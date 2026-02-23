@@ -1,0 +1,89 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>{{ editingProduct ? 'Editar producto' : 'Nuevo producto' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding glass-bg">
+
+  <form [formGroup]="productForm" (ngSubmit)="saveProduct()" class="product-form">
+
+    <ion-item>
+      <ion-label position="stacked">Nombre *</ion-label>
+      <ion-input formControlName="name" placeholder="Ej. Coca-Cola 600ml"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Unidad</ion-label>
+      <ion-select style="color: black;" formControlName="unitType" placeholder="Selecciona unidad">
+        <ion-select-option value="UNIDAD">UNIDAD</ion-select-option>
+        <ion-select-option value="GRAMOS">GRAMOS</ion-select-option>
+        <ion-select-option value="MILILITROS">MILILITROS</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked" style="color: black;">Descripción</ion-label>
+      <ion-textarea formControlName="description" style="color: black;" placeholder="Ej. Refresco sabor cola"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Categoría</ion-label>
+      <ion-input formControlName="category" placeholder="Ej. Bebidas"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Stock mínimo alerta</ion-label>
+      <ion-input type="number" formControlName="alertStock" placeholder="Ej. 10"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Fecha de caducidad</ion-label>
+      <ion-datetime formControlName="expiryDate" presentation="date"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">SKU</ion-label>
+      <ion-input formControlName="sku" placeholder="Ej. COC600ML123"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Proveedor</ion-label>
+      <ion-input formControlName="supplier" placeholder="Ej. FEMSA"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Marca</ion-label>
+      <ion-input formControlName="brand" placeholder="Ej. Coca-Cola"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Precio de compra</ion-label>
+      <ion-input type="number" formControlName="purchasePrice" placeholder="Ej. 12.50"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Ubicación almacenamiento</ion-label>
+      <ion-input formControlName="storageLocation" placeholder="Ej. Refrigerador #2"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none" class="file-input-item">
+      <ion-label>Imagen</ion-label>
+      <input type="file" (change)="onFileChange($event)" accept="image/*" />
+    </ion-item>
+
+    <div class="form-actions">
+      <ion-button fill="clear" expand="block" (click)="close()">Cancelar</ion-button>
+      <ion-button type="submit" expand="block" [disabled]="saving || productForm.invalid">
+        {{ saving ? 'Guardando...' : 'Guardar' }}
+      </ion-button>
+    </div>
+
+  </form>
+</ion-content>

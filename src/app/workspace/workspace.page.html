@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar translucent>
+    <ion-title>Planner — Advanced</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openAddEventAlert()">
+        <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="page-content" fullscreen>
+  <div class="app-shell">
+    <div class="left-column">
+      <div class="hours-list">
+        <div class="hour-row" *ngFor="let h of hours">{{ h }}</div>
+      </div>
+    </div>
+
+    <div class="main-column">
+      <div class="topbar">
+        <div class="view-tabs">
+          <ion-segment [(ngModel)]="viewMode">
+            <ion-segment-button value="week">Week</ion-segment-button>
+            <ion-segment-button value="month">Month</ion-segment-button>
+          </ion-segment>
+        </div>
+
+        <div class="nav">
+          <ion-button fill="clear" (click)="prevWeek()"><ion-icon name="chevron-back-outline"></ion-icon></ion-button>
+          <div class="week-range">{{ weekLabel }}</div>
+          <ion-button fill="clear" (click)="nextWeek()"><ion-icon name="chevron-forward-outline"></ion-icon></ion-button>
+        </div>
+      </div>
+
+      <div class="days-header">
+        <div class="day-header" *ngFor="let d of weekDays">{{ d.label }} <div class="date">{{ d.date | date:'MMM d' }}</div></div>
+      </div>
+
+      <div class="timeline-wrap">
+        <!-- central horizontal timeline line that stretches full width of days area -->
+        <div class="center-line" aria-hidden="true"></div>
+
+        <!-- days grid (columns) -->
+        <div class="days-grid">
+          <div class="day-col" *ngFor="let d of weekDays; let i = index">
+            <!-- hour stripes (background subtle) -->
+            <div class="hour-stripe" *ngFor="let h of hours; let hi = index"></div>
+          </div>
+
+          <!-- events layer (absolute over grid) -->
+          <div class="events-layer">
+            <ng-container *ngFor="let ev of visibleEvents">
+              <div
+                class="event-card"
+                [class.conflict]="ev.conflict"
+                [style.left.%]="getEventColumnLeft(ev)"
+                [style.width.%]="getColWidth()"
+                [style.top.%]="getEventTop(ev)"
+                [style.height.%]="getEventHeight(ev)"
+                [style.background]="getEventBg(ev)"
+                title="{{ ev.title }} — {{ ev.start | date:'shortTime' }} - {{ ev.end | date:'shortTime' }}"
+                (click)="openEditAlert(ev)"
+              >
+                <div class="ev-title">{{ ev.title }}</div>
+                <div class="ev-type">{{ ev.type }} • {{ ev.start | date:'shortTime' }} - {{ ev.end | date:'shortTime' }}</div>
+              </div>
+            </ng-container>
+          </div>
+
+          <!-- day separators -->
+          <div class="day-separators">
+            <div class="sep" *ngFor="let d of weekDays; let i = index" [style.left.%]="i * (100 / 7)"></div>
+          </div>
+
+        </div> <!-- days-grid -->
+      </div> <!-- timeline-wrap -->
+    </div> <!-- main-column -->
+
+    <div class="right-column">
+      <div class="panel">
+        <h4>Filters</h4>
+        <ion-list lines="none">
+          <ion-item lines="none">
+            <ion-checkbox slot="start" [(ngModel)]="filters.showClasses"></ion-checkbox>
+            <ion-label>Classes</ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-checkbox slot="start" [(ngModel)]="filters.showExams"></ion-checkbox>
+            <ion-label>Exams</ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-checkbox slot="start" [(ngModel)]="filters.showAssignments"></ion-checkbox>
+            <ion-label>Assignments</ion-label>
+          </ion-item>
+        </ion-list>
+
+        <h4>Actions</h4>
+        <ion-button expand="block" (click)="openAddEventAlert()">+ Add Event</ion-button>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

@@ -1,0 +1,311 @@
+<ion-header [translucent]="true" style="display: none;">
+  <ion-toolbar>
+    <ion-title>Administrar Inventario</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openModal()">
+        <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<ion-content [fullscreen]="true" class="page-bg">
+  <div class="container">
+
+
+   
+
+
+
+
+
+    
+
+    <div class="pagination" *ngIf="filtered.length > pageSize">
+      <ion-button (click)="prevPage()" [disabled]="pageIndex === 0">Anterior</ion-button>
+      <span>Pagina {{ pageIndex + 1 }} / {{ totalPages() }}</span>
+      <ion-button (click)="nextPage()" [disabled]="pageIndex + 1 >= totalPages()">Siguiente</ion-button>
+    </div>
+  </div>
+
+<div class="pos-page">
+
+  <!-- 🔹 Sidebar fija -->
+  <!-- <div class="sidebar">
+    <h2 class="logo" style="text-align: center;">Business <br> POS</h2>
+    <ion-list lines="none">
+   
+      <ion-item (click)="showPos()" button>
+        <ion-icon name="storefront-outline" slot="start"></ion-icon>
+        POS
+      </ion-item>
+   
+      <ion-item (click)="showInventario()" button>
+        <ion-icon name="cash-outline" slot="start"></ion-icon>
+        Inventario
+      </ion-item>
+
+      <ion-item (click)="showComanda()" button>
+        <ion-icon name="flash-outline" slot="start"></ion-icon>
+        Comanda
+      </ion-item>
+
+
+      <ion-item (click)="showProductos()" button>
+        <ion-icon name="cube-outline" slot="start"></ion-icon>
+        Productos
+      </ion-item>
+      
+        <ion-item button>
+        <ion-icon name="bar-chart-outline" slot="start"></ion-icon>
+        Estadisticas
+      </ion-item>
+    
+    </ion-list>
+  </div> -->
+
+  <!-- 🔹 Contenido principal -->
+  <div class="main">
+    <div class="order-section"  *ngIf="isPosVisible"> 
+      <div class="order-header">
+        <h4 style="color: black;"> Articulos   <span class="mesa">({{itemCount}})</span></h4>
+        <ion-icon name="person-circle-outline" class="client-icon"></ion-icon>
+      </div>
+
+      <div class="order-list">
+  
+         <ion-list *ngIf="itemCount !== 0">
+            <ion-item lines="none" *ngFor="let product of cartItems">
+              <!-- Imagen del producto -->
+
+        <ion-avatar slot="start" style="height: 70px;width: 70px;margin-inline-end: 3px;">
+        <img src="{{product.img}}">
+        </ion-avatar>
+              <!-- Información del producto -->
+              <ion-label style="padding: 1px;font-family: 'titulos';">
+                <h2 style="font-weight: bold;font-size: 15px;padding: 0px;color: rgb(62, 62, 62);">{{product.category}} </h2>
+                <h2 style="font-weight: bold;font-size: 15px;padding: 0px;color: #000;">{{ product.name }} </h2>
+          
+                <p style="font-size: 12px;padding: 0px;color: #000;">{{product.tptxt}}</p>
+                <h3 style="font-weight: bold; color: #37ac85;font-size: 14px;padding: 0px;">${{ product.price * product.quantity }}</h3>
+              </ion-label>
+
+              <!-- Botones de suma/resta -->
+              <div style="display: flex; align-items: center;background: #eeeeee;border-radius: 18px;max-width: 100px;">
+                <ion-button fill="clear" size="small" (click)="decreaseQuantity(product)">
+                  <ion-icon name="remove-circle-outline" style="color: black;font-size: 20px;"></ion-icon>
+                </ion-button>
+                <span style="margin: 0 3px;color: #000;">{{ product.quantity }}</span>
+                <ion-button fill="clear" size="small" (click)="increaseQuantity(product)" >
+                  <ion-icon style="color: black;font-size: 20px;" name="add-circle-outline"></ion-icon>
+                </ion-button>
+              </div>
+            </ion-item>
+        </ion-list>
+      </div>
+
+   
+
+      <div class="order-footer">
+      
+
+      
+
+
+
+
+     
+   
+
+
+    <ion-radio-group>
+
+  </ion-radio-group>
+        <div class="subtotal">
+         <strong>Total: ${{ precioTotal }}</strong>
+        </div>
+        <ion-button color="dark" expand="block" class="pay-btn"><b style="color: white;"> Ir al cobro ${{precioTotal}}</b></ion-button>
+      </div>
+    </div>
+
+    <!-- 🔹 Catálogo de productos -->
+    <div *ngIf="isPosVisible" class="products-section">
+         <!-- 🔍 BUSCADOR DE PRODUCTOS -->
+<ion-searchbar 
+  [(ngModel)]="searchTerm"
+  placeholder="Buscar producto..."
+  (ionInput)="filterProducts($event)"
+  color="light"
+  class="product-searchbar">
+</ion-searchbar>
+
+    <ion-toolbar style="border-radius: 30px;" color="light">
+  <ion-segment   mode="md" style="height: 50px;background: #ffffff00;"
+     scrollable color="dark" [(ngModel)]="segmentValue" (ionChange)="onSegmentChange($event)">
+    <!-- Botón de regresar -->
+ 
+
+    <ion-segment-button *ngFor="let category of categories" [value]="category.name" class="category-tab">
+      <ion-label [ngClass]="{'selected-label': segmentValue === category.name}" style="font-family: 'titulos'; font-weight: bold;font-size: 15px;">
+        {{ category.name }}
+      </ion-label>
+    </ion-segment-button>
+    
+  </ion-segment>
+
+</ion-toolbar>
+  
+  <div class="empty" *ngIf="categories?.length === 0">
+    <ion-icon name="cube-outline" class="big"></ion-icon>
+    <p>No hay productos</p>
+  </div>
+
+      <div class="product-grid">
+         <div class="products-section">
+          
+
+      <div class="product-grid">
+
+        <!-- Scroll horizontal de categorías -->
+        <div class="categories-scroll">
+          <div 
+            *ngFor="let category of categories" 
+
+            [hidden]="!category.active">
+
+            <!-- Productos de categoría -->
+            <div 
+              *ngFor="let product of category.products" 
+              [hidden]="!product.active"
+              (click)="navigate(product.nombre, product.id, product, category)" 
+
+              class="product-card">
+              <img [src]="product.imageLowRes" alt="{{product.nombre}}" />
+              <div class="info">
+                <h4>{{product.nombre}}</h4>
+                <p>${{ getFormattedPrice(product.precio) }} MXN</p>
+              </div>
+            </div>
+
+            <!-- Subcategorías -->
+            <ng-container *ngIf="category.subcategorias?.length">
+              <div *ngFor="let subcategory of category.subcategorias" [hidden]="!subcategory.active">
+                <div 
+                  *ngFor="let product of subcategory.products" 
+                  [hidden]="!product.active"
+                  (click)="addToOrder(product)"
+                  class="product-card">
+                  <img [src]="product.imageLowRes" alt="{{product.nombre}}" />
+                  <div class="info">
+                    <h4>{{product.nombre}}</h4>
+                    <p>${{ getFormattedPrice(product.precio) }} MXN</p>
+                  </div>
+                </div>
+
+                <!-- Sub-subcategorías -->
+                <ng-container *ngIf="subcategory.subcategorias?.length">
+                  <div *ngFor="let subsubcategory of subcategory.subcategorias">
+                    <div 
+                      *ngFor="let product of subsubcategory.products" 
+                      [hidden]="!product.active"
+                      (click)="addToOrder(product)"
+                      class="product-card">
+                      <img [src]="product.imageLowRes" alt="{{product.nombre}}" />
+                      <div class="info">
+                        <h4>{{product.nombre}}</h4>
+                        <p>${{ getFormattedPrice(product.precio) }} MXN</p>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-container>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+   
+      </div>
+    </div>
+
+    <div class="table-container" *ngIf="isInventarioVisible">
+              <ion-searchbar
+      [(ngModel)]="filterText"
+      placeholder="Buscar producto, categoría o SKU"
+      (ionInput)="applyFilter()"
+    ></ion-searchbar>
+     <ion-segment value="all" (ionChange)="changeUnitFilter($event)">
+      <ion-segment-button value="all">Todos</ion-segment-button>
+      <ion-segment-button value="UNIDAD">Unidad</ion-segment-button>
+      <ion-segment-button value="GRAMOS">Gramos</ion-segment-button>
+      <ion-segment-button value="MILILITROS">Mililitros</ion-segment-button>
+    </ion-segment>
+  <table class="product-table">
+    <thead>
+      <tr>
+        <th><ion-checkbox></ion-checkbox></th>
+        <th>Producto</th>
+        <th>Código</th>
+   
+        <th>Stock</th>
+        <th>Estatus</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of pagedProducts()">
+        <td><ion-checkbox></ion-checkbox></td>
+        <td class="prod-cell">
+          <img [src]="p.imageUrl || defaultImage" alt="" class="thumb" />
+          <div>
+            <div class="prod-name">{{ p.name }}</div>
+            <div class="prod-sub">{{ p.category || 'Sin categoría' }}</div>
+          </div>
+        </td>
+        <td>{{ p.sku || '-' }}</td>
+        <td>{{ p.stock }} {{ p.unitType }}</td>
+        <td style="display: none;">
+  <ion-icon 
+  name="star"
+  *ngFor="let s of [1,2,3,4,5]"
+  class="star-icon"
+></ion-icon>
+   </td>
+        <td>
+          <span
+            class="status"
+            [ngClass]="{
+              'in-stock': p.stock > 0,
+              'out-stock': p.stock == 0,
+              'restock': p.stock < 10 && p.stock > 0
+            }"
+          >
+            {{ p.stock == 0 ? 'Agotado' : p.stock < 10 ? 'Reponer' : 'En stock' }}
+          </span>
+        </td>
+   <td class="actions">
+  <ion-button style="margin-bottom: 10px;" color="dark" size="small" (click)="openActions(p)">
+    <ion-icon slot="start" name="chevron-down-circle-outline"></ion-icon>
+    ACCIONES
+  </ion-button>
+</td>
+
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+ <!-- <app-comanda *ngIf="isComandaVisible"></app-comanda>
+  -->
+  </div>
+</div>
+
+    
+
+</ion-content>

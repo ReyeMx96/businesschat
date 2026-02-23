@@ -1,0 +1,36 @@
+ion-button{
+    --padding-start:20%;
+    --padding-end:20%;
+  }
+.white-text-toast {
+  --color: #fff !important; /* texto del mensaje */
+  color: #fff !important;
+
+  .toast-message {
+    color: #fff !important;
+  }
+
+  ion-button, button {
+    color: #fff !important; /* también el texto de los botones */
+  }
+}
+
+  ion-item[disabled] {
+    opacity: 1; /* Elimina el efecto de opacidad */
+    --background: transparent; /* Mantiene el fondo como estaba */
+  }
+  
+  ion-input[disabled] {
+    opacity: 1; /* Elimina el gris */
+    pointer-events: none; /* Evita interacciones aunque no sea gris */
+  }
+  .animated-button {
+    animation: fadeInUp 0.6s ease-in-out;
+  }
+
+  .spinner-container {
+  display: flex;
+  margin-top: 70%;
+  justify-content: center;
+  align-items: center;
+}

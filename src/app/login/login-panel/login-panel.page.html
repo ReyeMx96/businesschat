@@ -1,0 +1,62 @@
+<ion-content fullscreen class="login-page">
+<br>
+  <div class="login-container">
+
+    <!-- Logo animado -->
+    <div class="logo-container">
+      <img src="../assets/icons/icon-384x384.png" alt="Logo" class="logo"/>
+    </div>
+
+    <h2 class="welcome-text">Bienvenido a Business Panel</h2>
+    <p class="sub-text">Para iniciar sesión debes autenticarte</p>
+
+    <!-- SMS Login -->
+    <div *ngIf="showButtonsSms" class="sms-container">
+      <ion-item *ngIf="showConfirmInput" lines="none" class="input-item">
+        <ion-label position="stacked">Código enviado a: <b>{{phoneNumber}}</b></ion-label>
+        <ion-input type="tel" [(ngModel)]="otpCode" maxlength="6" placeholder="Ingresa el código"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="!showConfirmInput" lines="none" class="input-item">
+        <ion-label position="floating">Número de celular</ion-label>
+        <ion-input type="tel" maxlength="10" placeholder="Numero de Celular" [(ngModel)]="phoneNumber"></ion-input>
+      </ion-item>
+<div *ngIf="showCaptcha" class="captcha-container">
+  <div id="recaptcha-container"></div>
+</div>
+      <ion-button *ngIf="!showConfirmInput" expand="full" shape="round" color="primary" (click)="sendCode()" class="login-btn">
+        Enviar código de autenticación
+      </ion-button>
+
+      <ion-button *ngIf="showConfirmInput" expand="full" shape="round" color="secondary" (click)="authCode()" class="login-btn">
+        Verificar código
+      </ion-button>
+    </div>
+<!-- dentro de login-container -->
+
+
+    <div class="login-buttons">
+      <!-- Login with SMS -->
+      <ion-button expand="full" shape="round" color="light" class="login-option" (click)="showSms()">
+        <ion-icon slot="start" name="mail"></ion-icon>
+        Login with SMS
+      </ion-button>
+
+      <!-- Login with Google Web -->
+      <ion-button expand="full" shape="round" color="light" class="login-option" (click)="onLoginGoogle()">
+        <ion-icon slot="start" name="logo-google"></ion-icon>
+        Login with Google Web
+      </ion-button>
+
+      <!-- Login with Google App -->
+      <ion-button expand="full" shape="round" color="light" class="login-option" (click)="onLoginGoogleApp()">
+        <ion-icon slot="start" name="logo-google"></ion-icon>
+        Login with Google App
+      </ion-button>
+    </div>
+
+    <ion-spinner *ngIf="showBackdropSesion" name="dots" color="primary"></ion-spinner>
+    
+  </div>
+
+</ion-content>

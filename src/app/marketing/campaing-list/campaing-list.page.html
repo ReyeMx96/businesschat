@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar mode="md" color="light">
+    <ion-buttons  style="padding-left:0px" slot="start">
+      <ion-back-button defaultHref="/tabs/marketing">
+     
+      </ion-back-button>
+       </ion-buttons>
+    <ion-title>Lista de campañas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--background: #fff;">
+<ion-grid class="campaign-grid">
+
+  <ion-row *ngFor="let item of arrayListCmpg"
+           [routerLink]="'/campaing-details/' + item.Id"
+           class="campaign-row">
+
+    <ion-col size="12">
+
+      <div class="glass-card">
+
+        <!-- Header -->
+        <div class="card-header">
+          <span class="campaign-id">{{ item.Id }}</span>
+          <span class="campaign-status">Activa</span>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body">
+          <h2 class="campaign-name">{{ item.Name }}</h2>
+
+          <div class="campaign-info">
+            <div>
+              <small>Total envíos</small>
+              <strong>{{ item.Tot }}</strong>
+            </div>
+
+            <div>
+              <small>Fecha</small>
+              <strong>{{ item.Tst | date:'short' }}</strong>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </ion-col>
+
+  </ion-row>
+
+</ion-grid>
+
+</ion-content>

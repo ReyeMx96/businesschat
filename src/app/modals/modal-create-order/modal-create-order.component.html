@@ -1,0 +1,435 @@
+<ion-header [translucent]="true">
+     <ion-toolbar   color="light"  style="height: 33px;">  </ion-toolbar>
+  
+  <ion-toolbar color="light" mode="ios">
+     <ion-buttons slot="start" (click)="closeModal()">
+      <ion-button style="margin-top: 8px;">
+       <ion-icon name="close-circle-outline" style="color: rgb(12, 12, 12);font-size: 25px;">
+ 
+       </ion-icon>
+      </ion-button>
+     </ion-buttons>
+    <ion-title  style="font-weight: bold;font-size: 18px;font-style: italic;padding-top: 5px;">
+      Finalizar pedido
+   <br>
+      <b style="font-size: 10px;"> {{this.direccion}}</b>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #content style="--background: #ffffff;">
+
+
+  <ion-header collapse="condense">
+    <ion-toolbar translucent="true" color="light">
+      <ion-title size="large" style="font-size: 30px;">
+       Resumen del pedido
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div *ngIf="itemCount === 0">
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <!-- Mapa de Google con botón "Ajustar el marcador" -->
+  <div  style="display: none;box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.2);position: relative; margin: 12px; border-radius: 12px; overflow: hidden;">
+    <div style="height: 120px; width: 100%; border-radius: 12px; overflow: hidden;">
+      <!-- Aquí puedes integrar el mapa de Google -->
+      <div id="map" style="height: 120px;"></div>
+    </div>
+
+    <ion-button 
+    style="
+    position: absolute;
+    top: 75px;
+    right: 10px;
+    width: 160px;
+    font-size: 12px;
+    color: black;
+    box-shadow: 1px 1px 1px 1px rgb(232, 232, 232);
+    "
+    
+    shape="round" color="light">
+      <b style="color: black;letter-spacing: 0px;">Ajustar el marcador</b>
+    </ion-button>
+  </div>
+
+  <!-- Formulario de detalles de entrega -->
+  <ion-list>
+      <div style="display: none;text-align: left;font-weight: bold;margin-left: 10px;font-size: 20px;padding: 4px;margin-top: 6px;">
+        Resumen del pedido.
+      </div>
+    <!-- Dirección -->
+    <ion-item detail="true" (click)="showModalDirecciones()" >
+<img src="https://cdn-icons-png.flaticon.com/128/1295/1295181.png" style="width:25px;height: 25px;margin-inline-end: 16px;">
+      <ion-label style="font-family: 'titulos';height: 75px;
+      padding-top: 10px;font-size: 17px;color: #000;">
+     <div style="font-size: 10px;display: none;">{{this.nombreDireccion}}</div>
+      {{ this.direccion }}<br>
+  
+    <div style="font-size: 10px;">
+      Referencias: {{this.referenciaDireccion}}
+
+    </div>
+      </ion-label>
+   <ion-label slot="end" style="text-transform: uppercase;text-align: center;font-size: 6px;color: gray;font-weight: bold;
+">
+    <ion-icon *ngIf="typeHouse === 'casa'"  name="home-outline" style="color: gray; font-size: 13px;"></ion-icon>
+
+<ion-icon *ngIf="typeHouse === 'departamento'"  name="business-outline" style="color: gray; font-size: 13px;"></ion-icon>
+
+<ion-icon *ngIf="typeHouse === 'oficina'"  name="briefcase-outline" style="color: gray; font-size: 13px;"></ion-icon>
+
+<ion-icon *ngIf="typeHouse === 'hotel'"  name="bed-outline" style="color: gray; font-size: 13px;"></ion-icon>
+
+<ion-icon *ngIf="typeHouse === 'otro'"  name="location-outline" style="color: gray; font-size: 13px;"></ion-icon>
+  <br>
+
+  {{this.typeHouse}}
+   </ion-label>
+
+
+
+    </ion-item>
+
+    <ion-item detail="true" (click)="showAlert('nombre', nameClient)">
+<img src="../../../../assets/icon/userprofile.png" style="width:25px;height: 25px;margin-inline-end: 16px;">
+
+      <ion-label style="font-family: 'titulos'; height: 43px; padding-top: 10px;color: #000;">
+        {{ nameClient }}
+      </ion-label>
+    </ion-item>
+    
+    <ion-item detail="true" (click)="showAlert('phone', phoneUser.replace('+52',''))">
+      
+<img src="../../../../assets/icon/wpp.png" style="width:25px;height: 25px;margin-inline-end: 16px;">
+
+      <ion-label style="font-family: 'titulos'; height: 43px; padding-top: 10px;color: #000;">
+        {{ phoneUser }}
+      </ion-label>
+    </ion-item>
+
+ 
+    <!-- Instrucciones de entrega -->
+     <!-- Tiempo de espera -->
+     <ion-item style="display: none;">
+      <ion-icon name="time-outline" slot="start" style="color: gray;"></ion-icon>
+      <ion-label style="font-family: 'titulos';height: 42px;padding-top: 10px"> Tiempo de espera </ion-label>
+      <ion-label style="font-weight: bold;font-family: 'titulos';height: 42px;padding-top: 10px;color: rgb(122, 122, 122);font-size: 14px;" slot="end" >  {{ entrega.tiempoEspera }}</ion-label>
+  
+    </ion-item>
+     <!-- metodo de pago -->
+  
+     <ion-accordion-group style="margin-top: 10px;">
+      <ion-accordion value="first" expanded="true" value="productos">
+        <ion-item slot="header">
+          <ion-avatar   style="
+    height: 50px;
+    width: 50px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    overflow: hidden;
+  "  slot="start">
+            <img src="{{this.logoBs}}" alt="Icono de comida">
+          </ion-avatar>
+          <ion-label style="color: #000;">
+           {{ this.nombreRestaurant }}<br>
+            Productos ({{ productosTotales }}) <br>${{precioTotal}}
+          </ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-list>
+            <ion-grid>
+              <ion-row *ngFor="let producto of cartItems">
+                <ion-col size="10.5" style="padding: 0px;">
+                  <h2 style="margin-top: 0px;font-size: 16px;margin-bottom: 0px;color: gray;">{{ producto.category }}</h2>
+                  <h2 style="margin-top: 0px;font-size: 16px;margin-bottom: 0px;">{{ producto.name }}</h2>
+
+                </ion-col>
+<ion-col size="1.5" style="padding: 0px;">
+  <p style="color: rgb(15, 143, 98);padding-top: 2px;padding-bottom: 0px;margin-bottom: 0px;margin-top: 0px;"><strong> ${{ producto.price * producto.quantity }}</strong></p>
+
+</ion-col>
+<ion-col size="12" style="padding: 0px;color: gray;">
+
+    {{producto.tptxt}}
+
+</ion-col>
+<ion-col size="12" style="padding: 0px;">
+    <p style="color: rgb(21, 21, 21);padding-top: 2px;padding-bottom: 0px;margin-bottom: 0px;margin-top: 0px;"><strong> Cantidad: {{producto.quantity}} x ${{ producto.price }}</strong></p>
+
+</ion-col>
+<div style="width: 100%;height: 1px;background: rgb(219, 219, 219);margin-top: 5px;margin-bottom: 5px;">
+
+</div>
+              </ion-row>
+            </ion-grid>
+         
+          </ion-list>
+        </div>
+      </ion-accordion>
+          <!-- Agregar cupón -->
+  
+    </ion-accordion-group>
+<div style="margin-top: 10px;" class="separator">
+  <div class="line"></div>
+  
+  <div class="line"></div>
+</div>
+  <!-- Resumen de costos -->
+  <ion-grid style="padding: 0px 12px 0px 12px">
+
+
+    <ion-row>
+      <ion-col>
+        <div style="font-size: 16px; color: black;">Total en productos</div>
+      </ion-col>
+      <ion-col size="auto">
+        <div style="font-size: 16px; color: black;">${{ getFormattedPrice(precioTotal) }}</div>
+      </ion-col>
+    </ion-row>
+    
+    <ion-row style="display: none;" *ngIf="typePay !== 'Efectivo'">
+      <ion-col>
+        <div style="font-size: 16px; color: rgb(60, 138, 100);">Descuento</div>
+      </ion-col>
+      <ion-col size="auto">
+        <div style="font-size: 16px; color: black;">${{ getFormattedPrice(descuentoNew) }}</div>
+      </ion-col>
+    </ion-row>
+    
+  
+    <ion-row>
+      <ion-col>
+        <div style="font-size: 16px; color: black;">Costo de envío</div>
+      </ion-col>
+      <ion-col size="auto">
+        <div style="font-size: 16px; color: black;"> ${{ getFormattedPrice(costoEnvio) }}  </div>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row *ngIf="tfll > 0">
+      <ion-col>
+        <div style="font-size: 16px; color: rgb(29, 49, 85);font-weight: bold;">Tarifa de lluvia</div>
+      </ion-col>
+      <ion-col size="auto">
+        <div style="font-size: 16px; color: rgb(37, 35, 104);font-weight: bold;"> ${{ getFormattedPrice(tfll) }}  </div>
+      </ion-col>
+    </ion-row>
+    <ion-row style="display: none;">
+      <ion-col>
+        <div style="font-size: 16px; color: black;">Tarifa de servicio</div>
+      </ion-col>
+      <ion-col size="auto">
+        <div style="font-size: 16px; color: black;" *ngIf="typePay === 'Transferencia'">
+          ${{ (precioTotal ? precioTotal * 0.05 : 0).toFixed(2) }}
+        </div>
+
+        <div style="font-size: 16px; color: black;" *ngIf="typePay === 'Efectivo'">
+          $0
+        </div>
+      </ion-col>
+    </ion-row>
+  <div style="margin-top: 10px;" class="separator">
+  <div class="line"></div>
+  
+  <div class="line"></div>
+</div>
+    <!-- Total con cálculo final -->
+    <ion-row>
+      <ion-col>
+        <div style="font-size: 18px; font-weight: bold;">Total a pagar</div>
+      </ion-col>
+      <ion-col size="auto">
+        <div style="font-size: 18px; font-weight: bold;">
+          ${{ getTotal().toFixed(2) }}
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div style="margin-top: 10px;" class="separator">
+  <div class="line"></div>
+  
+  <div class="line"></div>
+</div>
+
+
+          <ion-item  detail="true" >
+      
+<img src="../../../../assets/icon/efectivox.png" style="width:25px;height: 25px;margin-inline-end: 16px;" *ngIf="typePay === 'Efectivo'">
+<img src="../../../../assets/icon/transfx.png" style="width:25px;height: 25px;margin-inline-end: 16px;" *ngIf="typePay === 'Transferencia'">
+
+      <ion-label style="font-family: 'titulos'; height: 43px; padding-top: 10px;font-weight: bold;color: rgb(9, 116, 57);" *ngIf="typePay === 'Efectivo' || typePay === 'efectivo'">
+        {{ typePay }}
+      </ion-label>
+         <ion-label style="font-family: 'titulos'; height: 43px; padding-top: 10px;font-weight: bold;color: rgb(60, 89, 252);" *ngIf="typePay === 'Transferencia'">
+        {{ typePay }}
+      </ion-label>
+    </ion-item>
+
+
+    <ion-radio-group  (ngModelChange)="onTypePayChange($event)"  [(ngModel)]="typePay" mode="md" style="display: none;margin-top: 0px;">
+      <ion-item [disabled]="!this.platformConfig.efectivo">
+        <ion-icon name="logo-usdx" slot="start" style="color: gray;"></ion-icon>
+        <ion-icon name="logo-usd" slot="start" style="color: gray;"></ion-icon>
+        <ion-label style="font-family: 'titulos';font-weight: bold;">Efectivo</ion-label>
+        <ion-radio slot="end" value="Efectivo"></ion-radio>
+      </ion-item>
+      <ion-item [disabled]="!this.platformConfig.transferencia">
+        <ion-icon name="card-outlxine" slot="start" style="color: gray;"></ion-icon>
+        <ion-icon name="card-outline" slot="start" style="color: gray;"></ion-icon>
+        <ion-label style="font-weight: bold;">Transferencia</ion-label>
+        <ion-radio   slot="end" value="Transferencia"></ion-radio>
+        
+      </ion-item>
+    
+    </ion-radio-group>
+  
+  
+    
+       <div *ngIf="typePay === 'Transferencia'" style="text-align: center;display: none;">
+
+     <input type="file" (click)="requestPermisionCamera()" style="display: none;" id="inputFile"  accept="image/jpeg, image/png, image/jpg, application/pdf" (change)="onFileSelected($event, 'logo')" />
+    
+      <!-- Cuadro dashed con icono y texto -->
+      <div class="capture-box" (click)="clickInputFile()">
+        <ion-icon *ngIf="!logoPreview" name="image" style="font-size: 40px; color: gray;"></ion-icon>
+        <br>
+      <div *ngIf="!logoPreview">Captura de pantalla del recibo</div>
+      <img *ngIf="logoPreview" [src]="logoPreview" alt="Logo Preview" style="width: 200px; height: 200px; margin-top: 0px;border-radius: 15px;">
+        
+
+      </div>
+    </div>
+
+
+  
+   
+    
+    
+    
+
+   
+    <ion-item style="display: none;">
+      <ion-icon name="gift-outline" style="color: gray;" slot="start"></ion-icon>
+      <ion-label style="font-family: 'titulos';height: 42px;padding-top: 10px">Agregar cupon</ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end" style="color: rgb(43, 43, 43);font-size: 16px;"></ion-icon> <!-- Flecha derecha -->
+    </ion-item>
+  </ion-list>
+  
+
+  
+
+  <!-- Footer con botones -->
+
+<br>
+<br>
+<br>
+<br>
+<br>
+</ion-content>
+<ion-footer style="background: #fff; --background:#fff;padding-bottom: 26px;">
+<ion-grid>
+  <ion-row>
+    <ion-col size="4">
+      <div *ngIf="itemCount !== 0" class="animated-button" style="margin-top: 6px;
+      text-align: center; font-weight: bold;font-size: 24px;
+      color: rgb(4, 57, 42);">
+   <div style="font-size: 12px;color: black;">
+    Total a pagar
+   </div>
+   ${{ getTotal().toFixed(2) }}
+    
+      </div>
+    </ion-col>
+    <ion-col size="8">
+      <ion-button *ngIf="itemCount !== 0" [disabled]="costoEnvio === 0 || protectDouble" class="animated-button" expand="full" shape="round" color="dark" style="margin-bottom: 12px;"
+       (click)="confirmarOrden()">
+      <b style="font-style: italic;font-size: 14px;color: white;">  REALIZAR PEDIDO</b>
+       <!-- <ion-icon name="checkmark-circle-outline" *ngIf="!protectDouble" slot="end">
+    
+       </ion-icon>  -->
+       <ion-spinner name="dots" *ngIf="protectDouble">
+
+       </ion-spinner>
+      </ion-button>
+    </ion-col>
+ 
+  </ion-row>
+</ion-grid>
+
+
+
+  
+</ion-footer>

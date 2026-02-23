@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Gestionar accesos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Agregar nuevo usuario</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Correo</ion-label>
+        <ion-input placeholder="email" [(ngModel)]="email" type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input placeholder="contraseña" [(ngModel)]="password" type="password"></ion-input>
+      </ion-item>
+      <ion-button expand="block" (click)="addUser()">Agregar usuario</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="users.length > 0">
+    <ion-card-header>
+      <ion-card-title>Usuarios existentes</ion-card-title>
+    </ion-card-header>
+    <ion-list>
+      <ion-item *ngFor="let user of users">
+        <ion-label>
+          <h2>{{ user.email }}</h2>
+          <p>Rol: {{ user.rol }}</p>
+          <p>UID: {{ user.uid }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,151 @@
+<ion-header>
+  <ion-toolbar color="light">
+        <ion-title style="color: black;">Detalles Producto</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close-circle"></ion-icon>
+      </ion-button>
+    
+    </ion-buttons>
+
+    <ion-buttons *ngIf="typeSave === 'create'" slot="end">
+      <ion-button (click)="submitForm()">
+        <ion-icon name="checkmark-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons *ngIf="typeSave === 'edit'" slot="end">
+      <ion-button (click)="saveProduct()">
+        <ion-icon name="save"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <img src="{{this.fotoProducto}}"
+  style="height: 220px;width: 220px;border-radius: 15px; box-shadow: 0px 0px 5px 4px #c0c0c02e;margin-top: 10px;" 
+  
+  alt="Descripción de la imagen">
+  <div style="color: rgb(0, 0, 0); font-weight: bold; 
+  font-size: 18px;
+  font-style:Inter,ui-sans-serif,system-ui,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';
+  text-align: left;padding-left: 15px;">
+    {{this.nombreProducto}}
+
+  </div>
+  <div style="color: rgb(12, 167, 77); font-size: 16px;font-style: 'titulos';text-align: left;padding-left: 15px;padding-top: 5px;padding-bottom: 5px;">
+    <b>${{this.precio}}</b>
+  </div>
+  <div style="color: rgb(58, 58, 58); font-size: 13px;font-style: 'titulos';text-align: left;padding-left: 15px;">
+    {{this.descripcion}}
+  </div>
+
+<br>
+
+  <form>
+
+   
+ 
+    <ion-item lines="none">
+     
+      <input type="file" (change)="onFileSelected($event, 'logo')" accept="image/*" />
+    </ion-item>
+
+    <ion-item class="form-item" lines="none">
+      <ion-label style="color: black;" position="stacked">Nombre del Producto*</ion-label>
+      <ion-input style="color: black;" [(ngModel)]="nombreProducto" name="nombreProducto" required></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item" lines="none">
+      <ion-label style="color: black;" position="stacked">Descripción*</ion-label>
+      <ion-input style="color: black;" [(ngModel)]="descripcion" name="descripcion" required></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item" lines="none">
+      <ion-label style="color: black;" position="stacked">Precio*</ion-label>
+      <ion-input style="color: black;" type="number" [(ngModel)]="precio" name="precio" required></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item" lines="none">
+      <ion-label style="color: black;" position="stacked">Cantidad Máxima por Orden~</ion-label>
+      <ion-input style="color: black;" type="number" [(ngModel)]="cantidadMaxima" name="cantidadMaxima" required></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item" lines="none">
+      <ion-label style="color: black;" position="stacked">Cantidad Mínima por Orden ~</ion-label>
+      <ion-input style="color: black;" type="number" [(ngModel)]="cantidadMinima" name="cantidadMinima"></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item" lines="none">
+      <ion-label style="color: black;" position="stacked">Precio de Coste~</ion-label>
+      <ion-input style="color: black;" type="number" [(ngModel)]="precioCoste" name="precioCoste"></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item" lines="none">
+      <ion-label style="color: black;" position="stacked">SKU~</ion-label>
+      <ion-input style="color: black;" [(ngModel)]="sku" name="sku"></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item" lines="none">
+      <ion-label style="color: black;" position="stacked">Descuento (% o $)~</ion-label>
+      <ion-input style="color: black;" type="tel" [(ngModel)]="descuento" name="descuento"></ion-input>
+    </ion-item>
+
+    <div style="border-style: solid;border-width: 1px;border-color: gray;border-radius: 14px;margin-top: 10px;padding: 7px;">
+      <div style="text-align: center; color: #000;">
+          CALENDARIZACIÓN DE PRODUCTO
+      </div>
+
+      <div>
+        <div *ngFor="let day of daysOfWeek; let i = index" class="day-row">
+          <div style="color: black;" [class.selected]="day.selected">
+            {{ day.name }}
+          </div>
+          
+          <!-- Checkbox para seleccionar el día -->
+          <ion-checkbox name="selected{{i}}" [(ngModel)]="daysOfWeek[i].selected" (ionChange)="toggleDay(i,$event)">
+          </ion-checkbox>
+          
+          <ion-input [(ngModel)]="daysOfWeek[i].startTime" 
+                     name="startTime{{i}}" 
+                     style="color: black;"
+                     placeholder="Escribe la hora Ej. 18:30" 
+                     type="tel" 
+                     (ionInput)="formatearHorario($event, i, 'startTime')">
+          </ion-input>
+          
+          <ion-input [(ngModel)]="daysOfWeek[i].endTime"  
+                     name="endTime{{i}}"  
+                     style="color: black;"
+                     placeholder="Escribe la hora Ej. 18:30" 
+                     type="tel" 
+                     (ionInput)="formatearHorario($event, i, 'endTime')">
+          </ion-input>
+        </div>
+        
+        
+        
+      </div>
+      
+  
+
+
+
+    <br>
+  </div>
+
+    <ion-item class="form-item" lines="none">
+      <ion-label style="color: black;" position="stacked">Suele Elegirse Junto a... (opcional)~</ion-label>
+      <ion-input [(ngModel)]="sueleElegirseJunto" name="sueleElegirseJunto"></ion-input>
+    </ion-item>
+
+
+  </form>
+</ion-content>
+<ion-footer>
+    <ion-button expand="full" shape="round" color="dark" (click)="submitForm()">Guardar Producto</ion-button>
+
+</ion-footer>

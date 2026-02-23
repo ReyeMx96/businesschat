@@ -1,0 +1,159 @@
+/* Contenedor */
+.container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #dadada;
+  min-height: 100vh;
+}
+
+/* Título */
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Lista de tarjetas / opciones */
+.card-list {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+#card-element-container {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Card general */
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  box-shadow: 1px 1px 1px 1px #cbcbcb;
+  padding: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+h2{
+  color: #000;
+}
+.card:hover {
+  border-color: #3498db;
+}
+
+.card.selected {
+  border-color: #3498db;
+}
+
+/* Card pequeña */
+.card.small {
+  padding: 10px;
+}
+
+/* Info dentro de la card */
+.card-info {
+  display: flex;
+  align-items: center;
+}
+
+.card-info ion-icon {
+  font-size: 24px;
+  color: #2e2e2e;
+  margin-right: 10px;
+}
+
+.card-info .brand,
+.card-info span {
+  color: #000000;
+  font-weight: 500;
+}
+
+.card-info .expiry {
+  font-size: 12px;
+  color: #0f0f0f;
+}
+
+/* Icono check */
+.check {
+  color: #2ecc71;
+  font-size: 22px;
+}
+
+/* Subtítulo */
+.subtitle {
+  color: #191919;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Botón confirmar */
+.confirm-btn {
+  background-color: #3498db;
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 50px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.confirm-btn:hover {
+  background-color: #2980b9;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 20px;
+  padding: 15px;
+  color: #fff;
+}
+
+.stripe-field {
+  margin-bottom: 15px;
+  min-width: 120px;
+}
+
+.stripe-field-inline {
+  display: flex;
+  gap: 10px;
+}
+
+.card-element {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 10px;
+  border-radius: 12px;
+  padding-top: 16px;
+  border: 1px solid rgb(0 0 0);
+}
+
+.card-element iframe {
+  height: 40px !important;
+}
+
+label {
+  font-size: 16px;
+  margin-bottom: 5px;
+  display: block;
+  color: #8a8a8a;
+}
+
+.error {
+  color: #ff6b6b;
+  margin-top: 10px;
+}
+

@@ -1,0 +1,257 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start" style="margin-left: 10px;">
+      <ion-back-button text="" style="color: black;" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="font-style: italic;">Delivery Center</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+
+  <ion-grid  style="padding-top: 0px;background: #fff;">
+    <ion-row>
+        <ion-col size="12" size-lg="5" style="padding: 0px;min-height: 300px;">
+  
+      <div #map id="map" style="width: 100%; height: 50%;text-align: center;border-radius: 10px;
+      margin-top: 0px;"> </div>
+  <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-lg="12">
+            <ion-card class="glass-card" style="padding: 0px;background: #fff;">
+              <ion-card-header>
+                <ion-card-title style="padding-bottom: 0px;color: #000;">Pedidos en curso</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+      <ng-container  *ngFor="let pedido of pedidosFiltrados let i = index">
+
+             <ion-card 
+  style="padding: 0px; background: #f5f5f5; border-radius: 14px; margin-bottom: 10px;width: 100%;"
+  *ngIf="pedido.status !== 'Cancelado' && pedido.status !== 'Entregado'"
+    [ngClass]="{
+    'pedido-card': pedido.envio !== 0,
+    'pedido-card-local': pedido.envio === 0,
+    'nuevo': pedido.status === 'Nuevo'
+  }"
+  color="light"
+  routerLink="/comanda/{{pedido.id}}"
+>
+
+<!-- *ngIf="pedido.status !== 'Cancelado' " -->
+  <div  style="padding: 14px;    padding-left: 55px; display: flex; flex-direction: column;">
+
+    <!-- Primera fila: Nombre + Precio -->
+    <div style="display: flex; justify-content: space-between; width: 100%;">
+
+      <div style="font-weight: 600; font-size: 15px; color: #000;">
+        {{ pedido.cliente }}
+      </div>
+
+      <div style="font-weight: 600; font-size: 15px; color: #000;">
+        {{pedido.devMode}}
+      </div>
+
+    </div>
+
+    <!-- Segunda fila: ID + fecha -->
+    <div style="display: flex; justify-content: space-between; font-size: 13px; color: #555; margin-top: 8px;">
+      <div>#{{ pedido.idn?.slice(-5) }}</div>
+      <div>{{ pedido.status }}</div>
+    </div>
+<!-- Botón único con chevron -->
+
+
+  </div>
+  <ion-icon 
+    name="ellipsis-horizontal-circle-outline"
+    style="font-size: 32px; margin-left: 10px; color: #000;    bottom: 15px;
+    position: fixed;"
+   >
+  </ion-icon>
+</ion-card>
+
+                  
+              
+                  
+                 
+              
+
+              
+                </ng-container>
+
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+  </ion-grid>
+      </ion-col>
+
+      <!-- Formulario -->
+      <ion-col size="12" size-lg="7" style="padding: 0px;">
+        <ion-card class="glass-card" style="padding: 0px;background: #fff;margin-top: 5px;">
+          <ion-card-header>
+            <ion-card-title style="padding-bottom: 0px;color: #000;">Solicitar repartidor</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+    <ion-row>
+      <!-- Formulario -->
+<ion-col size="12" size-lg="4">
+  <ion-item color="light" lines="none">
+    <ion-label style="color: black;" position="stacked">Nombre del Cliente</ion-label>
+    <ion-input [(ngModel)]="nameClient" required placeholder="Ej. Juan Pérez"></ion-input>
+
+  </ion-item>
+</ion-col>
+
+      <!-- Formulario -->
+      <ion-col size="12" size-lg="4">
+
+
+           
+            <ion-item lines="none">
+              <ion-label style="color: black;" position="stacked">Teléfono</ion-label>
+              <ion-input type="tel" max="10" [(ngModel)]="phoneUser" required placeholder="Ej. 5544332211"></ion-input>
+            </ion-item>
+      </ion-col>
+     <ion-col size="12" size-lg="4">
+                         <ion-item lines="none">
+              <ion-label style="color: black;" position="stacked">Método de pago</ion-label>
+              <ion-select 
+      style="font-size: 13px;"
+              
+              [(ngModel)]="typePay" interface="popover" placeholder="Selecciona una opción">
+                <ion-select-option value="Efectivo">Efectivo</ion-select-option>
+                <ion-select-option value="Transferencia">Transferencia</ion-select-option>
+              </ion-select>
+            </ion-item>
+  </ion-col>
+<ion-col size="12" size-lg="4">
+  <ion-item lines="none">
+    <ion-label style="color: black;" position="stacked">Sucursal</ion-label>
+
+    <ion-select 
+      [(ngModel)]="sucursal" 
+      interface="popover" 
+      id="selectChangeXX"
+      style="font-size: 13px;"
+       (ionChange)="onSucursalChange($event)"
+      placeholder="Selecciona una opción">
+
+      <ion-select-option 
+        *ngFor="let sucursal of sucursales" 
+        [value]="sucursal.id">
+
+        {{ sucursal.nombre }}
+        
+      </ion-select-option>
+
+    </ion-select>
+
+  </ion-item>
+</ion-col>
+
+
+            
+               <ion-col size="12" size-lg="4">
+            <ion-item lines="none">
+              <ion-label style="color: black;" position="stacked">Total del pedido</ion-label>
+              <ion-input type="number" [(ngModel)]="precioTotal" required placeholder="Ej. 150"></ion-input>
+            </ion-item>
+              </ion-col>
+                   <ion-col size="12" size-lg="4">
+          <ion-item lines="none">
+              <ion-label style="color: black;" position="stacked">Costo de Envío</ion-label>
+              <ion-input type="number" disabled="true" [(ngModel)]="costoEnvio" required placeholder="Ej. 30"></ion-input>
+            </ion-item>
+              </ion-col>
+
+
+
+
+
+       <ion-col size="12" size-lg="6">
+  <ion-item lines="none">
+    <ion-label style="color: black;" position="stacked">Dirección de Recolección</ion-label>
+    <ion-textarea disabled="true" [(ngModel)]="direccionBs" required placeholder="Ej. Calle Test 123, CDMX"></ion-textarea>
+  
+  </ion-item>
+</ion-col>
+
+     <ion-col size="12" size-lg="6">
+  <ion-item lines="none">
+    <ion-label style="color: black;" position="stacked">Dirección de Entrega</ion-label>
+    <ion-textarea disabled="true" [(ngModel)]="direccion" required placeholder="Ej. Calle Test 123, CDMX"></ion-textarea>
+    <ion-button style="display: none;" fill="clear" slot="end" size="small" (click)="modalDirecciones()">
+      <ion-icon style="color: black;font-size: 30px;margin-top: 50px;" name="create-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-col>
+
+          
+  
+    </ion-row>
+
+          
+
+            <ion-item lines="none">
+              <ion-label style="color: black;" position="stacked">Nota del Pedido</ion-label>
+              <ion-textarea [(ngModel)]="notaPedido" placeholder="Agrega una nota al pedido"></ion-textarea>
+            </ion-item>
+
+            <ion-button style="margin-top: 30px;" expand="block" color="dark" (click)="finalizarPedido()"> <b style="color: white;"> 
+              
+              Solicitar repartidor x ${{this.costoEnvio + this.precioTotal}}
+            </b>
+            </ion-button>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <!-- Lista de clientes -->
+      <!-- <ion-col size="12" size-lg="3">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Clientes</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-searchbar [(ngModel)]="searchTerm" placeholder="Buscar cliente..." debounce="500"></ion-searchbar>
+            <ion-list>
+              <ion-item *ngFor="let cliente of clientes">
+                <ion-label>
+                  <h3>{{ cliente.nombre }}</h3>
+                  <p>{{ cliente.telefono }}</p>
+                  <p>{{ cliente.direccion }}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+
+
+        <ion-col size="12" size-lg="2.5">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Pedidos</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item *ngFor="let cliente of clientes">
+                <ion-label>
+                  <h3>{{ cliente.nombre }}</h3>
+                  <p>{{ cliente.telefono }}</p>
+                  <p>{{ cliente.direccion }}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col> -->
+
+     
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,330 @@
+// /* register-whatsapp.page.scss */
+// .fb-button {
+//   --background: #1877F2;
+//   --color: white;
+// }
+
+
+// .stat-card {
+//     --background: #f8f9fa;
+//     --color: #333;
+//     margin: 10px;
+//     border-radius: 12px;
+//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+//     transition: transform 0.2s ease-in-out;
+//   }
+//   ion-card-title{
+//     color: white;
+//     font-size: 22px;
+//   }
+//   .stat-card:hover {
+//     transform: translateY(-5px);
+//   }
+  
+//   .stat-card h2 {
+//     font-size: 2em;
+//     margin: 0;
+//     color: #007bff;
+//   }
+  
+//   @media (min-width: 768px) {
+//     .stat-card h2 {
+//       font-size: 2.5em;
+//     }
+//   }
+// .cns{
+//  background:  linear-gradient(135deg, #2bc798, #2a9ec2)
+// }
+//  .gradient-card {
+//   background: linear-gradient(135deg, #2bc798, #2a9ec2);
+//   color: white;
+//   padding: 1rem;
+//   border-radius: 8px;
+//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+// }
+
+//    ion-content {
+//         --padding-start: 2%;
+//         --padding-end: 2%;
+//     }
+
+
+:host {
+    ion-content {
+      --background: #f5f5f5;
+    }
+  }
+  
+  .stat-card {
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .analytics-table {
+    width: 100%;
+    border-collapse: collapse;
+  
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+  
+    th {
+      background-color: #e5e5e5;
+      color: #000000;
+    }
+  
+    td {
+      background-color: #f9f9f9;
+    }
+  
+    tr:nth-child(even) {
+      background-color: #f6f6f6;
+    }
+  }
+  
+  ion-card-header {
+    background-color: #fff;
+    text-align: center;
+    color: #ff7043;
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .dashboard-light {
+  --background: #f5f7fb;
+  padding: 16px;
+}
+
+/* Search */
+.dashboard-search {
+  max-width: 220px;
+  --background: #ffffff;
+  --border-radius: 12px;
+}
+
+/* KPI Cards */
+.kpi-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.kpi-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+}
+
+.users {
+  background: #fff4d9;
+}
+
+.revenue {
+  background: #e8f0ff;
+}
+
+.conversion {
+  background: #e6fff4;
+}
+
+.kpi-card p {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.kpi-card h2 {
+  margin: 4px 0;
+  font-weight: 700;
+}
+
+.positive {
+  color: #16a34a;
+  font-size: 12px;
+}
+
+.negative {
+  color: #dc2626;
+  font-size: 12px;
+}
+
+/* Cards */
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  height: 100%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* Chart Placeholder */
+.chart-placeholder {
+  margin-top: 16px;
+  border-radius: 12px;
+  background: linear-gradient(
+    180deg,
+    #f9fafb,
+    #eef2ff
+  );
+  display: grid;
+  place-items: center;
+  color: #9ca3af;
+}
+
+/* Country List */
+.country-list {
+  margin-top: 16px;
+}
+
+.country-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.view-more {
+  text-align: right;
+  margin-top: 12px;
+  font-size: 13px;
+  color: #6366f1;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Toolbar container */
+.report-toolbar {
+  margin-bottom: 24px;
+}
+
+/* Card wrapper */
+.report-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+  align-items: center;
+}
+
+/* Date filters */
+.filter-group {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.date-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.date-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.date-field input {
+  height: 42px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  padding: 0 12px;
+  font-size: 14px;
+  background: #f9fafb;
+}
+
+/* Restaurants filter */
+.restaurants-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.restaurants-selected {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+  background: #f3f4f6;
+  padding: 8px 12px;
+  border-radius: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Export */
+.export-col {
+  display: flex;
+  justify-content: center;
+}
+
+.export-box {
+  text-align: center;
+}
+
+.export-box ion-button {
+  --background: #22c55e;
+  --background-hover: #16a34a;
+  --border-radius: 14px;
+  font-weight: 600;
+}
+
+.export-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #6b7280;
+}

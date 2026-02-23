@@ -1,0 +1,59 @@
+<ion-header >
+     <ion-toolbar   color="light"  style="height: 33px;">  </ion-toolbar>
+  
+  <ion-toolbar  color="light">
+    <ion-buttons slot="start">
+      <ion-back-button text="" style="min-width: 40px;color: black;" defaultHref="/location-type"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" style="font-style: italic;">Busca una dirección</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" style="--background:#fafafa" >
+  <ion-card class="tip-box">
+  <ion-item lines="none" class="tip-item">
+    <ion-icon name="bulb-outline" slot="start" class="tip-icon"></ion-icon>
+    <ion-label>
+      <strong>Tip:</strong> Coloca tu código postal y tu calle para encontrar más fácil la ubicación.
+    </ion-label>
+  </ion-item>
+</ion-card>
+  <!-- Barra de búsqueda -->
+  <div class="search-bar">
+    <ion-input
+      class="custom-input"
+      placeholder="Escribe la dirección o busca algun punto cercano"
+      [(ngModel)]="searchQuery"
+      (ionInput)="loadGoogleSuggestions($event)"
+      clearInput>
+    </ion-input>
+  </div>
+  <!-- <div style="text-align: center;font-weight: bold;font-size: 12px;padding: 10px;">
+    Busca tu direccion o una cercana.
+  </div> -->
+  <!-- Contenedor oculto para PlacesService -->
+  <div #placesContainer style="display:none;"></div>
+
+  <!-- Lista de sugerencias con ion-card -->
+  <div *ngIf="sugerencias.length > 0" class="suggestion-card-list">
+    <ion-card
+      >
+      <ion-item *ngFor="let sug of sugerencias"
+      class="suggestion-card"
+      (click)="selectSuggestion(sug)">
+        <ion-label>
+      <b style="font-size: 16px;">   {{ sug.terms[0].value }}</b>
+          <br>
+         <div style="font-size: 12px;"> {{ sug.description }}</div>
+
+        </ion-label>
+
+        
+
+   
+      </ion-item>
+    
+    </ion-card>
+  </div>
+
+</ion-content>

@@ -1,0 +1,151 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="font-style: italic;">Mis Ubicaciones</ion-title>
+    <ion-buttons slot="start" (click)="closeModal()">
+      <ion-button>
+       <ion-icon name="close-circle-outline" style="color: rgb(12, 12, 12);">
+ 
+       </ion-icon>
+      </ion-button>
+     </ion-buttons>
+<button id="gtlocmodal" (click)="getLocation()" style="display: none;">
+
+</button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--background:#fafafa">
+  <!-- Buscador de direcciones -->
+
+
+
+
+  <!-- <h3 style=" font-size: 18px;padding: 10px;">
+    Sugerencias cercanas
+  </h3 > -->
+  <ion-searchbar style="display: none;" [(ngModel)]="searchQuery" placeholder="Buscar dirección"></ion-searchbar>
+  <!-- Opción para obtener ubicación actual -->
+  
+  <ion-item 
+  button 
+  detail 
+  (click)="selectLocationAmante()"
+  class="custom-item"
+  >
+
+  <!-- Icono condicional -->
+  <ion-avatar slot="start" class="icon-avatar">
+    <ion-icon 
+      [name]="getIcon(this.typeHouse)" 
+      class="type-icon">
+    </ion-icon>
+  </ion-avatar>
+
+  <!-- Detalles de la dirección -->
+  <ion-label style="font-size: 14px;">
+    <b style="color: rgb(25, 151, 92);">Cerca de ti</b>
+    <h3>{{ this.direccionAmante }}</h3>
+
+    <!-- Spinner cuando referenciaAmante es vacío o null -->
+    <p *ngIf="referenciaAmante; else loading">
+      {{ referenciaAmante }}
+    </p>
+    <ng-template #loading>
+      Tu ubicación en tiempo real está desactivada...<br>
+      <ion-button shape="round" color="dark" (click)="obtenerUbicacion()" fill="outline" >
+        Actualizar
+      </ion-button>
+   </ng-template>
+
+  </ion-label>
+
+</ion-item>
+
+
+
+
+  <ion-item 
+  button 
+  detail 
+   style="display: none;"
+  class="custom-item"
+>
+
+
+  <!-- Icono condicional -->
+  <ion-avatar slot="start" class="icon-avatar">
+    <ion-icon 
+      [name]="getIcon(this.typeHouse)" 
+      class="type-icon">
+    </ion-icon>
+  </ion-avatar>
+
+  <!-- Detalles de la dirección -->
+  <ion-label>
+    <b style="color: rgb(25, 151, 92);">Ubicación seleccionada</b>
+    <h3>{{ this.direccion }}</h3>
+    <p>Referencias: {{ this.referencia || 'Sin referencia' }}</p>
+  </ion-label>
+</ion-item>
+
+<h3 style="padding: 10px;margin-top: 0px;">
+  Ubicaciones guardadas
+</h3 >
+  
+  <!-- Lista de direcciones -->
+  <ion-list lines="none" class="custom-list">
+    <ng-container *ngFor="let direccion of filteredDirecciones; let i = index">
+      <ion-item 
+        button 
+        detail 
+        (click)="selectLocation(direccion)" 
+        *ngIf="i < 5"
+        class="custom-item"
+      >
+        <!-- Icono condicional -->
+        <ion-avatar slot="start" class="icon-avatar">
+          <ion-icon 
+            [name]="getIcon(direccion.type)" 
+            class="type-icon">
+          </ion-icon>
+        </ion-avatar>
+  
+        <!-- Detalles de la dirección -->
+        <ion-label>
+          <p style="font-weight: bold;color:rgb(36, 36, 36);">{{ direccion.type.toUpperCase() || 'Sin referencia' }}</p>
+          <h3>{{ direccion.direccion }}</h3>
+
+          <p style="color:rgb(98, 98, 98);font-size: 11px;">Referencias: {{ direccion.ref || 'Sin referenciaxx' }}</p>
+        </ion-label>
+  
+        <!-- Botón de borrar -->
+        <ion-button 
+          slot="end" 
+          color="danger" 
+          fill="clear" 
+          (click)="deleteDireccion(direccion)"
+        >
+          <ion-icon style="color: #fd5563;" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+  
+
+  
+  <div class="animated-button" style="position: fixed; bottom: 73px; left: 0; right: 0; padding: 0 12px; z-index: 1000;">
+    <ion-button (click)="showModalMap()" shape="round" color="dark" expand="full">
+      <div style="font-size: 16px; font-weight: 300; letter-spacing: 1px; width: 100%;color: #fff;">
+        Agregar nueva ubicación
+        <br>
+      </div>
+      <ion-icon name="location-outline" slot="start" style="font-size: 22px;"></ion-icon>
+  
+  
+    </ion-button>
+  </div>
+<br>
+<br>
+<br>
+<br>
+</ion-content>

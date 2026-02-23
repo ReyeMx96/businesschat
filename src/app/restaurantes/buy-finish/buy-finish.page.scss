@@ -1,0 +1,39 @@
+.buy-finish-content {
+  --background: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.finish-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+h2 {
+  margin-top: 10px;
+  font-weight: 600;
+  color: #222;
+}
+
+p {
+  margin: 8px 0 20px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.whatsapp-btn {
+  --border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+}

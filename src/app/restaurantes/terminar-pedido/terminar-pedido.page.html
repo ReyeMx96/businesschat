@@ -1,0 +1,676 @@
+<ion-header style="display: none;" [translucent]="true">
+  
+  <ion-toolbar color="light" mode="ios">
+    <ion-buttons  slot="start" style="margin-left: 10px;;">
+      <ion-back-button text="" color="dark" defaultHref="/carrito/{{this.restaurant}}/{{this.devMode}}/{{this.session}}"> 
+
+      </ion-back-button>
+    </ion-buttons>
+
+    <ion-title  style="font-weight: bold;font-size: 18px;font-style: italic;padding-top: 1px;">
+      Finalizar pedido.
+   <br>
+      <b style="font-size: 10px;display: none;"> {{this.direccion.replace("/n"," ").replace("/n"," ")}}</b>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<div class="overlay" *ngIf="showAlertx">
+  <div class="alert-box">
+    <img src="https://t3.ftcdn.net/jpg/04/49/73/64/360_F_449736488_IAGo58o7DloC8Os5S5v9vppX3BIxzK4S.jpg" alt="Alerta" class="alert-img" />
+   <div style="padding: 15px;padding-top: 0px;padding-bottom: 0px;">
+
+    <h2 style="margin-top: 0px;font-size: 15px;" class="alert-title">{{this.direccion.replace("/n"," ").replace("/n"," ")}}</h2>
+    <p class="alert-desc">Esta es tu dirección actual a la que enviaremos tu pedido.</p>
+ <ion-button
+  expand="block"
+  color="primary"
+  mode="ios"
+  shape="round"
+  (click)="closeAlert2()"
+  style="font-style: italic; font-size: 13px; --padding-top: 4px; --padding-bottom: 4px; --min-height: 36px;">
+  Cambiar ubicación
+</ion-button>
+
+<ion-button
+  expand="block"
+  color="dark"
+  mode="ios"
+  shape="round"
+  (click)="closeAlert()"
+  style="font-style: italic; font-size: 13px; --padding-top: 4px; --padding-bottom: 4px; --min-height: 36px;margin-top: 10px;">
+<b style="color: white;">  Confirmar</b>
+</ion-button>
+ </div>
+ 
+  </div>
+
+</div>
+
+<ion-content #content style="--background: #fff">
+ 
+   <div style="position: absolute; top: 7px; left: 2%;z-index: 999999999999999999999;">
+      <div (click)="goBackx()"
+       style="width: 43px;height: 43px;background: rgb(233 233 233 / 54%);; border-radius: 50%; padding: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);">
+        <ion-icon name="arrow-back-outline" style="font-size: 24px; color: rgb(0, 0, 0);"></ion-icon>
+      </div>
+    </div>
+
+   <ion-list *ngIf="itemCount === 0">
+
+    <ion-item >
+      <ion-label>
+        <ion-skeleton-text color="light" animated class="my-skeleton" style="width: 80%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 80%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 80%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 80%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 80%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 80%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 60%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 90%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 90%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 90%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 90%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 90%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 90%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 90%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+  <!-- Mapa de Google con botón "Ajustar el marcador" -->
+  <div  style="display: none;box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.2);position: relative; margin: 12px; border-radius: 12px; overflow: hidden;">
+    <div style="height: 120px; width: 100%; border-radius: 12px; overflow: hidden;">
+      <!-- Aquí puedes integrar el mapa de Google -->
+      <div id="map" style="height: 120px;"></div>
+    </div>
+
+    <ion-button 
+    style="
+    position: absolute;
+    top: 75px;
+    right: 10px;
+    width: 160px;
+    font-size: 12px;
+    color: black;
+    box-shadow: 1px 1px 1px 1px rgb(232, 232, 232);
+    "
+    
+    shape="round" color="light">
+      <b style="color: black;letter-spacing: 0px;">Ajustar el marcador</b>
+    </ion-button>
+  </div>
+  <!-- Formulario de detalles de entrega -->
+  <ion-list style=" padding-right: 10px;
+    padding-left: 10px;background: rgba(0, 0, 0, 0.08);
+">
+  <div  style="padding-top: 15px;font-size: 20px;width: 100%;
+    font-style: italic;text-align: center;color: #000;">Resumen del pedido~~</div>
+
+      <div style="display: none;text-align: left;font-weight: bold;margin-left: 10px;font-size: 20px;padding: 4px;margin-top: 6px;">
+        Resumen del pedido~~
+      </div>
+    <!-- Dirección -->
+     
+    <ion-item class="payment-card-top" style="height: 85px;margin-top: 26px;" detail="true" *ngIf="devMode !== 'Recoger en tienda'" (click)="presentDireccionActionSheet()" >
+<img src="https://cdn-icons-png.flaticon.com/128/1295/1295181.png" 
+style="width:25px;height: 25px;margin-inline-end: 16px;margin-bottom: 10px;">
+      <ion-label *ngIf="direccion !== ''" style="font-family: 'titulos';height: 65px; 
+      padding-top: 0px;font-size: 15px;color: #000;padding-top: 1px;">
+     
+    <span > {{this.referenciaDireccion}} {{ this.direccion.replace("/n"," ").replace("/n"," ") }}<br></span> 
+  
+    <div style="font-size: 12px;color: rgb(70, 128, 118);"  >
+      <!-- Calle y numero: {{this.referenciaDireccion}} -->
+     
+        <u style="color: #0c0c0c;font-size: 12px;margin-top: 5px;">Agregar calle y numero</u>
+
+      <!-- <u style="color: #0c0c0c;font-size: 10px;" (click)="showAlert('loc_ind', referenciaDireccion)">Editar calle y numero</u> -->
+
+
+
+    </div>
+      </ion-label>
+
+          <ion-label *ngIf="direccion === ''" style="font-family: 'titulos';height: 75px; 
+      padding-top: 0px;font-size: 16px;color: #b51414;margin-top: 5px;">
+    
+    Agrega tu dirección de entrega<br>
+    <div style="font-size: 12px;color: rgb(70, 128, 118);"  >
+      Referencias: {{this.referenciaDireccion}}<br>
+      <u style="color: #0c0c0c;font-size: 12px;display: none;" (click)="showAlert('loc_ind', referenciaDireccion)">Editar calle y numero</u>
+
+
+
+    </div>
+      </ion-label>
+
+
+   <ion-label slot="end" style="text-transform: uppercase;text-align: center;font-size: 6px;color: gray;font-weight: bold;
+">
+    <ion-icon *ngIf="typeHouse === 'casa'"  name="home-outline" style="color: gray; font-size: 13px;"></ion-icon>
+
+<ion-icon *ngIf="typeHouse === 'departamento'"  name="business-outline" style="color: gray; font-size: 13px;"></ion-icon>
+
+<ion-icon *ngIf="typeHouse === 'oficina'"  name="briefcase-outline" style="color: gray; font-size: 13px;"></ion-icon>
+
+<ion-icon *ngIf="typeHouse === 'hotel'"  name="bed-outline" style="color: gray; font-size: 13px;"></ion-icon>
+
+<ion-icon *ngIf="typeHouse === 'otro'"  name="location-outline" style="color: gray; font-size: 13px;"></ion-icon>
+  <br>
+
+  {{this.typeHouse}}
+   </ion-label>
+
+
+
+    </ion-item>
+
+    <div id="getLocation" style="display: none;" (click)="refreshLocation()">
+
+</div>
+
+
+    <ion-item class="payment-card" style="height: 55px;" detail="true" (click)="showAlert('name', nameClient)">
+<img src="../../../../assets/icon/userprofile.png" style="width:25px;height: 25px;margin-inline-end: 16px;">
+
+      <ion-label *ngIf="nameClient !== ''" style="font-family: 'titulos'; height: 37px; padding-top: 0px;color: #000;">
+        {{ nameClient }}
+    <br>
+     <u style="color: #0c0c0c;font-size: 12px;">Editar nombre</u>
+
+      </ion-label>
+
+         <ion-label *ngIf="nameClient === ''" style="font-family: 'titulos'; height: 43px; padding-top: 0px;color: #bd1a1a;">
+        Agrega tu nombre
+        <br>
+      <u style="color: #0c0c0c;font-size: 16px;">Editar nombre</u>
+
+      </ion-label>
+
+    </ion-item>
+ 
+    <ion-item class="payment-card" style="height: 55px;" detail="true">
+      
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" style="width:35px;height: 35px;margin-inline-end: 12px;">
+
+      <ion-label *ngIf="phoneUser !== ''" style="font-family: 'titulos'; height: 43px; padding-top: 10px;color: #000;">
+        {{ phoneUser }}  
+      </ion-label>
+
+      <ion-label *ngIf="phoneUser === ''" style="font-family: 'titulos'; height: 43px; padding-top: 10px;color: #a31b1b;">
+        Agregar número de WhatsApp
+      </ion-label>
+
+    </ion-item>
+  
+  
+          <ion-item class="payment-card" detail="true" style="margin-top: 3px;height: 50px;display:none">
+      
+<img src="../../../../assets/icon/efectivox.png" style="width:30px;height: 30px;margin-inline-end: 16px;" *ngIf="typePay === 'Efectivo'">
+<img src="../../../../assets/icon/transfx.png" style="width:30px;height: 30px;margin-inline-end: 16px;" *ngIf="typePay === 'Transferencia'">
+
+      <ion-label style="font-family: 'titulos'; height: 43px; padding-top: 10px;font-weight: bold;color: rgb(1, 53, 24);" *ngIf="typePay === 'Efectivo'">
+        {{ typePay }}
+      </ion-label>
+         <ion-label style="font-family: 'titulos'; height: 43px; padding-top: 10px;font-weight: bold;color: rgb(60, 89, 252);" *ngIf="typePay === 'Transferencia'">
+        {{ typePay }}
+      </ion-label>
+
+         <div (click)="presentMetodoPagoAlert()" style="margin-top: 0px;text-align: center;;color: white;font-style: italic;font-size: 8px;margin-left: 5px;background: #151518;padding: 5px;border-radius: 15px;max-width: 140px;">
+  
+    Cambiar metodo de pago
+    
+</div>
+    </ion-item>
+
+  <ion-radio-group [(ngModel)]="typePay">
+  <!-- EFECTIVO -->
+
+
+
+  <!-- TRANSFERENCIA -->
+  <!-- <ion-item
+    lines="none"
+    class="payment-card"
+    [class.selected]="typePay === 'Transferencia'"
+    button
+    (click)="typePay = 'Transferencia'"
+  >
+    <div class="left">
+      <img src="../../../assets/icon/transf.png" class="icon" />
+    </div>
+
+    <div class="content">
+      <h3 style="color: black;">Transferencia</h3>
+      <p style="color: blue;">SPEI inmediato</p>
+    </div>
+
+   <div class="right">
+      <ion-icon
+        *ngIf="typePay === 'Transferencia'"
+        name="checkmark-circle"
+        class="check-icon"
+      ></ion-icon>
+
+      <ion-radio
+        *ngIf="typePay !== 'Transferencia'"
+        value="Transferencia"
+      ></ion-radio>
+    </div>
+  </ion-item> -->
+
+</ion-radio-group>
+
+
+    <!-- Instrucciones de entrega -->
+     <!-- Tiempo de espera -->
+     <ion-item style="display: none;">
+      <ion-icon name="time-outline" slot="start" style="color: gray;"></ion-icon>
+      <ion-label style="font-family: 'titulos';height: 42px;padding-top: 10px"> Tiempo de espera </ion-label>
+      <ion-label style="font-weight: bold;font-family: 'titulos';height: 42px;padding-top: 10px;color: rgb(122, 122, 122);font-size: 14px;" slot="end" >  {{ entrega.tiempoEspera }}</ion-label>
+  
+    </ion-item>
+     <!-- metodo de pago -->
+  
+     <ion-accordion-group  style="margin-top: 10px;">
+      <ion-accordion  value="first" style="background: #00000000;"  expanded="true" value="productos">
+        <ion-item class="payment-card"  slot="header" style="margin:0px;padding: 0px;" >
+          <ion-avatar   style="
+    height: 50px;
+    width: 50px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    overflow: hidden;
+  "  slot="start">
+            <img src="{{this.logoBs}}" alt="Icono de comida">
+          </ion-avatar>
+          <ion-label style="color: #000;font-size: 14px;">
+         <b>  Ver carrito</b><br>
+            Productos ({{ productosTotales }}) <br>${{precioTotal}}
+          </ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content" style="background: #fff;">
+          <ion-list style="background: #fff;">
+            <ion-grid style="background: #fff;border-radius: 14px;">
+              <ion-row *ngFor="let producto of cartItems">
+                <ion-col size="12" style="padding: 0px;">
+                  <h2 style="margin-top: 0px;font-size: 14px;margin-bottom: 0px;color: gray;">{{ producto.category }}</h2>
+                  <h2 style="margin-top: 0px;font-size: 14px;margin-bottom: 0px;color: #000;">{{ producto.name }}</h2>
+
+                </ion-col>
+
+<ion-col size="12" style="padding: 0px;color: gray;font-size: 11px;">
+
+    {{producto.tptxt}}
+
+</ion-col>
+
+<ion-col size="10" style="padding: 0px;">
+    <p style="color: rgb(21, 21, 21);padding-top: 2px;padding-bottom: 0px;margin-bottom: 0px;margin-top: 0px;font-size: 13px;">
+   Cantidad: {{producto.quantity}} x ${{ producto.price }}</p>
+
+</ion-col>
+<ion-col size="2" style="padding: 0px;">
+  <p style="font-size: 13px;color: rgb(15, 143, 98);padding-top: 2px;padding-bottom: 0px;margin-bottom: 0px;margin-top: 0px;"><strong> ${{ producto.price * producto.quantity }}</strong></p>
+
+</ion-col>
+<div style="width: 100%;height: 1px;background: rgb(219, 219, 219);margin-top: 5px;margin-bottom: 5px;">
+
+</div>
+              </ion-row>
+            </ion-grid>
+         
+          </ion-list>
+        </div>
+      </ion-accordion>
+          <!-- Agregar cupón -->
+  
+    </ion-accordion-group>
+ <div style="margin-top: 1px;" class="separator">
+  <div class="line"></div>
+  
+  <div class="line"></div>
+</div>
+<div class="summary-card">
+
+  <!-- MÉTODO DE PAGO -->
+     <!-- TRANSFERENCIA -->
+       <ion-item
+    lines="none"
+    class="payment-card"
+    [class.selected]="typePay === 'Efectivo'"
+    button
+    (click)="typePay = 'Efectivo'"
+  >
+    <div class="left">
+      <img src="../../../assets/icon/dinero-en-efectivo.png" class="icon" style="width: 30px;height: 30px;" />
+    </div>
+
+    <div class="content">
+      <h3 style="color: #000;">Efectivo</h3>
+      <p style="color: black;">Paga al recibir tu pedido</p>
+    </div>
+
+    <div class="right">
+      <ion-icon
+        *ngIf="typePay === 'Efectivo'"
+        name="checkmark-circle"
+        class="check-icon"
+      ></ion-icon>
+
+      <ion-radio
+        *ngIf="typePay !== 'Efectivo'"
+        value="Efectivo"
+      ></ion-radio>
+    </div>
+  </ion-item>
+  <ion-item
+    lines="none"
+    class="payment-card"
+    [class.selected]="typePay === 'Transferencia'"
+    button
+    (click)="typePay = 'Transferencia'"
+  >
+    <div class="left">
+      <img src="../../../assets/icon/transf.png" class="icon" />
+    </div>
+
+    <div class="content">
+      <h3 style="color: black;">Transferencia</h3>
+      <p style="color: blue;">SPEI inmediato</p>
+    </div>
+
+   <div class="right">
+      <ion-icon
+        *ngIf="typePay === 'Transferencia'"
+        name="checkmark-circle"
+        class="check-icon"
+      ></ion-icon>
+
+      <ion-radio
+        *ngIf="typePay !== 'Transferencia'"
+        value="Transferencia"
+      ></ion-radio>
+    </div>
+  </ion-item>
+   
+ <ion-item *ngIf="typePay === 'Transferencia'" style="height: 60px;" class="payment-card" (click)="copiarTexto(cuentatransferencia)" detail="true" >
+      
+  
+      <ion-label 
+      style="font-family: 'titulos'; height: 43px; padding-top: 2px;
+      font-weight: bold;color: rgb(0, 0, 0);font-size: 12px;"
+       >
+        {{bankInfo}}<br>
+      <b style="font-size: 15px;"> {{cuentatransferencia}} </b>
+      </ion-label>
+
+         <ion-icon slot="start" name="card-outline" style="color: black;">
+
+       </ion-icon>
+       <ion-icon slot="end" name="copy" style="color: black;">
+
+       </ion-icon>
+    </ion-item>
+   
+       <div *ngIf="typePay === 'Transferencia'" style="text-align: center;display: block;">
+
+     <input type="file" (click)="requestPermisionCamera()" style="display: none;" id="inputFile"  accept="image/jpeg, image/png, image/jpg, application/pdf" (change)="onFileSelected($event, 'logo')" />
+    
+      <!-- Cuadro dashed con icono y texto -->
+      <div class="capture-box" (click)="clickInputFile()">
+        <ion-icon *ngIf="!logoPreview" name="image" style="font-size: 40px; color: gray;"></ion-icon>
+        <br>
+      <div *ngIf="!logoPreview">Captura de pantalla del recibo</div>
+      <img *ngIf="logoPreview" [src]="logoPreview" alt="Logo Preview" style="width: 200px; height: 200px; margin-top: 0px;border-radius: 15px;">
+        
+
+      </div>
+    </div>
+ 
+
+  <!-- DIVISOR -->
+  <div class="divider"></div>
+
+  <!-- PRECIOS -->
+  <div class="price-row">
+    <span style="color: black;">Total en productos</span>
+    <span style="color: #000;" >${{ getFormattedPrice(precioTotal) }}</span>
+  </div>
+
+  <!-- envio -->
+  <div class="price-row">
+    <span style="color: black;">Costo de envío</span>
+    <span style="color: black;">${{ getFormattedPrice(costoEnvio) }}</span>
+  </div>
+
+  <!-- tfll -->
+  <div *ngIf="tfll > 0" class="price-row">
+    <span style="color: rgb(42, 55, 241);">Tarifa de lluvia</span>
+    <span style="color: black;">${{ getFormattedPrice(tfll) }}</span>
+  </div>
+
+  <!-- TOTAL -->
+  <div class="total-row">
+    <span style="color: black;">Total a pagar</span>
+    <span class="total-amount">${{ getTotal().toFixed(2) }}</span>
+  </div>
+
+</div>
+
+  <!-- Resumen de costos -->
+  <ion-grid style="padding: 0px 12px 0px 12px" slot="margin-top:20px;display:none">
+
+
+    <ion-row style="display: none;">
+      <ion-col>
+        <div style="font-size: 16px; color: black;margin-top: 20px;">Total en productos</div>
+      </ion-col>
+      <ion-col size="auto">
+        <div style="font-size: 16px; color: black;margin-top: 20px;">${{ getFormattedPrice(precioTotal) }}</div>
+      </ion-col>
+    </ion-row>
+    
+    <ion-row style="display: none;" *ngIf="typePay !== 'Efectivo'">
+      <ion-col>
+        <div style="font-size: 15px; color: rgb(60, 138, 100);margin-top: 20px;">Descuento</div>
+      </ion-col>
+      <ion-col size="auto">
+        <div style="font-size: 16px; color: black;margin-top: 20px;">${{ getFormattedPrice(descuentoNew) }}</div>
+      </ion-col>
+    </ion-row>
+    
+  
+    <ion-row style="display: none;">
+      <ion-col>
+        <div style="font-size: 15px; color: black;margin-top: 10px;">Costo de envío</div>
+      </ion-col>
+      <ion-col size="auto">
+        <div style="font-size: 16px; color: black;margin-top: 10px;"> ${{ getFormattedPrice(costoEnvio) }}  </div>
+      </ion-col>
+    </ion-row>
+  
+    <!-- <ion-row *ngIf="tfll > 0">
+      <ion-col>
+        <div style="font-size: 16px; color: rgb(29, 49, 85);font-weight: bold;">Tarifa de lluvia</div>
+      </ion-col>
+      <ion-col size="auto">
+        <div style="font-size: 16px; color: rgb(37, 35, 104);font-weight: bold;"> ${{ getFormattedPrice(tfll) }}  </div>
+      </ion-col>
+    </ion-row> -->
+    <ion-row style="display: none;">
+      <ion-col>
+        <div style="font-size: 16px; color: black;">Tarifa de servicio</div>
+      </ion-col>
+      <ion-col size="auto">
+        <div style="font-size: 16px; color: black;" *ngIf="typePay === 'Transferencia'">
+          ${{ (precioTotal ? precioTotal * 0.05 : 0).toFixed(2) }}
+        </div>
+
+        <div style="font-size: 16px; color: black;" *ngIf="typePay === 'Efectivo'">
+          $0
+        </div>
+      </ion-col>
+    </ion-row>
+  <div style="margin-top: 10px;" class="separator">
+  <div class="line"></div>
+  
+  <div class="line"></div>
+</div>
+    <!-- Total con cálculo final -->
+    <ion-row style="display: none;">
+      <ion-col>
+        <div style="font-size: 18px; font-weight: bold;color: #000;">Total a pagar</div>
+      </ion-col>
+      <ion-col size="auto">
+        <div style="font-size: 18px; font-weight: bold;color: #000;">
+          ${{ getTotal().toFixed(2) }}
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div style="margin-top: 10px;" class="separator">
+  <div class="line"></div>
+  
+  <div class="line"></div>
+</div>
+ 
+ 
+
+
+    <ion-radio-group  (ngModelChange)="onTypePayChange($event)"  [(ngModel)]="typePay" mode="md" style="display: none;margin-top: 0px;">
+      <ion-item [disabled]="!this.platformConfig.efectivo">
+        <ion-icon name="logo-usdx" slot="start" style="color: gray;"></ion-icon>
+        <ion-icon name="logo-usd" slot="start" style="color: gray;"></ion-icon>
+        <ion-label style="font-family: 'titulos';font-weight: bold;">Efectivo</ion-label>
+        <ion-radio slot="end" value="Efectivo"></ion-radio>
+      </ion-item>
+      <ion-item [disabled]="!this.platformConfig.transferencia">
+        <ion-icon name="card-outlxine" slot="start" style="color: gray;"></ion-icon>
+        <ion-icon name="card-outline" slot="start" style="color: gray;"></ion-icon>
+        <ion-label style="font-weight: bold;">Transferencia</ion-label>
+        <ion-radio   slot="end" value="Transferencia"></ion-radio>
+        
+      </ion-item>
+    
+    </ion-radio-group>
+  
+   
+
+
+  
+   
+    
+    
+    
+
+   
+    <ion-item style="display: none;">
+      <ion-icon name="gift-outline" style="color: gray;" slot="start"></ion-icon>
+      <ion-label style="font-family: 'titulos';height: 42px;padding-top: 10px">Agregar cupon</ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end" style="color: rgb(43, 43, 43);font-size: 16px;"></ion-icon> <!-- Flecha derecha -->
+    </ion-item>
+  </ion-list>
+  
+
+  
+
+  <!-- Footer con botones -->
+
+
+</ion-content>
+
+
+
+<ion-footer class="checkout-footer" style="  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;">
+  <div class="checkout-container">
+
+    <!-- Total -->
+    <div class="total-box" style="text-align: center;" *ngIf="itemCount !== 0">
+      <div class="total-label" style="text-align: center;">Total a pagar</div>
+      <div class="total-amount">
+        ${{ getTotal().toFixed(2) }}
+      </div>
+    </div>
+
+    <!-- Botón -->
+    <ion-button
+      *ngIf="itemCount !== 0"
+      [disabled]="protectDouble"
+      expand="block"
+      shape="round"
+      class="checkout-btn animated-button"
+      (click)="confirmarOrden()"
+    >
+      <span *ngIf="!protectDouble" style="color: white;">REALIZAR PEDIDO</span>
+      <ion-spinner *ngIf="protectDouble" name="dots"></ion-spinner>
+    </ion-button>
+
+  </div>
+</ion-footer>

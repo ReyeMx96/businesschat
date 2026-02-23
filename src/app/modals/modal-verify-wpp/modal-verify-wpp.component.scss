@@ -1,0 +1,81 @@
+
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgb(255, 255, 255);
+  backdrop-filter: blur(10px);
+  z-index: 0;
+}
+
+.verify-card {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  display: inline-grid;
+  max-width: 420px;
+  background: rgb(255, 255, 255);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(175, 175, 175, 0.4);
+  padding: 24px;
+  text-align: center;
+  color: #fff;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 18px;
+  color: #fff;
+  z-index: 10;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.whatsapp-icon {
+  font-size: 80px;
+  color: #24c077;
+  filter: drop-shadow(0 4px 12px rgba(37, 211, 102, 0.4));
+}
+
+h2 {
+  font-size: 22px;
+  margin: 8px 0 4px;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 11px;
+  margin-bottom: 18px;
+}
+
+.info-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 18px;
+
+  ion-icon {
+    font-size: 28px;
+    color: #25d366;
+  }
+
+  .phone {
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0;
+  }
+}
+
+.note {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 12px;
+}

@@ -1,0 +1,154 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-title>WhatsApp Marketing</ion-title>
+    <ion-buttons slot="end" routerLink="campaing-list">
+      <ion-icon style="font-size: 30px;" name="list-circle-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+ <div class="glass-container">
+
+  <!-- ================= PREVIEW ================= -->
+  <div class="preview-panel">
+    <div class="preview-card">
+
+      <div 
+        class="capture-box"
+        *ngIf="currentTmp === 'img_text' || currentTmp === 'img_text_btn'"
+        (click)="doit()"
+      >
+      <!-- Input oculto para seleccionar imagen -->
+<input
+  type="file"
+  id="upload2"
+  hidden
+  accept="image/*"
+  (change)="onFileSelected($event)"
+/>
+
+<!-- Imagen temporal para que uploadImg() la lea -->
+<img id="imagenProfile2" style="display:none;" />
+
+<!-- Botón oculto que se dispara cuando termina upload -->
+<button id="btnUpload2" hidden (click)="imgUploaded()"></button>
+
+        <ion-icon *ngIf="croppedImage?.length < 1" name="image"></ion-icon>
+
+        <img 
+        
+          *ngIf="croppedImage"
+          [src]="croppedImage"
+          style="    margin-top: 150px;"
+          [ngStyle]="{'max-height': HeightDevice+'px'}"
+        />
+      </div>
+
+      <div class="message-bubble">
+        {{ textoSend }}
+      </div>
+
+      <ion-button 
+        *ngIf="currentTmp === 'img_text_btn'"
+        expand="block"
+        (click)="showToast('Sugiere al cliente tocar este boton para iniciar un pedido')"
+      >
+        Aceptar oferta
+      </ion-button>
+
+    </div>
+  </div>
+
+  <!-- ================= CONFIG ================= -->
+  <div class="config-panel">
+
+    <div class="section">
+      <h3>Plantilla seleccionada</h3>
+
+      <div class="chips-container">
+        <ion-chip 
+          *ngFor="let item of arrayTemplates; let i = index"
+          (click)="setTmp(item,i)"
+        >
+          {{item.Tmp}}
+        </ion-chip>
+      </div>
+    </div>
+
+    <div class="section">
+      <ion-item style="margin-bottom: 20px;" fill="outline">
+        <ion-label position="stacked">Nombre campaña</ion-label>
+        <ion-input maxlength="25" placeholder="Ej. Oferta de verano" [(ngModel)]="mktName"></ion-input>
+      </ion-item>
+
+
+    </div>
+
+    <div class="section">
+      <ion-item style="margin-bottom: 20px;" fill="outline">
+        <ion-label position="stacked">Mensaje</ion-label>
+        <ion-textarea placeholder="Ej. ¡Hola! Te ofrecemos un 20% de descuento en tu próxima compra." maxlength="254" [(ngModel)]="textoSend"></ion-textarea>
+      </ion-item>
+
+    </div>
+
+    <ion-button expand="block" (click)="usersComponent()">
+      <b style="color:white;">Agregar clientes</b>
+    </ion-button>
+
+    <ion-button expand="block" routerLink="/select-publico">
+      <b style="color:white;">Agregar por ubicación</b>
+    </ion-button>
+
+  
+
+  </div>
+
+  <!-- ================= CONTACTOS ================= -->
+  <div class="contacts-panel">
+
+    <div class="contacts-card">
+
+  <div class="summary-card">
+      <h2>{{ arrayList.length }} contactos</h2>
+      <p>Total: ${{ arrayList.length * 0.50 | number: '1.2-2' }} MXN</p>
+        <div class="empty-state" *ngIf="arrayList.length === 0">
+        No hay contactos aún
+      </div>
+    </div>
+      <ion-list style="margin-top: 10px;border-radius: 15px;" *ngIf="arrayList.length > 0">
+        <ion-item style="border-radius: 15px;margin-top: 1px;" *ngFor="let item of arrayList; let i = index">
+          <ion-label>
+            <h2>{{ item.Name }}</h2>
+            <p>{{ item.Numb }}</p>
+          </ion-label>
+
+          <ion-button fill="clear" color="danger" (click)="deleteItem(i)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+
+    
+
+    </div>
+
+  </div>
+
+</div>
+
+
+</ion-content>
+
+<ion-footer>
+  <ion-button 
+    expand="block"
+    [disabled]="disableBtn === 'Sin ubicacion'"
+    (click)="sendMsgs()"
+  >
+    <b style="color: white;">Enviar mensajes</b>
+    <ion-spinner *ngIf="disableBtn === 'Sin ubicacion'" slot="end"></ion-spinner>
+  </ion-button>
+</ion-footer>

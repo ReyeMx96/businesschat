@@ -1,0 +1,371 @@
+.templates-page {
+  --background: #f4f6fb;
+}
+
+.layout {
+  display: flex;
+  height: 100%;
+}
+
+/* TOP BAR */
+.topbar {
+  --background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+.canvas-container{
+
+}
+/* SIDEBAR */
+.sidebar {
+  width: 180px;
+  background: #ffffff;
+  padding: 14px 12px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.sidebar-section h4 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.filters {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.filter.active {
+  background: #e0e7ff;
+  color: #1e40af;
+}
+
+.filter.active ion-icon {
+  color: #1e40af;
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  font-size: 13px;
+  border-radius: 8px;
+  background: transparent;
+  color: #374151;
+  border: none;
+  cursor: pointer;
+}
+
+.filter ion-icon {
+  font-size: 16px;
+  color: #6b7280;
+}
+
+.filter:hover {
+  background: #f1f5f9;
+}
+
+/* MAIN */
+.main {
+  flex: 1;
+  padding: 18px;
+}
+
+.main-header {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 14px;
+}
+
+/* AI RESULT */
+.ai-result {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.ai-result img {
+  max-width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+/* CARD */
+.card {
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all .18s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.12);
+}
+
+/* IMAGE FULL */
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* ION CONTENT */
+ion-content {
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+/* CARD ACTIONS OVERLAY */
+.card {
+  position: relative;
+}
+
+.card-actions {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity .15s ease;
+  z-index: 2;
+}
+
+.card:hover .card-actions {
+  opacity: 1;
+}
+
+/* BOTONES */
+.action-btn {
+  flex: 1;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  backdrop-filter: blur(6px);
+}
+
+/* MEJORAR */
+.action-btn.improve {
+  background: rgba(255,255,255,.9);
+  color: #111827;
+}
+
+/* CAMBIAR */
+.action-btn.change {
+  background: rgba(30,64,175,.9);
+  color: #ffffff;
+}
+
+/* MOBILE: siempre visibles */
+@media (max-width: 768px) {
+  .card-actions {
+    opacity: 1;
+  }
+}
+
+
+
+.editor-wrapper {
+  display: flex;
+  gap: 16px; /* espacio entre canvas y sidebar */
+  height: 450px; /* altura del editor */
+}
+
+/* CANVAS */
+.editor-container {
+  flex: 1; /* ocupa todo el espacio restante */
+  justify-content: center;
+  height: 400px;
+  width: 400px;
+
+  align-items: center;
+}
+
+canvas {
+  max-width: 700px;
+  max-height:700px;
+}
+
+/* BARRA LATERAL */
+.sidebar-panel {
+  width: 300px; /* ancho fijo */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+}
+/* BARRA LATERAL */
+.sidebar-panel2 {
+  width: 300px; /* ancho fijo */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+}
+
+/* Scroll interno si hay contenido largo */
+.scroll-content {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+
+
+/* ================================
+   CANVA PRO EDITOR UI
+================================ */
+
+.editor-wrapper {
+  display: grid;
+  grid-template-columns: 260px 1fr 300px;
+  gap: 16px;
+  height: 470px;
+  padding: 16px;
+  background: linear-gradient(180deg, #f9fafb, #eef2ff);
+  border-radius: 18px;
+}
+
+/* PANEL IZQUIERDO */
+.sidebar-panel {
+  background: rgba(255,255,255,.9);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.08);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-panel h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar-panel ion-icon {
+  cursor: pointer;
+  color: #4f46e5;
+  transition: transform .2s;
+}
+.sidebar-panel ion-icon:hover {
+  transform: scale(1.15);
+}
+
+/* GRID TOOLS */
+.sidebar-panel img {
+  width: 100%;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all .2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,.06);
+}
+
+.sidebar-panel img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 24px rgba(79,70,229,.35);
+}
+
+/* ======================
+   CANVAS
+====================== */
+
+.editor-container {
+  background: radial-gradient(circle at top, #ffffff, #eef2ff);
+  border-radius: 22px;
+  
+  align-items: center;
+  margin-left: 49px;
+  justify-content: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,.12);
+  position: relative;
+}
+
+.editor-container::before {
+  content: "Lienzo";
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6366f1;
+  opacity: .8;
+}
+
+canvas {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.18);
+}
+
+/* ======================
+   PANEL PLANTILLAS
+====================== */
+
+.sidebar-panel2 {
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.08);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-panel2 h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 10px;
+}
+
+/* GRID PLANTILLAS */
+.sidebar-panel2 img {
+  width: 100%;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all .18s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+}
+
+.sidebar-panel2 img:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 16px 40px rgba(79,70,229,.35);
+}
+
+/* SCROLL PRO */
+.scroll-content {
+  scrollbar-width: thin;
+  scrollbar-color: #c7d2fe transparent;
+}
+.scroll-content::-webkit-scrollbar {
+  width: 6px;
+}

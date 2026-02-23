@@ -1,0 +1,42 @@
+
+<ion-header>
+
+  <ion-toolbar mode="ios" color="danger">
+    <ion-buttons (click)="closeModal()" slot="start">
+      <ion-button>
+        <ion-icon name="close-circle">
+
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
+
+    <ion-buttons (click)="saveModal()" slot="end">
+      <ion-button>
+        <ion-icon name="checkmark-circle-outline">
+
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
+
+
+    <ion-title>
+      {{this.fechaToday}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--background:#434343">
+
+  <ion-datetime
+  (ionChange)="timePickerEvent($event)"
+  presentation="date"
+ 
+  [min]="fechaTodaycache"
+
+></ion-datetime>
+
+</ion-content>

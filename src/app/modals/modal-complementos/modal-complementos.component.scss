@@ -1,0 +1,53 @@
+@media screen and (min-width: 1200px) {
+  
+
+    ion-content{
+      --padding-start: 0%;
+      --background: #ffffff;
+      --padding-end: 0%;
+    }
+    ion-modal{
+        width:1000px;
+        height:700px
+    }
+    img{
+      max-height: 220px;
+      width: 100%;
+    }
+  
+    
+    }
+
+
+    img{
+      max-height: 420px;
+      width: 100%;
+    }
+ 
+    .close-icon {
+      position: fixed; /* Posición fija para que no se desplace con el scroll */
+      top: 20px; /* Distancia desde la parte superior */
+      right: 20px; /* Distancia desde el lado derecho */
+      z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+      width: 24px; /* Ancho del ícono */
+      height: 24px; /* Altura del ícono */
+      /* Añade más estilos según sea necesario */
+    }
+    
+    .container {
+      text-align: center;
+      position: relative;
+    }
+    
+    .close-icon {
+      position: absolute;
+      top: 10px; /* Ajusta según sea necesario */
+      left: 10px; /* Ajusta según sea necesario */
+      font-size: 39px; /* Ajusta según sea necesario */
+      color: rgb(246, 246, 246); /* O cualquier otro color deseado */
+    }
+
+
+    ion-label{
+      font-family: 'titulos';
+    }

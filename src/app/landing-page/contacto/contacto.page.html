@@ -1,0 +1,86 @@
+<ion-content fullscreen class="contact-container">
+
+  <div class="contact-bg"></div>
+
+  <div class="contact-wrapper">
+
+    <!-- HEADER -->
+    <div class="contact-header">
+      <h1>Contactanos 🚀</h1>
+      <p>
+        Estamos listos para ayudarte a escalar tu negocio con
+        Business Chat.
+      </p>
+    </div>
+
+    <!-- GRID -->
+    <div class="contact-grid">
+
+      <!-- FORMULARIO -->
+      <div class="contact-card">
+
+        <h2>Envíanos un mensaje</h2>
+
+        <ion-item lines="none" class="glass-input">
+          <ion-label position="stacked">Nombre</ion-label>
+          <ion-input [(ngModel)]="contact.name"></ion-input>
+        </ion-item>
+
+        <ion-item lines="none" class="glass-input">
+          <ion-label position="stacked">Correo electrónico</ion-label>
+          <ion-input type="email" [(ngModel)]="contact.email"></ion-input>
+        </ion-item>
+
+        <ion-item lines="none" class="glass-input">
+          <ion-label position="stacked">Teléfono</ion-label>
+          <ion-input type="tel" [(ngModel)]="contact.phone"></ion-input>
+        </ion-item>
+
+        <ion-item lines="none" class="glass-input">
+          <ion-label position="stacked">Mensaje</ion-label>
+          <ion-textarea rows="4" [(ngModel)]="contact.message"></ion-textarea>
+        </ion-item>
+
+        <ion-button expand="block"
+                    shape="round"
+                    class="btn-main"
+                    (click)="sendContact()">
+      <b style="color: white;">    Enviar mensaje</b>
+        </ion-button>
+
+      </div>
+
+      <!-- INFO -->
+      <div class="contact-info">
+
+        <div class="info-card">
+          <ion-icon name="logo-whatsapp"></ion-icon>
+          <h3>WhatsApp</h3>
+          <p>+52 833 428 55 13</p>
+        </div>
+
+        <div class="info-card">
+          <ion-icon name="mail-outline"></ion-icon>
+          <h3>Email</h3>
+          <p>business-studio&#64;businesschat.mx</p>
+        </div>
+
+        <div class="info-card">
+          <ion-icon name="location-outline"></ion-icon>
+          <h3>Ubicación</h3>
+          <p>Tampico, Tamaulipas 🇲🇽</p>
+        </div>
+
+        <div class="info-card">
+          <ion-icon name="time-outline"></ion-icon>
+          <h3>Horario de atención</h3>
+          <p>Lunes a Sabado<br>10:00 AM - 10:00 PM</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>

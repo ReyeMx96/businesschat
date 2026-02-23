@@ -1,0 +1,167 @@
+<ion-header translucent>
+  <ion-toolbar class="topbar">
+    <ion-title>ADX MEDIA</ion-title>
+    <ion-buttons>
+
+    <ion-button expand="full" (click)="exportImage()">
+  <b style="color: rgb(0, 0, 0);">Guardar imagen final</b>
+</ion-button>
+    </ion-buttons>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="templates-page">
+  <input
+  type="file"
+  #plantillaFileInput
+  accept="image/*"
+  hidden
+  (change)="handlePlantillaUpload($event)"
+/>
+
+<input
+  type="file"
+  #extraFileInput
+  accept="image/*"
+  hidden
+  multiple
+  (change)="handleExtraImage($event)"
+/>
+
+<input
+  type="file"
+  #toolFileInput
+  accept="image/*"
+  hidden
+  (change)="handleToolUpload($event)"
+/>
+
+
+<div style="display:flex; gap:8px; margin-top:8px">
+  <img
+    *ngFor="let img of extraImages"
+    [src]="img"
+    style="width:80px; border-radius:8px"
+  />
+</div>
+
+
+<div class="editor-wrapper">
+
+  <!-- HERRAMIENTAS -->
+  <div class="sidebar-panel">
+    <h3>
+      Herramientas
+      <ion-icon name="add-circle-outline" (click)="addTool()"></ion-icon>
+    </h3>
+
+    <div class="scroll-content">
+      <ion-row>
+        <ion-col *ngFor="let item of toolsArray" size="4">
+          <img (click)="addProductPNG(item.image)" [src]="item.image" />
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+  <!-- CANVAS -->
+  <div class="editor-container">
+    <canvas id="canvas" style="max-width: 420px;max-height: 420px;"></canvas>
+  </div>
+
+  <!-- PLANTILLAS -->
+  <div class="sidebar-panel2">
+    <h3>Plantillas     <ion-icon name="add-circle-outline" (click)="addPlantilla()"></ion-icon>
+   </h3>
+
+    <div class="scroll-content">
+      <ion-row>
+        <ion-col *ngFor="let item of plantillas" size="6">
+          <img (click)="addProduct(item.image)" [src]="item.image" />
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+  <div class="layout" style="margin-top: 20px;">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="sidebar-section">
+        <h4>Categoría</h4>
+      </div>
+
+   <div class="filters">
+
+  <button class="filter" [class.active]="selectedCategory === 'ALL'" (click)="selectCategory('ALL')">
+    <ion-icon name="apps-outline"></ion-icon>
+    <span>Todas</span>
+  </button>
+
+  <button class="filter" [class.active]="selectedCategory === 'Temporada'" (click)="selectCategory('Temporada')">
+    <ion-icon name="calendar-outline"></ion-icon>
+    
+    <span>Temporada</span>
+  </button>
+
+  <button class="filter"[class.active]="selectedCategory === 'Creativa'" (click)="selectCategory('Creativa')">
+    <ion-icon name="color-palette-outline"></ion-icon>
+    <span>Creativa</span>
+  </button>
+ 
+  <button class="filter" [class.active]="selectedCategory === 'Fidelización'" (click)="selectCategory('Fidelización')">
+    <ion-icon name="business-outline"></ion-icon>
+    <span>Fidelización</span>
+  </button>
+
+</div>
+
+
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <div class="main-header">
+        <span>{{ templates.length }} creativas disponibles</span>
+      </div>
+
+      <div *ngIf="imageResult" class="ai-result">
+        <h3>Resultado IA</h3>
+        <img [src]="imageResult" />
+      </div>
+
+      <section class="grid" *ngIf="filteredTemplates.length">
+        <article
+          class="card"
+          *ngFor="let item of filteredTemplates"
+          (click)="openPromptAlert(item.image)"
+        >
+
+          <!-- BOTONES OVERLAY -->
+  <div class="card-actions">
+    <button class="action-btn improve" (click)="openPromptAlert(item.image); $event.stopPropagation()">
+      ✨ Mejorar imagen
+    </button>
+
+        <!-- <button class="action-btn change" (click)="addProductPNG(); $event.stopPropagation()">
+      🔁 Agregar producto  PNG
+    </button> -->
+  </div>
+
+          <img [src]="item.image" />
+        </article>
+      </section>
+
+    </main>
+
+  </div>
+</ion-content>

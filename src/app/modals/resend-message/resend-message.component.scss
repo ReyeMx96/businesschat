@@ -1,0 +1,93 @@
+
+.price-container {
+    display: flex;
+    overflow-x: auto; /* Habilita la barra de desplazamiento horizontal */
+    white-space: nowrap; /* Evita que los elementos se envuelvan a la siguiente línea */
+    padding: 10px;
+    background-color: #ffffff;
+   
+    border-radius: 10px;
+}
+/* Barra superior semitransparente */
+.toolbar-glass {
+  --background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  text-align: center;
+}
+.price-tag {
+    display: inline-block;
+    background-color: #f3f3f3; /* Color de fondo */
+    color: rgb(27, 27, 27); /* Color del texto */
+    font-size: 14px; /* Tamaño del texto */
+    font-weight: bold; /* Negrita */
+    padding: 5px 10px; /* Espaciado interno */
+    border-radius: 25px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    text-align: center; /* Alineación del texto */
+    margin-right: 15px; /* Espaciado entre las etiquetas */
+    flex-shrink: 0; /* Evita que los elementos se encojan */
+}
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  color: white;
+}
+
+.price-tag:last-child {
+    margin-right: 0; /* Elimina el margen derecho del último elemento */
+}
+.ion-activatable {
+    color: #fff;
+    z-index: 999999999999;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+/* Opcional: Hover effect */
+.price-tag:hover {
+    background-color: #035723; /* Cambiar color al pasar el ratón */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Sombra al pasar el ratón */
+}
+
+ion-item {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  ion-ripple-effect {
+    z-index: 999999999999999999999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+  }
+  
+
+     ion-content {
+        --padding-start: 0%;
+        --padding-end: 0%;
+    }
+
+
+    .my-skeleton {
+  /* Fondo más oscuro */
+  --background: #8a8a8a;
+  --background-rgb: 138, 138, 138;
+
+  /* Shimmer más visible */
+  --shimmer-color: #ffffff44;
+  --shimmer-color-rgb: 255, 255, 255;
+
+  border-radius: 6px;
+}

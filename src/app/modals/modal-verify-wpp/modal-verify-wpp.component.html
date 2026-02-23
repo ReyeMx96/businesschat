@@ -1,0 +1,103 @@
+
+
+
+
+
+
+
+<ion-content style="--background:#fff" fullscreen>
+
+<div style="text-align: center;margin-top: 20px;">
+
+  <div class="verify-card">
+    <ion-button fill="clear" style="color: black;" class="close-btn" (click)="dismiss()">✕</ion-button>
+<br>
+    <div class="logo-container">
+      <ion-icon name="logo-whatsapp" class="whatsapp-icon"></ion-icon>
+    </div>
+
+    <h2 style="color: black;">Verifica tu número</h2>
+    <p style="color: black;" class="subtitle">Debes verificar tu número de WhatsApp para finalizar tu pedido.</p>
+
+   <ion-item *ngIf="showInputCode === true" mode="md" lines="none">
+        <ion-input
+          fill="outline"
+          style="border-radius: 5px;color: #000;"
+          placeholder="Digita el código recibido"
+          mode="md"
+          type="tel"
+          [(ngModel)]="codigo"
+          name="codigo"
+          required>
+        </ion-input>
+      </ion-item>
+
+      
+
+      <!-- <ion-button  *ngIf="showInputCode === true"  expand="full" style="--background: #0d6944;margin-top: 16px;" (click)="confirmarCodigo()" shape="round" type="submit">
+        <b style="color: rgb(255, 255, 255);font-family: 'titulos'">CONFIRMAR CÓDIGO</b>
+        <ion-icon  style="color: rgb(255, 255, 255);" name="checkmark-circle" slot="end"></ion-icon>
+
+      </ion-button> -->
+<ion-button  
+  *ngIf="showInputCode === true"  
+  expand="full" 
+  style="--background: #0d6944;margin-top: 16px;" 
+  (click)="confirmarCodigo()" 
+  shape="round"
+  [disabled]="loadingConfirmar">
+
+  <ng-container *ngIf="!loadingConfirmar">
+    <b style="color: white;font-family: 'titulos'">CONFIRMAR CÓDIGO</b>
+    <ion-icon style="color: white;" name="checkmark-circle" slot="end"></ion-icon>
+  </ng-container>
+
+  <ng-container *ngIf="loadingConfirmar">
+    <ion-spinner name="crescent" style="color: white;"></ion-spinner>
+  </ng-container>
+
+</ion-button>
+
+     <ion-item *ngIf="showInputCode === false" mode="md" lines="none">
+        <ion-input
+          fill="outline"
+          style="border-radius: 5px;color: #000;font-size: 14px;"
+          placeholder="Celular (Ej: 8331002250)"
+          mode="md"
+          type="tel"
+          [(ngModel)]="telefono"
+          name="telefono"
+          required>
+        </ion-input>
+      </ion-item>
+
+    <!-- <ion-button *ngIf="showInputCode === false" style="margin-top: 16px;" expand="block" color="dark" (click)="enviarCodigoLogin()">
+    <b style="color: white;">  Enviar código</b>
+        <ion-icon  style="color: rgb(255, 255, 255);" name="logo-whatsapp" slot="end"></ion-icon>
+
+    </ion-button> -->
+<ion-button 
+  *ngIf="showInputCode === false" 
+  style="margin-top: 16px;" 
+  expand="block" 
+  color="dark" 
+  (click)="enviarCodigoLogin()" 
+  [disabled]="loadingEnviar"
+>
+  <ng-container *ngIf="!loadingEnviar">
+    <b style="color: white;">Enviar código</b>
+    <ion-icon style="color: white;" name="logo-whatsapp" slot="end"></ion-icon>
+  </ng-container>
+
+  <ng-container *ngIf="loadingEnviar">
+    <ion-spinner name="crescent" style="width: 22px; height: 22px; color: white;"></ion-spinner>
+  </ng-container>
+</ion-button>
+
+
+    <p style="color: gray;" class="note">Si no recibes el código, revisa tu número o contacta a soporte.</p>
+  </div>
+
+</div>
+
+</ion-content>

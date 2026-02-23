@@ -1,0 +1,98 @@
+<ion-header translucent>
+  <ion-toolbar color="light">
+    <ion-title style="color: black;"></ion-title>
+        <ion-buttons slot="end">
+      <ion-button routerLink="/secap-demo" shape="round" fill="solid" color="light">
+        <ion-icon name="search-circle-outline" slot="icon-only" style="color: black;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="page-bg" fullscreen>
+    <ion-header collapse="condense" translucent>
+    <ion-toolbar color="light">
+      <ion-title size="large" style="color: black;">Subir Certificado</ion-title>
+    </ion-toolbar>
+  </ion-header>
+<div class="center-wrap">
+    <ion-card color="light" class="glass-card">
+      <ion-card-header>
+        <ion-card-title style="color: black;">Registrar certificado</ion-card-title>
+        <ion-card-subtitle style="color: black;">Completa los datos y sube el PDF</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12" size-md="6">
+                <ion-item>
+                  <ion-label style="color: black;" position="stacked">Nombre del estudiante</ion-label>
+                  <ion-input formControlName="studentName" placeholder="Ej. Juan Pérez"></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col size="12" size-md="6">
+                <ion-item>
+                  <ion-label style="color: black;" position="stacked">Matrícula / ID</ion-label>
+                  <ion-input formControlName="studentId" placeholder="Ej. 20251234"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="12" size-md="6">
+                <ion-item>
+                  <ion-label style="color: black;" position="stacked">Curso</ion-label>
+                  <ion-input formControlName="course" placeholder="Ej. Desarrollo Web"></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col size="12" size-md="6">
+                <ion-item>
+                  <ion-label style="color: black;" position="stacked">Fecha de emisión</ion-label>
+                  <ion-input type="date" formControlName="issuedDate"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label style="color: black;" position="stacked">Notas (opcional)</ion-label>
+                  <ion-textarea formControlName="notes" rows="3"></ion-textarea>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="file-row">
+              <ion-col size="12" size-md="8">
+                <input id="file" type="file" shape="round" accept="application/pdf" (change)="onFileChange($event)" hidden/>
+                <ion-button shape="round" color="dark"  (click)="clickDoc()">
+                <b style="color: white;">  {{ fileName ? ('PDF: ' + fileName) : 'Seleccionar PDF' }}</b>
+                </ion-button>
+              </ion-col>
+
+              <ion-col size="12" size-md="4">
+                <ion-button expand="full" shape="round" color="primary" type="submit"> <b style="color: white;">Subir</b></ion-button>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="progress > 0">
+              <ion-col size="12">
+                <ion-item lines="none">
+                  <ion-label style="color: black;">Progreso: {{progress}}%</ion-label>
+                </ion-item>
+                <ion-progress-bar [value]="progress / 100"></ion-progress-bar>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <br>
+  <br>
+  <br>
+</ion-content>

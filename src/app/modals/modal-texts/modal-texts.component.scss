@@ -1,0 +1,39 @@
+
+.customTextArea .native-textarea.sc-ion-textarea-md {
+    --height: 50px;
+    
+    }
+   ion-item{
+     border-radius: 14px;
+   }
+    .ion-color.sc-ion-input-md-h {
+        color: #a8a8a8;
+    }
+    ion-item::part(native) {
+      background-color: var(--ion-color-warning);
+      color:#fff
+    }
+    item-interactive item-textarea item-input ion-color ion-color-dark item md item-lines-default item-fill-outline hydrated item-label item-label-floating item-has-value ion-valid ion-dirty ion-touched{
+        color:white
+      }
+      .item-fill-outline.item-has-value .label-floating.sc-ion-label-md-h{
+        background: #1a1a1a;
+        overflow: hidden;
+        color: white;
+      }
+    ion-icon{
+      margin-inline-end:14px
+    }
+    
+    
+      div{
+        text-align: center;
+        color: rgb(206, 206, 206);
+      }
+      .inpits .input-wrapper{
+        height: 50px;
+      }
+
+         ion-content{
+      --background: #ffffff;
+    }

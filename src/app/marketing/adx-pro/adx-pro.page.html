@@ -1,0 +1,162 @@
+
+
+
+
+  <!-- Selector de imagen -->
+  <input style="display:none" type="file" accept="image/*" (change)="onFileSelected($event)" />
+
+  <!-- Imagen cargada
+  <div *ngIf="previewImage" style="margin-top: 20px;">
+    <ion-card>
+      <img [src]="previewImage" />
+      <ion-card-content>
+        <p>Previsualización</p>
+      </ion-card-content>
+    </ion-card>
+  </div> -->
+
+  <!-- Botón subir -->
+  <ion-button style="display: none;" expand="block" color="primary" (click)="uploadImage()" [disabled]="!selectedFile">
+    Subir imagen a Firebase
+  </ion-button>
+
+  <!-- URL final generada
+  <ion-item style="display:none"  style="margin-top: 10px;">
+    <ion-label>URL Imagen</ion-label>
+    <ion-input [value]="imageUrl" readonly></ion-input>
+  </ion-item> -->
+
+  <!-- Crear anuncio -->
+  <ion-button style="display: none;" expand="block" color="success" (click)="crearAnuncio2()" >
+    Crear anuncio con esta imagen
+  </ion-button>
+
+  <!-- Resultado -->
+  <ion-card *ngIf="resultado" style="margin-top: 20px;">
+    <ion-card-header>
+      <ion-card-title>Resultado</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <pre>{{ resultado | json }}</pre>
+    </ion-card-content>
+  </ion-card>
+
+
+<ion-header class="ads-header">
+  <ion-toolbar>
+    <div class="header-left">
+      <div class="logo">
+        <span></span><span></span>
+      </div>
+      <h1>Adx Pro</h1>
+    </div>
+
+    <div class="header-right">
+      <ion-button (click)="openCreateCampaign()" class="new-btn" fill="solid" color="dark">
+        <ion-icon name="add-outline"></ion-icon>
+        Nuevo Anuncio
+      </ion-button>
+      <ion-button fill="clear" class="icon-btn">
+        <ion-icon name="settings-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ads-content">
+
+  <!-- Filters -->
+  <div class="filters">
+    <div class="tabs">
+      <button class="tab active">Anuncios</button>
+      <button class="tab">Activos</button>
+      <button class="tab">Pausados</button>
+    </div>
+
+    <div class="selectors">
+      <div class="select">Facebook Marketing API▾</div>
+      <div class="select">WhatsApp ▾</div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-card">
+
+    <!-- Header -->
+    <div class="table-header">
+      <span>Imagen</span>
+      <span>Vistas</span>
+      <span>Clicks</span>
+      <span>CTR</span>
+      <span>Campaña ID</span>
+      <span>Estado</span>
+      <span>Presupuesto</span>
+    </div>
+
+    <!-- Loading -->
+    <div class="table-row" *ngIf="loading">
+      <div style="grid-column: 1 / -1; text-align:center;">
+        Cargando anuncios...
+      </div>
+    </div>
+
+    <!-- Rows -->
+    <div class="table-row" *ngFor="let ad of ads">
+
+      <!-- Preview -->
+      <div class="preview">
+        <img
+          *ngIf="ad.media?.imageUrl"
+          [src]="ad.media.imageUrl"
+          alt="Ad image"
+        />
+
+        <div>
+          <h3>Anuncio #{{ ad.index }}</h3>
+          <p>Objetivo: <strong>{{ ad.meta.objective }}</strong></p>
+          <p>Edad: {{ ad.targeting.agemin }} - {{ ad.targeting.agemax }}</p>
+        </div>
+      </div>
+
+      <!-- Metrics (placeholder) -->
+      <div>0</div>
+      <div>0</div>
+      <div>0</div>
+
+      <!-- Campaign ID -->
+      <div style="font-size: 10px;">{{ ad.facebook.campaignId }}</div>
+
+      <!-- Status -->
+      <div>
+        <span class="badge active">
+          Activo
+        </span>
+      </div>
+
+      <!-- Budget -->
+      <div>
+        ${{ ad.meta.dailyBudget/100 }} MXN / día
+      </div>
+
+    </div>
+
+    <!-- Empty -->
+    <div class="table-row" *ngIf="!loading && ads.length === 0">
+      <div style="grid-column: 1 / -1; text-align:center;">
+        No hay anuncios para este WhatsApp
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="table-footer">
+      <span>Mostrando {{ ads.length }} anuncios</span>
+      <div class="pagination">
+        <button disabled>Previous</button>
+        <button class="page active">1</button>
+        <button disabled>Next</button>
+      </div>
+    </div>
+
+  </div>
+</ion-content>
+

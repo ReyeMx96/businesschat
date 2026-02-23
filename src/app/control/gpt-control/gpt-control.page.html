@@ -1,0 +1,75 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="light">
+    <ion-title>IA Studio Pro</ion-title>
+    <ion-buttons slot="end" (click)="agregarNuevaAction()">
+      <ion-icon name="add-circle-outline" slot="icon-only" style="font-size: 30px; color: black;"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="content-glass">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="12" *ngFor="let action of textActions">
+        <div class="card-glass">
+          <div class="card-header">
+            <h2>{{ action.name }}</h2>
+            <p>{{ action.description }}</p>
+          </div>
+
+          <div class="card-table">
+            <table>
+              <tr>
+                <th>Tipo de Respuesta</th>
+                <th>Texto de Respuesta</th>
+                <th>Imagen</th>
+                <th>Extras</th>
+                <th>Acciones</th>
+              </tr>
+              <tr>
+                <td>
+                  <span class="arrow">➡</span>
+                  {{ action.typeAns || '—' }}
+                </td>
+                <td>
+                  <span class="arrow">➡</span>
+                  {{ action.textAns || '—' }}
+                </td>
+                <td>
+                  <ng-container *ngIf="action.imgAns">
+                    <span class="arrow">➡</span>
+                    <img [src]="action.imgAns" class="img-table" />
+                    <div class="url-text">{{ action.imgAns }}</div>
+                  </ng-container>
+                  <ng-container *ngIf="!action.imgAns">—</ng-container>
+                </td>
+                <td>
+                  <ng-container *ngIf="action.Menu">
+                    <pre>{{ action.Menu }}</pre>
+                  </ng-container>
+                  <ng-container *ngIf="action.extra">{{ action.extra }}</ng-container>
+                  <ng-container *ngIf="!action.Menu && !action.extra">—</ng-container>
+                </td>
+                <td>
+                  <ion-button fill="outline" color="dark" size="small" (click)="editarAction(action)">Editar</ion-button>
+                  <ion-button fill="solid" color="danger" size="small" (click)="eliminarAction(action)">Eliminar</ion-button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-item style="display: none;">
+    <ion-label position="stacked">Cuerpo del Prompt (Editable)</ion-label>
+    <ion-textarea placeholder="Escribe aqui..." [(ngModel)]="textBody"></ion-textarea>
+  </ion-item>
+
+  <ion-button expand="block" style="display: none;" color="dark" class="btn-save" (click)="guardarPrompt()">
+    Guardar Prompt
+  </ion-button>
+
+</ion-content>

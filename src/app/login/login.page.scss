@@ -1,0 +1,176 @@
+/* ===== BACKGROUND LIGHT ===== */
+
+.login-container {
+  --background: transparent;
+  position: relative;
+}
+
+.bg-light {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #f5f7fa, #e4ecf5);
+  z-index: -1;
+}
+
+/* ===== WRAPPER ===== */
+
+.page-wrap {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* ===== GLASS CARD ===== */
+
+.glass-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 40px 30px;
+  border-radius: 30px;
+
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.1);
+
+  text-align: center;
+}
+
+/* ===== HEADER ===== */
+
+.logo {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 0px;
+}
+
+.app-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2d3d;
+  margin-bottom: 6px;
+}
+
+.lead {
+  font-size: 14px;
+  color: #5f6c7b;
+  margin-bottom: 30px;
+}
+
+/* ===== INPUTS ===== */
+
+.glass-input {
+  --background: rgba(255, 255, 255, 0.8);
+  border-radius: 14px;
+  margin-bottom: 18px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(200, 210, 220, 0.5);
+}
+
+ion-input {
+  color: #1f2d3d;
+}
+
+/* ===== BUTTONS ===== */
+
+.btn-main {
+  --background: linear-gradient(135deg, #3aff78, #0c712a);
+  --color: #fff;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.btn-success {
+  --background: linear-gradient(135deg, #28c76f, #1ebd5a);
+  --color: #fff;
+  margin-top: 10px;
+}
+
+.btn-alt {
+  margin-top: 10px;
+  border-radius: 20px;
+}
+
+/* ===== FORGOT PASSWORD ===== */
+
+.forgot-password {
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+.forgot-password a {
+  color: #3a8dff;
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+
+/* ===== SPINNER ===== */
+
+.spinner-wrap {
+  margin-top: 20px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 480px) {
+  .glass-card {
+    padding: 30px 20px;
+  }
+}
+
+
+/* ===============================
+   MENU FLOATING BUTTON
+================================= */
+
+.menu-fab {
+  position: absolute;
+  top: 10px;
+  left: 10%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.menu-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.15),
+    inset 0 0 10px rgba(255, 255, 255, 0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: all 0.3s ease;
+}
+ion-item{
+  padding: 16px;
+}
+.menu-btn ion-icon {
+  font-size: 33px;
+  color: #000000;
+}
+
+.menu-btn:hover {
+  transform: scale(1.08);
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.2);
+}

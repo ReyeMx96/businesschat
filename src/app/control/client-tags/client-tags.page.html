@@ -1,0 +1,107 @@
+<ion-header class="header-clean">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>
+      Clientes 
+      <span class="count-pill">
+        {{arrayContactosCache.length}}
+      </span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="page-bg">
+
+  <!-- SEARCH -->
+  <div class="search-wrapper">
+    <ion-searchbar
+      (ionInput)="searchSort($event)"
+      placeholder="Buscar número..."
+      >
+    </ion-searchbar>
+  </div>
+<div class="action-top">
+  <ion-button 
+    expand="block"
+    class="btn-publico"
+    routerLink="/select-publico">
+      <b style="color: white;"> MAPA DE CALOR 🔥 🚀</b>
+    <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+
+  </ion-button>
+</div>
+
+  <!-- RESULTADOS REMOTOS -->
+  <ion-list *ngIf="remoteResults.length > 0" class="remote-list">
+    <ion-item
+      button
+      *ngFor="let item of remoteResults"
+      (click)="openChat(item.phone)"
+    >
+      <ion-label>
+        <h2>{{ item.phone }}</h2>
+        <p>{{ item.text }}</p>
+        <small>{{ formatDate(item.tst) }}</small>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- SKELETON -->
+  <div *ngIf="menuLength === 0" class="table-container">
+    <div class="table-row skeleton-row" *ngFor="let x of [1,2,3,4,5,6]">
+      <div class="table-cell">
+        <ion-skeleton-text animated style="width:80%"></ion-skeleton-text>
+      </div>
+      <div class="table-cell">
+        <ion-skeleton-text animated style="width:60%"></ion-skeleton-text>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLA -->
+  <div *ngIf="menuLength !== 0" class="table-container">
+
+    <!-- HEADER -->
+    <div class="table-header">
+      <div class="table-cell header">
+        Nombre y número
+      </div>
+
+      <div class="table-cell header sortable" (click)="reverseArray()">
+        {{descVar}}
+      </div>
+
+      <div class="table-cell header center">
+        <ion-icon (click)="filtercomponent()" name="options-outline"></ion-icon>
+      </div>
+    </div>
+
+    <!-- FILAS -->
+    <div
+      class="table-row"
+      (click)="presentActionSheet(item,i)"
+      *ngFor="let item of arrayContactos; let i = index"
+    >
+      <div class="table-cell">
+        <div class="name-block">
+          <b *ngIf="item.Name !== ''">{{item.Name}}</b>
+          <b *ngIf="item.Name === ''">No name</b>
+          <span class="phone">{{item.Num}}</span>
+        </div>
+      </div>
+
+      <div class="table-cell">
+        {{item[actualVar] || 'No disponible'}}
+      </div>
+
+      <div class="table-cell center">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

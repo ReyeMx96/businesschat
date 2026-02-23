@@ -1,0 +1,87 @@
+<ion-header [translucent]="true">
+     <ion-toolbar   color="light"  style="height: 33px;">  </ion-toolbar>
+  
+  <ion-toolbar  color="light">
+    <ion-buttons slot="start">
+      <ion-back-button text="" style="min-width: 40px;color: black;" defaultHref="/getlocation/{{programa['lat']}}/{{programa['lng']}}"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="font-style: italic;">Detalles de la dirección</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" >
+
+  <!-- Mapa estático de Google -->
+  <div class="map-container">
+    <img [src]="staticMapUrl" alt="Mapa de ubicación" style="object-fit: none;width: 100%;max-height: 185px;">
+  
+  <div style="width: 100%;text-align: center;">
+    <ion-button  fill="clear" size="small" style="display: inline-table;" class="edit-marker-btn"  
+    (click)="editarUbicacion()"> <b style="color: #d10074;">
+       EDITAR MARCADOR</b></ion-button>
+
+  </div>
+  </div>
+
+  <ion-item lines="none">
+    <ion-label class="ion-text-wrap">
+      <h2 style="font-weight: bold;">{{programa['codigopostal'] }}</h2>
+      <p style="color: rgb(59, 59, 59);font-weight: bold;">{{ programa['direccion'] }}</p>
+    </ion-label>
+  </ion-item>
+<ion-card style="padding: 0px;margin-top: 3px;">
+  <ion-row>
+  <ion-col size="6" size-lg="6">
+ <ion-item   lines="none">
+    <ion-label style="margin-left: 0px;font-size: 15px; font-family: 'questrial';font-weight: bold;" position="stacked">Tipo de edificio</ion-label>
+    <ion-select  style="font-family: 'questrial';font-weight: bold;font-size: 15px;" [(ngModel)]="programa.type" placeholder="Seleccionar">
+      <ion-select-option value="casa">Casa</ion-select-option>
+      <ion-select-option value="departamento">Departamento</ion-select-option>
+      <ion-select-option value="oficina">Oficina</ion-select-option>
+      <ion-select-option value="hotel">Hotel</ion-select-option>
+      <ion-select-option value="otro">Otro</ion-select-option>
+    </ion-select>
+  </ion-item>
+  </ion-col>
+
+   <ion-col size="6" size-lg="6">
+ <ion-item lines="none">
+    <ion-label style="font-family: 'questrial';font-weight: bold;" position="stacked">Número de casa</ion-label>
+    <ion-input (ionInput)="setNumber($event)" [(ngModel)]="programa.numero" style="font-size: 12px;" placeholder="Ej. 123, A-2, etc."></ion-input>
+  </ion-item>
+  </ion-col>
+
+
+  </ion-row>
+ 
+
+
+  <ion-item style="margin-top: 12px;" lines="none">
+    <ion-label  style="font-family: 'questrial';font-weight: bold;" position="stacked">Nombre de la ubicación</ion-label>
+    <ion-input [(ngModel)]="programa.nombre" style="font-size: 12px;" placeholder="Ej. Mi casa"></ion-input>
+  </ion-item>
+
+ 
+
+  <ion-item style="margin-bottom: 23px;" lines="none">
+    <ion-label style="font-family: 'questrial';font-weight: bold;" position="stacked">Referencias</ion-label>
+    <ion-textarea [(ngModel)]="programa.ref" style="font-size: 13px;" placeholder="Color de casa, punto de referencia, etc."></ion-textarea>
+  </ion-item>
+
+  
+
+</ion-card>
+
+
+
+
+<br>
+<br>
+<br>
+</ion-content>
+
+<ion-footer style="background:#fff;max-height: 77px;margin-bottom: 30px;">
+  <ion-button expand="block" color="dark" (click)="guardarDireccion()" style="margin-bottom: 48px;">
+    Guardar ubicación
+  </ion-button>
+</ion-footer>

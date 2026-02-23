@@ -1,0 +1,770 @@
+<ion-header
+  [translucent]="true"
+  [ngStyle]="{
+    'position': 'fixed',
+    'top': scrollTop - 200 >= 200 ? '0px' : '-100px',
+    'left': '0',
+    'right': '0',
+    'z-index': '100',
+    'transition': 'top 0.3s ease-in-out'
+  }"
+>
+ 
+
+  <ion-toolbar *ngIf="scrollTop - 200 >= 200"  color="light">
+    
+<ion-title  style="font-size:18px ;    padding-inline: 5px;color:black;font-style: italic;">
+{{nombreRestaurant}}
+
+</ion-title>
+
+
+<ion-buttons (click)="goBack()" slot="end" style="margin-right: 15px;">
+<ion-icon name="search" style="font-size: 24px;color: #000;">
+
+</ion-icon>
+</ion-buttons>
+  </ion-toolbar>
+<ion-toolbar color="light">
+  <ion-segment  *ngIf="scrollTop - 200 >= 200" mode="md" style="background: #ffffff00;"
+     scrollable color="dark" [(ngModel)]="segmentValue" (ionChange)="onSegmentChange($event)">
+    <!-- Botón de regresar -->
+ 
+
+    <ion-segment-button *ngFor="let category of categories" [value]="category.name" class="category-tab">
+      <ion-label [ngClass]="{'selected-label': segmentValue === category.name}" style="font-family: 'titulos'; font-weight: bold;font-size: 16px;">
+        {{ category.name }}
+      </ion-label>
+    </ion-segment-button>
+    
+  </ion-segment>
+
+</ion-toolbar>
+
+<ion-toolbar *ngIf="scrollTop - 200 >= 200 && segmentValueSubBoolean" style="display: none;" color="light">
+  <ion-segment  mode="md" scrollable color="dark"
+   [(ngModel)]="segmentValueSub" (ionChange)="onSegmentChangeSub($event)">
+    <ion-segment-button style="min-height: 30px;" *ngFor="let subcategoria of subcategories" [value]="subcategoria.nombre" class="category-tab">
+
+      <ion-label [ngClass]="{'selected-label': segmentValueSub === subcategoria.nombre}" style="font-family: 'titulos'; font-weight: bold;">
+        {{ subcategoria.nombre }}
+      </ion-label>
+
+    
+    </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
+
+</ion-header>
+  
+
+
+<ion-content [fullscreen]="true" #contentRef (ionScroll)="onScroll($event)" style="--background: #fff;background: #fff;" scrollEvents="true">
+ 
+  <ion-list *ngIf="itemCountCategories === 0">
+
+    <ion-item >
+      <ion-label>
+        <ion-skeleton-text color="light" animated class="my-skeleton" style="width: 80%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 80%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 80%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 80%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 80%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 80%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 60%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 90%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 90%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 90%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 90%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 90%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 90%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text animated class="my-skeleton" style="width: 90%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+
+  <div  class="image-container">
+    <img *ngIf="itemCountCategories !== 0" src="{{this.logo}}" [style.filter]="!activeRestaurante ? 'grayscale(100%)' : 'none'" class="image-avatar">
+  </div>
+ 
+  <!-- Imagen de portada -->
+  <div *ngIf="itemCountCategories !== 0" style="height: 200px; overflow: hidden; position: relative;">
+    <img class="animated-button"
+    src="{{this.banner}}"
+    
+    [style.filter]="!activeRestaurante ? 'grayscale(100%)' : 'none'"
+     style="width: 100%; height: 205px;object-fit: cover;">
+
+ 
+
+    <div style="position: absolute; top: 10px; right: 10px;display: none;">
+      <div style="width: 43px;height: 43px;background: rgba(233, 233, 233, 0.8); border-radius: 50%; padding: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);">
+        <ion-icon name="heart-outline" style="font-size: 24px; color: #121212;"></ion-icon>
+      </div>
+    </div>
+
+    <div style="position: absolute; top: 10px; right: 10px;">
+      <div (click)="goLocation()"
+       style="width: 43px;height: 43px;background: rgb(233 233 233 / 54%);; border-radius: 50%; padding: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);">
+        <ion-icon name="location-outline" style="font-size: 24px; color: rgb(0, 0, 0);"></ion-icon>
+      </div>
+    </div>
+
+    <div style="position: absolute; top: 10px; right: 70px;">
+      <div style="width: 43px;height: 43px;background: rgb(233 233 233 / 54%);; border-radius: 50%; padding: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);">
+        <ion-icon name="search" style="font-size: 24px; color: #000000;"></ion-icon>
+      </div>
+    </div>
+
+    <!-- Imagen del restaurante centrada y con z-index -->
+   
+    
+  </div>
+
+  <!-- Nombre del negocio y detalles -->
+  <div style="border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
+  background: #ffffff;
+  top: -24px;
+  position: relative;
+  padding: 0px;
+  margin-left: -2px;
+  margin-right: -2px;
+  text-align: center;">
+  <br>
+  <br>
+  
+  <h2 *ngIf="itemCountCategories !== 0" style="font-weight: bold; 
+  color: #171717; margin-bottom: 0px;margin-top: 10px;font-size: 21px;">
+  {{ nombreRestaurant }}<br>
+
+  <ion-row>
+    <ion-col size="3">
+
+    </ion-col>
+<ion-col size="6">
+  <div style="text-align: center;">
+    <b style="color: rgb(185, 185, 185); font-size: 14px; display: inline-flex; align-items: center; gap: 3px;">
+      <ion-icon name="alarm-outline" style="color: rgb(92, 92, 92); font-size: 15px;"></ion-icon>
+      {{ this.apertura }} - {{ this.cierre }}
+    </b>
+  </div>
+</ion-col>
+
+  
+        <ion-col size="3">
+
+    </ion-col>
+  </ion-row>
+</h2>
+   <div class="envio-container" style="display: none;">
+
+  <div style="border-top-right-radius: 20px;padding-top: 4px;display: inline-table;width: 180px;height: 30px;background: #f1f1f1;text-align: left;margin-top: 3px;font-size: 13px;font-weight: bold;">
+   <b style="margin-left: 10px;">A Domicilio</b>
+    <div style="height: 1px;background: #d10074;width: 100%;margin-top: 10px;">
+      
+    </div>
+  </div>
+  
+  <div style="padding-top: 4px;display: inline-table;width: 160px;height: 30px;background: #fff;text-align: left;margin-top: 3px;font-size: 13px;">
+    Para Recoger
+  </div>
+  <div class="contenido-envio" >
+    <div class="info-left">
+      <div class="info-time">30-45 Min</div>
+      <div class="info-note">
+        <ion-icon name="card-outline" style="font-size: 16px; margin-right: 4px;"></ion-icon>
+       cubre el monto de la tarifa dinámica por ti
+      </div>
+    </div>
+    <div class="info-right">
+      <div class="gratis">Gratis</div>
+      <div class="precio-tachado">MX$49.00</div>
+    </div>
+  </div>
+</div>
+    <div *ngIf="itemCountCategories !== 0" 
+    style="text-align: center;display: inline-flex; margin-top: 3px;">
+
+      <ion-segment value="A domicilio"
+      style="border-radius: 30px;
+    display: flex; justify-content: center; max-width: 240px; 
+      --background: #f7f7f7; padding: 6px;" 
+      (ionChange)="segmentChanged($event)">
+      
+      <ion-segment-button value="A domicilio" 
+        style="--indicator-color: linear-gradient(345deg, #1e1e1e, #444444, #2e2e2e);
+    width: 120px;
+    --border-radius: 30px;
+    --color-checked: #ffffff;
+    --color: #8e8e8e;
+    min-width: 50px;
+        
+        ">
+        <b style="font-size: 14px;" > A Domicilio</b>
+      </ion-segment-button>
+    
+      <ion-segment-button value="Recoger en tienda" 
+        style="--indicator-color: linear-gradient(345deg, #1e1e1e, #444444, #2e2e2e);;width: 120px; --border-radius:30px; --color-checked: #ffffff; --color: #8e8e8e;"
+        >
+        <b style="font-size: 14px;">Para Recoger</b>
+      </ion-segment-button>
+    </ion-segment>
+    
+  </div>
+
+
+  </div>
+  
+
+
+
+  <div style="height: 1px;width: 100%;background: #ffffff;margin-bottom: 5px;margin-top: 3px;display: none;">
+
+  </div>
+
+  <ion-searchbar
+  style="margin-top: 0px;padding-top: 0px;"
+  mode="ios"
+  *ngIf="itemCountCategories !== 0"
+  placeholder="Buscar productos..."
+  [(ngModel)]="searchQuery"
+  (ionInput)="filterItems($event)">
+</ion-searchbar>
+
+
+  <div >
+      <h1 *ngIf="activeExclusivo === true"  class="animated-button" style="color: rgb(0, 0, 0);margin-left: 19px;
+  margin: 0px;margin-top: 0px;;width: 350px;font-family: 'titulos';font-weight: bold;
+  text-align: left;padding: 4px;font-size: 20px;">
+   Promociones exclusivas
+  </h1>
+  <div *ngIf="activeExclusivo === true" class="animated-button horizontal-scroll-container" style="margin-bottom: 16px;">
+    <div *ngFor="let itemx of categories; let xi = index"  [ngClass]="{'hidden': !itemx.show}" style="display: flex;">
+      <!-- Contenedor de cada categoría -->
+  
+      <div style="margin-left: 16px;" *ngFor="let item of itemx.products; let j = index"
+      (click)="navigate(item.nombre, item.id, item, itemx)"
+      class="category-container"
+      [ngClass]="{'oculto': !item.exclusivo}"
+      navigateclass="product-container">
+        <!-- Mostrar contenido del producto -->
+  
+        <!-- Mostrar descuento si aplica -->
+        <div  *ngIf="item.exclusivo  === true" class="contenedor-imagen">
+          <img class="product-image-top" src="{{item.imageLowRes}}"
+          loading="lazy" 
+           alt="Descripción de la imagen">
+      
+          <div class="texto-superpuesto" *ngIf="item.exclusivo !== true">
+            DESTACADO
+        </div>
+        </div>
+  
+        <!-- Mostrar detalles del producto con descuento -->
+        <div class="product-details">
+          <div class="product-name" style="max-width: 110px;   display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;" >
+            {{item.nombre}}
+          </div>
+          <div class="product-price-discounted" style="text-align: left;">
+            ${{ (item.precio - (item.precio * (item.Disc / 100))).toFixed(2) }}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <h1 *ngIf="activeDestacado === true"  class="animated-button" style="color: rgb(0, 0, 0);margin-left: 19px;
+    margin: 0px;margin-top: 0px;;width: 350px;font-family: 'titulos';font-weight: bold;
+    text-align: left;padding: 4px;font-size: 20px;">
+     Productos destacados
+    </h1>
+<div *ngIf="activeDestacado === true" class="animated-button horizontal-scroll-container" style="margin-bottom: 22px;">
+
+  <!-- Recorre categorías -->
+  <div *ngFor="let itemx of categories; let xi = index" [ngClass]="{'hidden': !itemx.show}" style="display: flex;">
+
+    <!-- =============================== -->
+    <!-- Productos de la categoría principal -->
+    <!-- =============================== -->
+    <ng-container *ngFor="let item of itemx.products">
+      <div
+        *ngIf="item.destacado"
+        (click)="navigate(item.nombre, item.id, item, itemx)"
+        class="category-container"
+        style="margin-left: 16px;"
+        navigateclass="product-container"
+      >
+        <div class="contenedor-imagen">
+          <img class="product-image-top" loading="lazy" [src]="item.imageLowRes" alt="Descripción de la imagen">
+          <div class="texto-superpuestoxk">DESTACADO</div>
+        </div>
+
+        <div class="product-details">
+          <div class="product-name" style="max-width: 110px; margin-top: 5px;">
+            {{ item.nombre }}
+          </div>
+          <div class="product-price-discounted" style="text-align: left;">
+            ${{ (item.precio - (item.precio * (item.Disc / 100))).toFixed(2) }}
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- =============================== -->
+    <!-- Productos de las subcategorías -->
+    <!-- =============================== -->
+    <ng-container *ngFor="let sub of itemx.subcategorias">
+      <ng-container *ngFor="let item of sub.products">
+        <div
+          *ngIf="item.destacado"
+          (click)="navigate(item.nombre, item.id, item, itemx)"
+          class="category-container"
+          style="margin-left: 16px;"
+          navigateclass="product-container"
+        >
+          <div class="contenedor-imagen">
+            <img class="product-image-top" loading="lazy" [src]="item.imageLowRes" alt="Descripción de la imagen">
+            <div class="texto-superpuestoxk">DESTACADO</div>
+          </div>
+
+          <div class="product-details">
+            <div class="product-name" style="max-width: 110px; margin-top: 5px;">
+              {{ item.nombre }}
+            </div>
+            <div class="product-price-discounted" style="text-align: left;">
+              ${{ (item.precio - (item.precio * (item.Disc / 100))).toFixed(2) }}
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+
+  </div>
+</div>
+
+
+
+
+
+
+</div>
+  
+
+
+
+
+  <ion-grid style="padding: 0px;margin-top: 5px;">
+    <ion-row *ngFor="let category of categories; let i = index"  #productRow 
+     style="margin-right: 0px;" [attr.id]="'category-' + i">
+      <ion-col size="12" [ngStyle]="{ 'display': category.active === false ? 'none' : 'block' }">
+        <!-- Mostrar nombre de la categoría principal -->
+        <h1 
+        [ngStyle]="{ 
+          'font-weight': 'bold', 
+          'font-size': '23px', 
+          'color': '#1e1e1e', 
+          'margin-bottom': '10px', 
+          'margin-top': i === 0 ? '0px' : '30px', 
+          'margin-left': '10px' 
+        }">
+        {{ category.name }}
+      </h1>
+      
+        <div style="height: 0.5px; background: #eee; width: 100%; box-shadow: 0px 0px 3px 0px rgba(156, 156, 156, 0.186);"></div>
+      </ion-col>
+
+      <ion-col size="12" [ngStyle]="{ 'display': category.active === false ? 'none' : 'block' }"
+      *ngIf="category.products && category.products.length > 0" >
+        <ion-row  *ngFor="let product of category.products" (click)="navigate(product.nombre, product.id, product, category)"
+         class="animated-buttonSlow"
+           [ngStyle]="{
+    display: !product.active ? 'none' : 'flex',
+    padding: '6px',
+    'padding-right': '0px',
+    'border-radius': '15px',
+    'margin-right': '0px',
+    'flex': '0 0 auto',
+    'margin-top': '2px'
+  }">
+<ion-col size="0.1">
+
+</ion-col>
+        <ion-col size="4">
+          <div style="text-align: center;padding: 6px;">
+ 
+            <img loading="lazy"
+            [style.filter]="!activeRestaurante ? 'grayscale(100%)' : 'none'"
+            [ngStyle]="{
+           
+              'color': !product.active ? 'red' : 'inherit'
+            }" 
+            src="{{product.imageLowRes}}"  
+            style="width: 160px; border-radius: 14px; max-height: 160px;box-shadow: rgba(68, 68, 68, 0.562) 0px 0px 9px;;">    </div>
+         
+        </ion-col>
+         <ion-col size="5">
+         <div style="padding-top: 3px;">
+
+
+          <div *ngIf="!product.active">
+            <div style="background: #000000;padding: 3px;text-align: center;color: white;border-radius: 6px;font-size: 11px;margin-bottom: 5px;max-width: 80px;"> AGOTADO </div>
+          </div>
+
+
+           <div [ngStyle]="{'color': !product.active ? 'red' : 'black'}" style="font-weight: 400; font-size: 18px; color: #000000;text-align: left;padding-left: 5px;">
+             {{ product.nombre }}
+           </div>
+           <div 
+           [ngStyle]="{'color': !product.active ? 'red' : 'rgb(18 18 18)'}" 
+           style="font-size: 11px;  text-align: left; padding-left: 5px;
+                  display: -webkit-box;
+                  letter-spacing: 1px;
+                  -webkit-line-clamp: 4;
+                  font-family: 'descripciones';
+                  -webkit-box-orient: vertical;
+                  overflow: hidden;
+                  text-overflow: ellipsis;">
+           {{ product.desc }}
+
+        </div>
+   
+</div> 
+
+      
+         </ion-col>
+         <ion-col size="0.2">
+
+         </ion-col>
+         <ion-col size="2.6">
+          <div style="padding-top: 3px;">
+
+          <div  [ngStyle]="{'color': !product.active ? 'red' : 'inherit'}" 
+          style="color: rgb(35, 35, 35); font-size: 16px; padding: 1px;text-align: right;margin-top: 0px;margin-right: 4px;">
+            ${{ getFormattedPrice(product.precio)}} 
+          </div>
+          <ion-fab-button style="--border-radius: 10px;
+          width: 27px;
+          height: 27px;
+          margin-top: 33%;
+          --background: linear-gradient(135deg, #181818 0%, #000000 100%);
+          margin-left: 65%;" size="small">
+            <ion-icon name="add" style="font-size: 18px;color: white;"></ion-icon>
+          </ion-fab-button>
+        </div>
+
+          </ion-col>
+          <ion-col size="0.1">
+
+          </ion-col>
+        <ion-col size="12">
+<div style="width: 100%; height: 1px;background: #eee;">
+
+</div>
+        </ion-col>
+       </ion-row>
+      </ion-col>
+
+
+     <ng-container *ngIf="category.subcategorias && category.subcategorias.length > 0">
+        <ng-container *ngFor="let subcategory of category.subcategorias" #subcategoryRow>
+          <ion-col [ngStyle]="{ 'display': category.active === false ? 'none' : 'block' }" size="12" style="margin-top: 1px;">
+            <!-- Mostrar nombre de la subcategoría -->
+            <ion-col [ngStyle]="{ 'display': subcategory.active === false ? 'none' : 'block' }" size="12" style="padding: 0px;">
+              <ion-row style="padding: 0px;margin-top: 5px;">
+                <ion-col size="12" style="padding: 0px;">
+                  <h3  #h3Element  style="font-weight: bold; font-size: 21px; color: #181818;margin-top: 2px;margin-bottom: 5px;font-family: 'titulos';margin-left: 13px;">
+                      {{ subcategory.nombre }}  
+                  </h3>
+                </ion-col>
+          
+                           </ion-row>
+      
+            </ion-col>
+            <!-- Recorrer productos de la subcategoría xc -->
+            <ion-col size="12" >
+              <!-- Productos deslizables horizontalmente*ngFor="let product of subcategory.products" -->
+            <ion-row *ngFor="let product of subcategory.products" 
+            (click)="navigate1(product.nombre, product.id, product,category,subcategory)" class="animated-buttonSlow"
+                style=" padding: 7px;padding-right: 0px; border-radius: 15px; margin-right: 0px;; flex: 0 0 auto;margin-top: 2px;">
+                <ion-col size="0.1">
+
+                </ion-col>
+                <ion-col size="3.3">
+                  <div style="text-align: center;padding: 3px;">
+         
+                    <img loading="lazy"
+                    [style.filter]="!activeRestaurante ? 'grayscale(100%)' : 'none'"
+                    [ngStyle]="{
+                  
+                      'color': !product.active ? 'red' : 'inherit'
+                    }" 
+                    src="{{product.imageLowRes}}"  
+                    style="width: 180px; border-radius: 14px; max-height: 180px;"
+                  >    </div>
+                 
+                </ion-col>
+            
+                 <ion-col size="5.7">
+        <div style="padding-left: 8px;
+    padding-top: 0px;">
+
+                  <div *ngIf="!product.active">
+                    <b style="background: #d10011;padding: 3px;text-align: center;color: white;border-radius: 6px;font-size: 12px;"> Agotado </b>
+                  </div>
+        
+                   <div [ngStyle]="{'color': !product.active ? 'red' : 'inherit'}" style="font-weight: 400; font-size: 18px; color: #000000;text-align: left;">
+                     {{ product.nombre }}
+                   </div>
+                   <div 
+                   [ngStyle]="{'color': !product.active ? 'red' : 'rgb(18 18 18)'}" 
+                   style="font-size: 11px;  text-align: left; padding-left: 1px;
+                          display: -webkit-box;
+                          letter-spacing: 1px;
+                          -webkit-line-clamp: 4;
+                          font-family: 'descripciones';
+                          -webkit-box-orient: vertical;
+                          overflow: hidden;
+                          text-overflow: ellipsis;">
+                   {{ product.desc }}
+                 </div>
+             
+        </div>
+               
+                 </ion-col>
+                 <ion-col size="0.1">
+
+                 </ion-col>
+                 <ion-col size="2.8">
+                  <div style="padding: 0px;">
+
+                    <div  [ngStyle]="{'color': !product.active ? 'red' : 'inherit'}" 
+                    style="color: rgb(35, 35, 35); font-size: 16px; padding: 1px;text-align: right;margin-top: 0px;margin-right: 4px;">
+                      ${{ getFormattedPrice(product.precio)}} 
+                    </div>
+
+                  <ion-fab-button style="
+                  --border-radius: 10px;
+                  --background: linear-gradient(135deg, #181818 0%, #000000 100%);
+                  width: 25px;height: 25px;margin-top: 25%;margin-left: 65%;" 
+                  size="small">
+                    <ion-icon name="add" style="font-size: 22px;color: white;"></ion-icon>
+                  </ion-fab-button>
+                </div>
+
+                  </ion-col>
+               
+                <ion-col size="12">
+        <div style="width: 100%; height: 1px;background: #eee;margin-top: 8px;">
+        
+        </div>
+                </ion-col>
+               </ion-row>
+     
+            </ion-col>
+            
+  
+            <!-- Recursión para más subcategorías dentro de subcategorías -->
+            <ng-container *ngIf="subcategory.subcategorias && subcategory.subcategorias.length > 0">
+              <ng-container *ngFor="let subsubcategory of subcategory.subcategorias">
+                <ion-row >
+                  <ion-col size="12">
+                    <b style="color: rgb(34, 34, 34);font-size: 20px;margin-left: 20px;"> {{ subsubcategory.nombre }}</b>
+                  </ion-col>
+                  <ng-container *ngFor="let subsubcategoryproducts of subsubcategory.products">
+                    <ion-row  (click)="navigate1(subsubcategoryproducts.nombre, subsubcategoryproducts.id, subsubcategoryproducts,subcategory,subsubcategory)">
+                      <ion-col size="0.1">
+
+                      </ion-col>
+                      <ion-col size="3.8">
+                        <div style="text-align: center;padding: 3px;">
+               
+                          <img 
+                          [style.filter]="!activeRestaurante ? 'grayscale(100%)' : 'none'"
+                          [ngStyle]="{
+                        
+                            'color': !subsubcategoryproducts.active ? 'red' : 'inherit'
+                          }" 
+                          src="{{subsubcategoryproducts.imageLowRes}}"  
+                          style="width: 180px; border-radius: 14px; max-height: 180px;"
+                        >    </div>
+                       
+                      </ion-col>
+                  
+                       <ion-col size="4.7">
+              <div style="padding: 8px;">
+      
+                        <div *ngIf="!subsubcategoryproducts.active">
+                          <b style="background: #0e0e0e;padding: 3px;text-align: center;color: white;border-radius: 6px;font-size: 12px;"> Agotado </b>
+                        </div>
+              
+                         <div [ngStyle]="{'color': !subsubcategory.active ? 'red' : 'inherit'}" style="font-weight: 400; font-size: 18px; color: #000000;text-align: left;">
+                           {{ subsubcategoryproducts.nombre }}
+                         </div>
+                         <div 
+                         [ngStyle]="{'color': !subsubcategoryproducts.active ? 'red' : 'rgb(18 18 18)'}" 
+                         style="font-size: 10px;  text-align: left; padding-left: 5px;
+                                display: -webkit-box;
+                                letter-spacing: 1px;
+                                -webkit-line-clamp: 4;
+                                font-family: 'descripciones';
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                                text-overflow: ellipsis;">
+                         {{ subsubcategoryproducts.desc }}
+                       </div>
+                   
+              </div>
+                     
+                       </ion-col>
+                       <ion-col size="0.4">
+      
+                       </ion-col>
+                       <ion-col size="2.9">
+                        <div style="padding: 6px;">
+      
+                          <div  [ngStyle]="{'color': !subsubcategoryproducts.active ? 'red' : 'inherit'}" 
+                          style="color: rgb(35, 35, 35); font-size: 16px; padding: 1px;text-align: right;margin-top: 0px;margin-right: 4px;">
+                            ${{ getFormattedPrice(subsubcategoryproducts.precio)}} 
+                          </div>
+      
+                        <ion-fab-button style="--border-radius: 10px;--background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);width: 25px;height: 25px;margin-top: 25%;margin-left: 65%;" size="small">
+                          <ion-icon name="add" style="font-size: 22px;color: white;"></ion-icon>
+                        </ion-fab-button>
+                      </div>
+      
+                        </ion-col>
+                    </ion-row>
+            
+                  </ng-container>
+      
+                 
+                  <ion-col size="12">
+          <div style="width: 100%; height: 1px;background: #eee;">
+          
+          </div>
+                  </ion-col>
+                  
+                </ion-row>
+              </ng-container>
+            </ng-container>
+          </ion-col>
+        </ng-container>
+      </ng-container>
+
+      
+      <!-- Recorrer subcategorías recursivamente -->
+ 
+    </ion-row>
+  </ion-grid>
+  
+  
+
+  
+  <br><br>
+  <br><br>
+
+  <!--FOOOTER BUTTON-->
+  <div *ngIf="itemCount !== 0" style="position: fixed; bottom: 25px; left: 0; right: 0; padding: 0 12px; z-index: 1000;">
+    <ion-button (click)="goToCart()" color="dark" shape="round" style="--background:linear-gradient(345deg, #000000, #444444, #2e2e2e);" expand="full">
+      <div style="font-size: 11px; font-weight: 300; letter-spacing: 1px; width: 100%;">
+       
+       
+        <b style="font-size: 17px; padding-top: 8px;font-weight: bold;font-style: italic;color: #fff;"> Ver carrito (${{precioTotal}})</b>
+      </div>
+  
+      <div style="margin-left: auto; display: flex; align-items: center;">
+        <div style="width: 29px; height: 29px; border-radius: 50%; background-color: #4a4a4a; display: flex; align-items: center; justify-content: center;">
+          <b style="color: white; font-size: 14px; margin-left: 3px;">{{itemCount}}</b>
+        </div>
+      </div>
+    </ion-button>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <br>
+  <br>
+  <br>
+ 
+
+ 
+  <br>
+</ion-content>

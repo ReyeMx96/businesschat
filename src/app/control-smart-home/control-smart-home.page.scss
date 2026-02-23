@@ -1,0 +1,115 @@
+/* ================================
+   FONDO GLASS SUAVE
+   ================================= */
+.glass-bg {
+  --background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(25px);
+  background: url('/assets/bg.jpg') center/cover no-repeat fixed;
+}
+
+/* ================================
+   HEADER GLASS
+   ================================= */
+.glass-header {
+  --background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.title-glass {
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.6);
+  letter-spacing: 1px;
+}
+   ion-content{
+      --background: #ffffff;
+            --padding-start: 2%;
+         --padding-end: 2%;
+    }
+/* ================================
+   CONTENEDOR PRINCIPAL CENTRADO
+   ================================= */
+.control-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 25px;
+}
+
+/* ================================
+   TARJETA GLASSMORPHISM
+   ================================= */
+.glass-card {
+  width: 90%;
+  max-width: 420px;
+  padding: 25px;
+  border-radius: 25px;
+
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+  text-align: center;
+  animation: cardPop 0.7s ease both;
+}
+
+@keyframes cardPop {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ================================
+   TITULO DEL DISPOSITIVO
+   ================================= */
+.device-title {
+  color: white;
+  font-size: 28px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* ================================
+   BOTONES GLASS
+   ================================= */
+.btn-glass {
+  --background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+  height: 55px;
+
+  font-size: 18px;
+  color: #ffffff;
+
+  margin-bottom: 15px;
+  box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.1);
+
+  transition: 0.25s;
+}
+
+.btn-glass:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 8px 25px rgba(255, 255, 255, 0.25);
+}
+
+/* rojo suave para apagar */
+.danger {
+  --background: rgba(255, 100, 100, 0.25);
+}
+
+.danger:hover {
+  box-shadow: 0px 8px 25px rgba(255, 80, 80, 0.45);
+}
+
+/* animación suave al aparecer los botones */
+.fade-in {
+  animation: fadeIn 1s ease backwards;
+}
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(15px); }
+  100% { opacity: 1; transform: translateY(0); }
+}

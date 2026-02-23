@@ -1,0 +1,125 @@
+.btn-tap {
+  transition: transform 0.1s ease;
+}
+
+.btn-tap:active {
+  transform: scale(0.85);
+}
+
+
+@keyframes bounceTap {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.85); }
+  100% { transform: scale(1); }
+}
+   ion-content{
+      --background: #ffffff;
+    }
+
+@media screen and (min-width: 1200px) {
+  
+
+    ion-content{
+      --padding-start: 0%;
+      --background: #ffffff;
+      --padding-end: 0%;
+    }
+    ion-modal{
+        width:1000px;
+        height:700px
+    }
+    img{
+      max-height: 220px;
+      width: 100%;
+    }
+  
+    
+    }
+
+
+    img{
+      max-height: 420px;
+      width: 100%;
+    }
+ 
+    .close-icon {
+      position: fixed; /* Posición fija para que no se desplace con el scroll */
+      top: 20px; /* Distancia desde la parte superior */
+      right: 20px; /* Distancia desde el lado derecho */
+      z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+      width: 24px; /* Ancho del ícono */
+      height: 24px; /* Altura del ícono */
+      /* Añade más estilos según sea necesario */
+    }
+    
+    .container {
+      text-align: center;
+      position: relative;
+      margin-left: 10px;
+    }
+    
+    .close-icon {
+      position: absolute;
+      top: 10px; /* Ajusta según sea necesario */
+      left: 10px; /* Ajusta según sea necesario */
+      font-size: 39px; /* Ajusta según sea necesario */
+      color: rgb(246, 246, 246); /* O cualquier otro color deseado */
+    }
+
+
+    ion-label{
+      font-family: 'titulos';
+    }
+
+    /* Aplica estilos solo a los ion-checkbox dentro del ion-item */
+ion-item ion-checkbox {
+  --background: transparent; /* Fondo por defecto */
+  --border-color: #ccc;      /* Color de borde sin seleccionar */
+  --size: 24px;              /* Tamaño del checkbox */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  --border-radius: 50%;
+
+}
+
+/* Efecto de transformación y cambio de color al seleccionar */
+ion-item ion-checkbox[aria-checked="true"] {
+  --background: #4caf50; /* Color del fondo al seleccionar */
+  --border-color: #4caf50; /* Color del borde al seleccionar */
+  transform: scale(1.1); /* Escala el checkbox ligeramente */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  --border-radius: 50%;
+}
+
+/* Animación de selección personalizada */
+ion-checkbox::part(indicator) {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  border-radius: 50%; /* Redondea el indicador de selección */
+  box-shadow: 0 0 6px rgba(76, 175, 80, 0.6); /* Sombra al seleccionar */
+}
+
+/* Aplica estilos personalizados a ion-radio */
+ion-item ion-radio {
+  --background: transparent;
+  --border-color: #ccc; /* Color de borde sin seleccionar */
+  --size: 24px; /* Tamaño del radio */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Efecto de transformación y cambio de color al seleccionar */
+ion-item ion-radio[aria-checked="true"] {
+  --background: #4caf50; /* Fondo al seleccionar */
+  --border-color: #4caf50; /* Color del borde al seleccionar */
+  transform: scale(1.1); /* Efecto de escala */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Personalización del indicador de selección */
+ion-radio::part(indicator) {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  border-radius: 50%; /* Bordes redondeados */
+  box-shadow: 0 0 6px rgba(76, 175, 80, 0.6); /* Sombra al seleccionar */
+}
+
+.disabled-label {
+  color: gray; /* Cambia el color según tus necesidades */
+}

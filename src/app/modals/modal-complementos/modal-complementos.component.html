@@ -1,0 +1,66 @@
+<ion-content  style="--background:#fafafa" [fullscreen]="true">
+  <ion-toolbar color="light">
+    <ion-buttons (click)="closeModal()" slot="start">
+      <ion-icon name="close-circle"></ion-icon>
+    </ion-buttons>
+    <ion-title>Gestionar Addons</ion-title>
+  </ion-toolbar>
+
+  <ion-grid style="padding: 0px;">
+    <ion-row>
+      <ion-col size="12" style="padding: 0px;">
+        <ion-card color="light" style="min-height: 500px; margin-inline: 5px; border-radius: 22px;margin-top: 0px;">
+          <!-- <ion-card-header style="background-color: #f4f5f7; border-radius: 20px 20px 0 0;">
+            <ion-card-title style="font-size: 18px; font-weight: bold; text-align: center; color: #333;">
+              Complementos disponibles
+            </ion-card-title>
+          </ion-card-header> -->
+
+          <ion-card-content>
+            <ion-searchbar
+  placeholder="Buscar complemento"
+  (ionInput)="filterAddons($event)"
+  debounce="300"
+  showCancelButton="never">
+</ion-searchbar>
+
+            <!-- ion-reorder-group para hacer la lista ordenable -->
+            <ion-reorder-group disabled="false" (ionItemReorder)="doReorder($event)">
+              <ion-item style="border-radius: 10px;--background: rgb(239, 239, 239);margin-top: 10px;" (click)="setCurrentSelectedAddon(item,i)" *ngFor="let item of addons; let i = index">
+                <ion-icon name="checkmark-circle" slot="start" style="color: green;"></ion-icon>
+                <ion-label style="color: black;">
+                  <h2 style="font-weight: bold;color: #000;">{{ item.nameTopping }}</h2>
+                  <p style="margin: 0;">Tipo: {{ item.type }}</p>
+                  <p style="margin: 0;">Obligatorio: {{ item.isMandatory }}</p>
+                  <p style="margin: 0;" *ngIf="item.type === 'increment'">
+                    Min: {{ item.min || 0 }} - Max: {{ item.max || 0 }}
+                  </p>
+                  <br>
+              
+
+                </ion-label>
+
+            <ion-label style="color: black;">
+                  <p style="margin: 0;font-size: 10px;color: black;" *ngFor="let itemk of item.arrayToppings">
+                    {{ itemk.name || 0 }}<br>
+                    Precio: ${{ itemk.Precio || 0 }}<br><br>
+                 </p>
+            </ion-label>
+                <!-- ion-reorder para permitir el arrastre del elemento -->
+                <ion-reorder style="color: black;" slot="start"></ion-reorder>
+              </ion-item>
+            </ion-reorder-group>
+
+            <!-- Botón para guardar cambios en el orden -->
+    
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+          <ion-button expand="block" color="dark" (click)="saveCustomizationChanges()">
+           <b style="color: white;">   Guardar Cambios de Orden</b>
+            </ion-button>
+</ion-footer>

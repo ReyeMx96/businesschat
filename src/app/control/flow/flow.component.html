@@ -1,0 +1,89 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Flow Builder</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="addNodeAt({x:40, y:40})">Agregar nodo</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div #canvas class="flow-canvas"
+       (click)="onCanvasClick()"
+       (dblclick)="onCanvasDblClick($event)">
+<!-- SVG para mostrar las líneas -->
+<svg class="connector-svg">
+ <ng-container *ngFor="let link of links">
+  <ng-container *ngIf="getConnectionPoint(getNodeById(link.from), getNodeById(link.to)) as pts">
+
+    <line
+      [attr.x1]="pts.start.x"
+      [attr.y1]="pts.start.y"
+      [attr.x2]="pts.end.x"
+      [attr.y2]="pts.end.y"
+      stroke="#111"
+      stroke-width="2"
+      marker-end="url(#arrow)"
+    ></line>
+
+  </ng-container>
+</ng-container>
+
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L6,3 z" fill="#111"></path>
+    </marker>
+  </defs>
+</svg>
+
+    <ng-container *ngFor="let node of nodes">
+
+      <div class="flow-node"
+           [class.selected]="node.id === selectedNodeId"
+           [ngStyle]="{
+              transform:'translate(' + node.x + 'px,' + node.y + 'px)',
+              width: node.width + 'px',
+              height: node.height + 'px',
+              'background-color': node.color
+            }"
+           (mousedown)="onNodeMouseDown($event, node)"
+           (click)="onNodeClick($event, node)">
+
+        <div class="node-inner">
+          <div class="node-title">{{ node.title }}</div>
+          <div class="node-sub">{{ node.subtitle }}</div>
+        </div>
+
+        <div class="node-action">
+          <ion-icon name="ellipsis-vertical"></ion-icon>
+        </div>
+
+      </div>
+    </ng-container>
+
+
+    <!-- CONTEXT MENU -->
+    <div class="node-menu"
+         *ngIf="showNodeMenu && selectedNode"
+         [ngStyle]="{ left: menuPos.x + 'px', top: menuPos.y + 'px' }">
+
+      <button (click)="doMenuAction('rename', selectedNode)">Rename</button>
+      <button (click)="doMenuAction('duplicate', selectedNode)">Duplicate</button>
+      <button (click)="doMenuAction('copy', selectedNode)">Copy</button>
+      <button (click)="doMenuAction('delete', selectedNode)">Delete</button>
+
+      <div class="divider"></div>
+<button (click)="doMenuAction('connect', selectedNode)">Connect To…</button>
+
+      <button (click)="doMenuAction('add-step', selectedNode)">Add Step</button>
+      <button (click)="doMenuAction('parallel-flow', selectedNode)">Parallel Flow</button>
+      <button (click)="doMenuAction('go-to', selectedNode)">Go To</button>
+      <button (click)="doMenuAction('merge-flow', selectedNode)">Merge Flow</button>
+
+    </div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,47 @@
+<ion-tabs mode="md">
+
+  <ion-tab-bar  color="light"  class="md hydrated"  slot="bottom">
+    <ion-tab-button  tab="conversations">
+         <img src="../../assets/icon/comment.png" style="width: 30px;height: 30px;">
+
+      <ion-label style="font-size: 12px;color: black;"><b>Chats</b></ion-label>
+    </ion-tab-button>
+    <!-- <ion-tab-button tab="marketing">
+      <ion-icon name="rocket-outline" style="color: rgb(0, 0, 0);font-size: 30px;"></ion-icon>
+      <ion-label style="font-size: 12px;color: black;"><b> Marketing </b></ion-label>
+    </ion-tab-button>  -->
+    <ion-tab-button tab="clientes">
+         <img src="../../assets/icon/user-avatar.png" style="width: 30px;height: 30px;">
+
+      <ion-label style="font-size: 12px;color: black;"><b> Clientes </b></ion-label>
+    </ion-tab-button> 
+
+
+      <ion-tab-button tab="panel/{{this.businessFinal}}" layout="icon-top" >
+      <img src="../../assets/icon/booking.png" style="width: 30px;height: 30px;">
+    <ion-label style="font-size: 12px;color: black;"><b> Pedidos </b></ion-label>
+    </ion-tab-button> 
+
+         <!-- <ion-tab-button tab="gpt-control/{{this.phoneNumberAdmin}}" layout="icon-top" >
+      <img src="../../assets/icon/chatgpt.png" style="width: 30px;height: 30px;">
+
+      <ion-label style="font-size: 12px;color: black;"><b> IA Studio </b></ion-label>
+    </ion-tab-button>  -->
+ <!--
+     <ion-tab-button  tab="conversationsv2" >
+      <ion-icon name="chatbubbles-outline"></ion-icon>
+      <ion-label style="font-size: 12px;color: black;"><b>Chats v2</b></ion-label>
+    </ion-tab-button>  -->
+
+    <ion-tab-button style="display: none;" tab="stats">
+      <ion-icon style="font-size: 30px;color: black;" name="logo-usd"></ion-icon>
+      <ion-label style="font-size: 12px;color: black;"><b> Ventas </b></ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button style="display: none;"  tab="control/{{this.uid}}" layout="icon-top" >
+      <ion-icon name="settings-outline" style="font-size: 30px;color: black;"></ion-icon>
+      <ion-label style="font-size: 12px;font-weight: bold;color: black;"><b>Panel</b></ion-label>
+    </ion-tab-button>
+ 
+  </ion-tab-bar>
+</ion-tabs>

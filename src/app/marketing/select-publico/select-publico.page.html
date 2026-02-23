@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title style="color: white;">Marketing por ubicación</ion-title>
+       <ion-buttons slot="end">
+      <ion-button (click)="openSettings()">
+        <ion-icon name="settings-outline" style="color: white;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+
+
+  
+    <div #map id="map" style="width: 100%; height: 96%;"> </div>
+
+  <div class="animated-button" style="position: fixed; bottom: 44px; left: 0; right: 0; padding: 0 12px; z-index: 1000;">
+    <ion-button [disabled]="ciudad === '' || calle === '' || colonia === ''" (click)="saveLocation()" shape="round" color="dark" expand="full">
+      <div style="font-size: 11px; font-weight: 300; letter-spacing: 1px; width: 100%;">
+ 
+        <b style="font-size: 15px; padding-top: 8px;color: white;">Continuar (Clientes: {{ this.arrayContactosSegmented.length}})</b>
+      </div>
+  
+    </ion-button>
+  </div>
+   <div class="animated-button2" style="position: fixed; bottom: 4px; left: 0; right: 0; padding: 0 12px; z-index: 1000;">
+   <ion-item>
+      <ion-label>{{currentRadioPersonas}}</ion-label>
+
+  <ion-range [(ngModel)]="currentRadioPersonas" max="1000" (ionChange)="onRadioChange($event)"
+   style="width: 100%; --background: #fff; --color: color: #000;;">
+      <ion-icon slot="start" name="person-circle"></ion-icon>
+      
+    </ion-range> 
+   </ion-item>
+   
+  </div>
+
+</ion-content>

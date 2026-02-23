@@ -1,0 +1,139 @@
+<!-- <ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Pago por Transferencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding">
+
+  <ion-item>
+    <ion-label position="floating">Correo electrónico</ion-label>
+    <ion-input type="email" [(ngModel)]="email"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Monto a pagar (MXN)</ion-label>
+    <ion-input type="number" [(ngModel)]="monto"></ion-input>
+  </ion-item>
+
+
+    <ion-button expand="block" color="primary" (click)="crearClienteStripe('valentin_s101@hotmail.com','g7ru8u484u939j9fj3993')">
+    Crear cliente Stripe
+  </ion-button>
+
+
+  <ion-button expand="block" color="primary" (click)="iniciarTransferencia()">
+    Generar Referencia SPEI
+  </ion-button>
+
+
+  <div *ngIf="instrucciones">
+    <h2>Instrucciones de Transferencia</h2>
+    <ion-item>
+      <ion-label><strong>Banco:</strong> {{ instrucciones.financial_addresses[0].spei.bank_code }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><strong>CLABE:</strong> {{ instrucciones.financial_addresses[0].spei.clabe }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><strong>Referencia:</strong> {{ instrucciones.financial_addresses[0].spei.reference }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><strong>Monto:</strong> {{ instrucciones.amount_remaining / 100 | currency:'MXN' }}</ion-label>
+    </ion-item>
+  </div>
+
+
+</ion-content> -->
+
+
+<ion-content>
+  <div class="container">
+
+    <h2>Selecciona tu método de pago</h2>
+
+    <!-- Tarjetas guardadas -->
+    <div class="card-list">
+      <div class="card" *ngFor="let card of savedCards; let i = index"
+           [class.selected]="selectedCard === i"
+           (click)="selectCard(i)">
+        <div class="card-info">
+          <ion-icon name="card-outline"></ion-icon>
+          <div>
+            <p class="brand">{{ card.brand }} **** {{ card.last4 }}</p>
+            <p class="expiry">Expira {{ card.exp_month }}/{{ card.exp_year }}</p>
+          </div>
+        </div>
+        <ion-icon *ngIf="selectedCard === i" name="checkmark-circle" class="check"></ion-icon>
+      </div>
+    </div>
+
+    <!-- Opciones alternativas -->
+    <div class="card-list">
+      <p class="subtitle">Otras opciones</p>
+      <div class="card small" 
+           [class.selected]="selectedAlternative === 'efectivo'"
+           (click)="selectAlternative('efectivo')">
+        <div class="card-info">
+          <ion-icon name="cash-outline"></ion-icon>
+          <span>Efectivo</span>
+        </div>
+        <ion-icon *ngIf="selectedAlternative === 'efectivo'" name="checkmark-circle" class="check"></ion-icon>
+      </div>
+
+      <div class="card small" 
+           [class.selected]="selectedAlternative === 'transferencia'"
+           (click)="selectAlternative('transferencia')">
+        <div class="card-info">
+          <ion-icon name="swap-horizontal-outline"></ion-icon>
+          <span>Transferencia bancaria</span>
+        </div>
+        <ion-icon *ngIf="selectedAlternative === 'transferencia'" name="checkmark-circle" class="check"></ion-icon>
+      </div>
+    </div>
+
+    <ion-button shape="round" expand="full" color="dark" class="confirm-btn">Confirmar pago</ion-button>
+  </div>
+   
+<!-- <div id="card-element-container">
+  <div id="card-element"></div><br>
+
+    <div id="card-expiry" class="card-element"></div>
+       <div id="card-cvc" class="card-element"></div>
+</div> -->
+<ion-card class="glass-card">
+  <ion-card-header>
+    <ion-card-title>Agregar tarjeta</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <div class="stripe-field">
+      <label>Número de tarjeta</label>
+      <div id="card-number" class="card-element"></div>
+    </div>
+
+    <div class="stripe-field-inline">
+      <div class="stripe-field">
+        <label style="font-size: 18px;">MM/AA</label>
+        <div id="card-expiry" class="card-element"></div>
+      </div>
+      <div class="stripe-field">
+        <label style="font-size: 18px;">CVV</label>
+        <div id="card-cvc" class="card-element"></div>
+      </div>
+    </div>
+
+    <p *ngIf="cardError" class="error">{{ cardError }}</p>
+
+    <ion-button expand="full" shape="round" color="dark" (click)="submitCard()"> <b style="color: white;">Guardar tarjeta</b></ion-button>
+    <div style="text-align: center;color: #000;margin-top: 20px;">
+
+     <ion-icon name="shield-checkmark" style="color: rgb(10, 151, 128);"> </ion-icon>   La información de tu tarjeta se guardará de forma segura.
+    </div>
+ 
+  </ion-card-content>
+</ion-card>
+<br>
+    <p *ngIf="cardError" class="error">{{ cardError }}</p>
+</ion-content>

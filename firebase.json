@@ -1,0 +1,43 @@
+{
+  "hosting": {
+    "public": "www",
+    "appAssociation": "AUTO",
+
+    "headers": [
+      {
+        "source": "/ngsw-worker.js",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-cache" }
+        ]
+      },
+      {
+        "source": "/firebase-messaging-sw.js",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-cache" }
+        ]
+      },
+      {
+        "source": "/combined-js.js",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-cache" }
+        ]
+      }
+    ],
+
+    "rewrites": [
+      { "source": "/firebase-messaging-sw.js", "destination": "/firebase-messaging-sw.js" },
+      { "source": "/combined-js.js", "destination": "/combined-js.js" },
+
+      { "source": "/michelotes/**", "destination": "/michelotes/index.html" },
+      { "source": "/partner/**", "destination": "/partner/index.html" },
+
+      { "source": "**", "destination": "/index.html" }
+    ],
+
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

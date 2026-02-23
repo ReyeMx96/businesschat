@@ -1,0 +1,1086 @@
+
+.send-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #1b1b1b;
+  color: white;
+  touch-action: manipulation;
+}
+
+.scrollable-row {
+  display: flex;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  scrollbar-width: thin;
+  -ms-overflow-style: none;
+}
+.active-bubble {
+  position: relative;
+  z-index: 99999999999999999999999999 !important;
+}
+.scrollable-row::-webkit-scrollbar {
+  height: 6px;
+}
+.message-popover::part(backdrop) {
+  backdrop-filter: blur(3px);
+  background-color: rgba(0,0,0,.35);
+}
+.fake-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
+  z-index: 999999;
+}
+
+.fake-popover {
+  position: fixed;
+  transform: translate(-50%, -110%);
+  background: linear-gradient(145deg, #000c, #fff2);
+  backdrop-filter: blur(20px);
+  color: white;
+  border-radius: 14px;
+  min-width: 160px;
+  padding: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.45);
+  z-index: 1000000;
+}
+
+.fake-item {
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.fake-item:hover {
+  background: rgba(255,255,255,.1);
+}
+
+.fake-item.cancel {
+  color: #ff6b6b;
+}
+/* Flecha oculta por defecto */
+/* Aparece solo en PC */
+@media (hover: hover) and (pointer: fine) {
+  .bubble {
+    position: relative;
+  }
+
+  .bubble .hover-arrow {
+    display: none;
+    position: absolute;
+    z-index: 999999999999;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #000000;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    pointer-events: none;
+  }
+
+  /* Cuando el mouse pasa encima del mensaje */
+  .bubble:hover .hover-arrow {
+    display: block;
+    opacity: 1;
+  }
+}
+
+.toolbar-glass {
+  --background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  text-align: center;
+}
+
+.scrollable-row::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.3);
+  border-radius: 3px;
+}
+
+
+
+
+.item-native {
+  background: transparent !important;
+}
+ion-item {
+background: #ffffff00;
+  --padding-start: 0px;
+    --inner-padding-end: 0px;
+}
+
+ion-item::part(native) {
+  background: transparent;
+}
+
+  ion-grid{
+    padding: 0px;
+  }
+   ion-row{
+    padding: 0px;
+  }
+    ion-col{
+    padding: 0px;
+  }
+ /* Estilos para la barra de desplazamiento en navegadores webkit (como Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 12px; /* Ancho de la barra de desplazamiento */
+}
+
+::-webkit-scrollbar-track {
+    background-color: #333; /* Color de fondo de la pista de la barra de desplazamiento */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #666; /* Color del pulgar (scrollbar handle) */
+    border-radius: 6px; /* Bordes redondeados del pulgar */
+}
+
+/* Estilos para la barra de desplazamiento en navegadores de Microsoft (como Edge) */
+/* Nota: Actualmente, Edge no soporta la personalización de las barras de desplazamiento con CSS */
+/* Estos estilos se aplicarán si Edge añade soporte en el futuro */
+::-ms-scrollbar {
+    width: 12px;
+}
+
+::-ms-scrollbar-track {
+    background-color: #333;
+}
+
+::-ms-scrollbar-thumb {
+    background-color: #666;
+    border-radius: 6px;
+}
+  ion-list{
+    padding: 0px;
+  }
+  
+  ion-content{
+     position: relative;
+    flex-direction: column-reverse;
+    height: 100%;
+    --background: url('https://firebasestorage.googleapis.com/v0/b/the-business-chat.appspot.com/o/WhatsApp%20Image%202025-09-02%20at%2023.05.19.jpeg?alt=media&token=5f4ce20b-5ac4-4005-a941-cb3983b4f2d2') 0 0/100% 100% no-repeat;
+  
+  }
+   ion-footer{
+ 
+    background: url('https://firebasestorage.googleapis.com/v0/b/the-business-chat.appspot.com/o/WhatsApp%20Image%202025-09-02%20at%2023.05.19.jpeg?alt=media&token=5f4ce20b-5ac4-4005-a941-cb3983b4f2d2') 0 0/100% 100% no-repeat;
+    min-height: 100px;
+  }
+ ion-grid{
+ 
+    --background: url('https://firebasestorage.googleapis.com/v0/b/the-business-chat.appspot.com/o/WhatsApp%20Image%202025-09-02%20at%2023.05.19.jpeg?alt=media&token=5f4ce20b-5ac4-4005-a941-cb3983b4f2d2') 0 0/100% 100% no-repeat;
+  
+  }
+
+
+  .imessage {
+    
+      border-radius: 0.25rem;
+     display: flex;
+      flex-direction: column;
+      font-family: "SanFrancisco";
+      font-size: 1.25rem;
+   
+      padding: 0.5rem 1.5rem;
+    }
+    
+    ion-button{
+      --padding-start:0px;
+      --padding-end:3px;
+  
+    }
+    ion-back-button{
+      --padding-start:0px;
+      --padding-end:0px;
+      color: white;
+  
+  
+    }
+    ion-title{
+      font-size:16px;
+      margin-left: -20px;
+      display: block;
+      color: white;
+  
+    }
+    ion-icon{
+      color: white;
+    }
+  ion-fab-button{
+    width: 35px;
+    height: 35px;
+    --background:var(--ion-color-medium);
+  
+  }
+  .searchbar-left-aligned.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios {
+    padding-left: 30px;
+    font-size: 14px;
+}
+  ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ion-toolbar{
+    --background:var(--ion-color-danger);
+  }
+  ul li{
+    display:inline-block;
+    clear: both;
+    padding: 20px;
+    border-radius: 30px;
+    margin-bottom: 0px;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  
+  .him{
+    background: rgb(151, 16, 16);
+    float: left;
+  }
+  
+  .me{
+    float: right;
+    background: #0084ff;
+    color: #fff;
+  }
+  
+  .him + .me{
+    border-bottom-right-radius: 5px;
+  }
+  p{
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  .me + .me{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  audio{
+  max-width: 100%;
+  
+  }
+  .me:last-of-type {
+    border-bottom-right-radius: 30px;
+  }
+    .imessage p {
+      border-radius: 1.15rem;
+     
+      max-width: 90%;
+      padding: 0.5rem .875rem;
+      position: relative;
+      word-wrap: break-word;
+    }
+    
+    .imessage p::before,
+    .imessage p::after {
+      bottom: -0.1rem;
+      content: "";
+      height: 1rem;
+      position: absolute;
+    }
+    
+    p.from-me {
+      align-self: flex-end;
+      font-size: 13px;
+      font-weight: bold;
+      background: linear-gradient(90deg, #6bcf8c 0%, #0b6354 100%);
+      color: #000000; 
+    }
+    
+    p.from-me::before {
+      border-bottom-left-radius: 0.8rem 0.7rem;
+  
+      right: -0.35rem;
+      transform: translate(0, -0.1rem);
+    }
+    
+    .sc-ion-input-ios-h {
+        display: inline-block;
+    }
+    p.from-me::after {
+  
+      border-bottom-left-radius: 0.5rem;
+      right: -40px;
+      transform:translate(-30px, -2px);
+      width: 10px;
+    }
+    
+    p[class^="from-"] {
+      margin: 0.5rem 0;
+      width: fit-content;
+    }
+    .custom-ripple {
+      color: #2bd39b;
+    }
+    .blocksHome{
+     
+      background: #414141;
+      display: inline-block;
+      padding: 5px;
+      border-radius: 1.15rem;
+     color: white;
+      max-width: 90%;
+      padding: 0.5rem .875rem;
+      position: relative;
+      word-wrap: break-word;
+      padding-left: 15px;
+     
+      padding-right: 15px;
+  
+      font-size: 14px;
+      
+      padding-bottom: 8px;
+      margin-left: 10px;
+      margin-top: 5px;
+      }
+
+      .blocksHomeMenu{
+     
+        background: #48ac82;
+        display: inline-block;
+        padding: 5px;
+        border-radius: 1.15rem;
+       color: white;
+        max-width: 90%;
+        padding: 0.5rem .875rem;
+        position: relative;
+        word-wrap: break-word;
+        padding-left: 15px;
+       
+        padding-right: 10px;
+    
+        font-size: 14px;
+        
+        padding-bottom: 5px;
+        margin-left: 10px;
+        margin-top: 5px;
+        }
+      .blocksHomedetails{
+     
+        background: #48ac82;
+        display: inline-block;
+        padding: 5px;
+        border-radius: 1.15rem;
+       color: white;
+        max-width: 90%;
+        padding: 0.5rem .875rem;
+        position: relative;
+        word-wrap: break-word;
+        padding-left: 15px;
+       
+        padding-right: 10px;
+    
+        font-size: 14px;
+        
+        padding-bottom: 5px;
+        margin-left: 10px;
+        margin-top: 5px;
+        }
+      div{
+        color: var(--ion-color-dark-contrast)
+      }
+  
+       .blocksHomeMatchs{
+     
+      display: inline-block;
+      padding: 5px;
+      
+      padding-left: 15px;
+      padding-top: 5px;
+      padding-right: 10px;
+      font-weight: bold;
+      width: 100px;
+      font-size: 10px;
+      
+      border-bottom-left-radius: 0.5rem;
+      padding-bottom: 5px;
+      margin-left: 10px;
+      margin-top: 25px;
+      }
+    p.from-me ~ p.from-me {
+      margin: 0.25rem 0 0;
+    }
+    
+    p.from-me ~ p.from-me:not(:last-child) {
+      margin: 0.25rem 0 0;
+    }
+    
+    p.from-me ~ p.from-me:last-child {
+      margin-bottom: 0.5rem;
+    }
+    @keyframes slideInFromLeft {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+    .bubbleTags{
+      border-radius: 14px;
+      background: royalblue;
+      color: white;
+      border-style: solid;
+      padding:10px;
+      border-width: 1px;
+
+    }
+    p.from-them {
+      animation: 1s ease-out 0s 1 slideInFromLeft;
+  
+      font-size: 13px;
+      align-items: flex-start;
+     font-weight: bold;
+      background: linear-gradient(90deg, #ffffff 0%, #2b2b2b 100%);
+      color: rgb(0, 0, 0);
+      
+    }
+  
+    p.from-them:before {
+      border-bottom-right-radius: 0.8rem 0.7rem;
+  
+      left: -0.35rem;
+      transform: translate(0, -0.1rem);
+    }
+    
+    p.from-them::after {
+      
+      border-bottom-right-radius: 0.5rem;
+      left: 20px;
+      transform: translate(-30px, -2px);
+      width: 10px;
+    }
+    
+    p[class^="from-"].emoji {
+      background: none;
+      font-size: 2.1rem;
+    }
+    
+  
+  
+    p[class^="from-"].emoji::before {
+      content: none;
+    }
+    
+    .no-tail::before {
+      display: none;
+    }
+    
+    .margin-b_none {
+      margin-bottom: 0 !important;
+    }
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    
+    
+    .message .time {
+      color: rgb(0, 0, 0);
+      font-size: 9px;
+      margin-top: 0px;
+      display: flex;
+      float: right; /* Alinea la hora a la izquierda */
+  }
+    
+    
+    
+    
+    /* general styling */
+    @font-face {
+      font-family: "SanFrancisco";
+      src:
+        url("https://cdn.rawgit.com/AllThingsSmitty/fonts/25983b71/SanFrancisco/sanfranciscodisplay-regular-webfont.woff2") format("woff2"),
+        url("https://cdn.rawgit.com/AllThingsSmitty/fonts/25983b71/SanFrancisco/sanfranciscodisplay-regular-webfont.woff") format("woff");
+    }
+    
+    body {  
+      font-family: -apple-system, 
+        BlinkMacSystemFont, 
+        "Segoe UI", 
+        Roboto, 
+        Oxygen-Sans, 
+        Ubuntu, 
+        Cantarell, 
+        "Helvetica Neue", 
+        sans-serif;
+      font-weight: normal;
+      margin: 0;
+    }
+    
+    .container {
+     margin:0.0rem 0;
+      max-width: 600px;
+      padding: 1rem;
+    }
+    
+   
+    
+    h2 {
+      border-bottom: 1px solid #e5e5ea;
+      color: #666;
+      font-weight: normal;
+      margin-top: 0;
+      padding-bottom: 1.5rem;
+    }
+    
+    .comment {
+      color: #222;
+      font-size: 1.25rem;
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+      max-width: 100%;
+      padding: 0;
+    }
+    
+    @media screen and (max-width: 800px) {
+      body {
+        margin: 0 0.0rem;
+      }
+    
+      .container {
+        padding: 0.0rem;
+      }
+    
+      .imessage {
+        font-size: 12px;
+       
+        max-width: 600px;
+        padding: 0.25rem 0.875rem;
+      }
+    
+      .imessage p {
+        margin: 0.0rem 0;
+      }
+  
+  
+    }
+  
+    .text {
+  white-space: pre-line;
+}
+
+    input[type=text]:focus:not([readonly]) {
+      box-shadow: none;
+      border-bottom: none;
+    }
+    audio::-webkit-media-controls-enclosure {
+      overflow:hidden;
+  }
+    audio::-webkit-media-controls-mute-button {
+      display: none !important;
+  }
+
+  @keyframes up-right {
+    0% {
+        transform: scale(1);
+        opacity: .25
+    }
+    50% {
+        transform: scale (1, 5);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: .25;
+    }
+  }
+  .circle {
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    opacity: .25;
+  }
+  .red {
+    background-color: red;
+    position: absolute;
+  
+    -webkit-animation: up-right 1s infinite;
+    -moz-animation: up-right 1s infinite;
+    -o-animation: up-right 1s infinite;
+    animation: up-right 1s infinite;
+  }
+  
+  .inner-scroll {
+    overflow: hidden;
+    background: var(--ion-color-base);
+    color: var(--ion-color-contrast);
+  }
+ .item-native {
+  background: transparent !important;
+}
+  
+  .container2{
+    display: flex;
+    
+  }
+  .native-textarea.sc-ion-textarea-md {
+    font-size: 12px;
+  }
+  .side{
+    flex: 2;
+    height: 100vh;
+    overflow-x: hidden;
+    color: white;
+    background-color: black;
+    overflow: scroll;
+    
+  }
+ 
+  .content2{
+    flex: 10;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow: scroll;
+  
+  }
+  
+   
+   @media screen and (min-width: 1200px) {
+
+  .speech-wrapper {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 2px;
+    margin-bottom: 3px;
+  }
+
+  .speech-wrapper .bubble {
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    position: relative;
+  }
+
+  .speech-wrapper .bubble.altfrom {
+    margin-right: 40%;
+    background: #fff;
+  }
+
+  .speech-wrapper .bubble.alt {
+    background: #D9FDD3;
+    margin-left: 40%;
+  }
+
+  .speech-wrapper .bubble .txt {
+    padding: 2px 13px 6px 12px;
+  }
+
+  .speech-wrapper .bubble .txt .name {
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0px;
+    color: #35ba92;
+  }
+
+  .speech-wrapper .bubble .txt .name span {
+    font-weight: normal;
+    color: #b3b3b3;
+  }
+
+  .speech-wrapper .bubble .txt .name.alt {
+    color: #2ecc71;
+  }
+
+  .speech-wrapper .bubble .txt .message {
+    font-size: 16px;
+    margin: 0;
+    padding: 10px;
+    color: #e8e8e8;
+  }
+
+  .speech-wrapper .bubble .txt .timestamp {
+    font-size: 11px;
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    text-transform: uppercase;
+    color: #999;
+  }
+
+  .speech-wrapper .bubble .bubble-arrow,
+  .speech-wrapper .bubble .bubble-arrowaltfrom {
+    position: absolute;
+    width: 0;
+    bottom: 42px;
+    left: -16px;
+    height: 0;
+  }
+
+  .speech-wrapper .bubble .bubble-arrow.alt,
+  .speech-wrapper .bubble .bubble-arrowaltfrom.alt {
+    right: -2px;
+    bottom: 40px;
+    left: auto;
+  }
+}
+
+  
+  
+  .speech-wrapper{
+    padding-left:15px;
+    padding-right:15px;
+
+    margin-top: 2px;
+
+    margin-bottom: 6px;
+    .bubble{
+      
+      height: auto;
+      box-shadow: 0px 0px 1px 1px #0000000d;
+      padding: 2px;
+      display: block;
+      border-radius: 8px;
+     
+      position: relative;
+   
+      &.altfrom{
+        margin-right: 50%;
+        background: #fff;
+
+        }
+      &.alt{
+      background: #D9FDD3;
+
+      margin-left: 50%;
+      }
+      .txt{
+        padding:0px 0px 0px 0px;
+        .name{
+          font-weight: 600;
+          font-size: 14px;
+          margin: 0px;
+          color: #35ba92;
+          span{
+            font-weight: normal;
+            color: #b3b3b3;
+          }
+          &.alt{
+            color: #2ecc71;
+          }
+        }
+        .message{
+          font-size: 12px;
+          margin: 0;
+          padding: 5px;
+      
+          color: #000000;
+        }
+        .timestamp{
+          font-size: 11px;
+          position: absolute;
+          bottom: 8px;
+          right: 10px;
+          text-transform: uppercase; color: #999
+        }
+      }
+      .bubble-arrow {
+        position: absolute;
+        width: 0;
+        bottom:42px;
+        left: -16px;
+        height: 0;
+        &.alt{
+          right: -2px;      
+          bottom: 40px;
+          left: auto;
+        }
+    
+      }
+      .bubble-arrowaltfrom {
+        position: absolute;
+        width: 0;
+        bottom:42px;
+        left: -16px;
+        height: 0;
+        &.alt{
+          right: -2px;      
+          bottom: 40px;
+          left: auto;
+        }
+    
+      }
+      .bubble-arrow:after {
+        content: "";
+        display: none;
+        position: absolute;
+        border: 0 solid transparent;
+        border-top: 9px solid #caf3ec;
+        border-radius: 0 20px 0;
+        width: 15px;
+        height: 30px;
+        transform: rotate(145deg);
+      }
+      .bubble-arrowaltfrom:after {
+        content: "";
+        position: absolute;
+        display: none;
+
+        border: 0 solid transparent;
+        border-top: 9px solid #242424;
+        border-radius: 0 20px 0;
+        width: 15px;
+        height: 30px;
+        transform: rotate(145deg);
+      }
+      
+      .bubble-arrow.alt:after {
+        transform: rotate(45deg) scaleY(-1);
+      }
+    }
+  }
+  .mi-popover {
+    animation: aparecer 0.3s ease-in-out;
+  }
+  
+  @keyframes aparecer {
+    from {
+
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .contenedor-imagen {
+    position: relative;
+  }
+  .my-button {
+    background: #fffff000;
+    border-radius: 50px;
+    box-shadow: 5px 2px 4px 1px rgb(255, 238, 0);
+    animation: pulse 4s infinite;
+  }
+  @media screen and (min-width: 1200px) {
+  
+
+    ion-content{
+      --padding-start: 0%;
+      --padding-end: 0%;
+    }
+    ion-modal{
+        width:1000px;
+        height:700px
+    }
+    img{
+      max-height: 220px;
+      width: 100%;
+    }
+  
+    
+    }
+
+
+    img{
+      max-height: 420px;
+      width: 100%;
+    }
+ 
+   
+    .container {
+      position: relative;
+    }
+    
+    .close-icon {
+      position: absolute;
+      top: 10px; /* Ajusta según sea necesario */
+      left: 10px; /* Ajusta según sea necesario */
+      font-size: 39px; /* Ajusta según sea necesario */
+      color: rgb(246, 246, 246); /* O cualquier otro color deseado */
+    }
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(220, 231, 68, 0.664);
+    }
+    70% {
+      box-shadow: 0 0 0 20px rgba(255, 196, 0, 0.034);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(255, 196, 0, 0.151);
+    }
+  }
+  .texto-superpuesto {
+    position: absolute;
+    top:90%;
+    left: 50%;
+    text-align: center;
+    width: 100%;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    font-size: 10px;
+    transform: translate(-50%, -50%);
+    background-color: rgba(12, 170, 104, 0.904);; /* Color de fondo del texto */
+    padding: 2px; /* Espaciado interno del texto */
+  }
+  .texto-superpuesto2 {
+    position: absolute;
+    top:110%;
+    z-index: 99999999999;
+    left: 50%;
+    text-align: center;
+    width: 100%;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    font-size: 9px;
+    transform: translate(-50%, -50%);
+   
+    padding: 2px; /* Espaciado interno del texto */
+  }
+  .imgSize{
+    
+    max-height: 170px;
+   
+    width: 100%;
+  }
+
+  @media screen and (min-width: 1200px) {
+  
+
+    .imgSize{
+    
+      max-height: 240px;
+     
+      width: 100%;
+    }
+  }
+
+ 
+
+  .digitalists {
+    display: block;
+    animation: slideDown 0.5s ease-out;
+}
+.sc-ion-textarea-md-h {
+  --padding-top: 4px;
+}
+.native-textarea.sc-ion-textarea-md {
+  margin-top: 10px;
+}
+
+
+.tagTop{
+  animation: slideDown 0.5s ease-out;
+  position: fixed;
+  top: 60px; /* Ajusta esto si tienes un ion-header */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff; /* Color verde pastel */
+  color: rgb(119, 255, 41);
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  font-size: 14px;
+
+}
+.price-tag:last-child {
+  margin-right: 0; /* Elimina el margen derecho del último elemento */
+}
+
+
+.price-tag {
+  display: inline-block;
+  background-color: #f3f3f3; /* Color de fondo */
+  color: rgb(0, 0, 0); /* Color del texto */
+  font-size: 14px; /* Tamaño del texto */
+  letter-spacing: 1px;
+  font-weight: bold; /* Negrita */
+  padding: 6px 11px; /* Espaciado interno */
+  border-radius: 25px; /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+  text-align: center; /* Alineación del texto */
+  margin-right: 15px; /* Espaciado entre las etiquetas */
+  flex-shrink: 0; /* Evita que los elementos se encojan */
+}
+/* Opcional: Hover effect */
+.price-tag:hover {
+  background-color: #013324; /* Cambiar color al pasar el ratón */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Sombra al pasar el ratón */
+}
+
+.price-container {
+  display: flex;
+  overflow-x: auto; /* Habilita la barra de desplazamiento horizontal */
+  white-space: nowrap; /* Evita que los elementos se envuelvan a la siguiente línea */
+  padding: 10px;
+ 
+  border-radius: 10px;
+}
+.tagBottom {
+  animation: slideUp 0.5s ease-out;
+  position: fixed;
+  top: 60%; /* Ajusta esto si tienes un ion-header */
+  left: 25%;
+  min-width: 300px;
+  max-width: 300px;
+  min-height: 300px;
+
+  background-color: #131313; /* Color verde pastel */
+  color: white;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  overflow: hidden;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  animation-fill-mode: forwards; 
+  font-size: 14px;
+}
+  @keyframes slideDown {
+    from {
+        transform: translateY(-10%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+   ion-content {
+        --padding-start: 0%;
+        --padding-end: 0%;
+    }
+    
+@keyframes slideUp {
+  from {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-10%);
+    opacity: 1;
+  }
+}
+ ion-textarea{
+    font-size: 18px;
+
+      border-radius: 10px;
+      padding: 10px;
+      width: 100%; 
+      color: black;
+      background: #fff;
+  
+  }

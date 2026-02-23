@@ -1,0 +1,68 @@
+ion-content{
+    --padding-start:0%
+    --padding-end:0%
+}
+/* Fondo general */
+.glass-bg {
+  --background: linear-gradient(135deg, #f4f7ff, #e8f0ff);
+}
+
+/* Header glass */
+.glass-header ion-toolbar {
+  --background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+ion-title {
+  color: #111;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Contenedor */
+.glass-container {
+  padding: 16px;
+}
+
+/* Card glass */
+.glass-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.05),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+
+  transition: all 0.25s ease;
+}
+
+/* Hover */
+.glass-card:active {
+  transform: scale(0.97);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Nombre principal */
+.glass-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+}
+
+/* Descripción */
+.glass-desc {
+  font-size: 13px;
+  color: #555;
+  margin-top: 6px;
+}

@@ -1,0 +1,301 @@
+<ion-header>
+  <ion-toolbar mode="md" color="dark">
+     <ion-buttons (click)="closeModal()" slot="start">
+   <ion-button>
+    <ion-icon name="close-circle-outline" style="color: rgb(255, 81, 81);">
+
+    </ion-icon>
+
+   </ion-button>
+
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="dismiss()"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons (click)="showCartModal()" slot="end">
+      <ion-button>
+      <ion-icon style="font-size: 25px;color: white;" name="cart-outline">
+
+      </ion-icon>
+      <ion-badge style="color: white;">{{this.menuPromociones.length}}</ion-badge>
+      </ion-button>
+    </ion-buttons>
+    <ion-title style="padding-top: 14px;color: white;">Finalizar pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--background: #111;">
+
+  <ion-item   color="dark">
+    <ion-icon name="storefront-outline"  style="color: white;" slot="start">
+
+    </ion-icon>
+    <ion-icon name="chevron-forward-outline" style="color: white;" slot="end">
+
+    </ion-icon>
+    <ion-label style="white-space:'normal';color: white;">
+      
+     Suc. {{this.sucursal}}  <br> <b style="color: rgb(61, 194, 132);font-size: 11px;">(Se asignó la sucursal mas cercana.)</b>
+    </ion-label>
+  </ion-item>
+  
+  <ion-item *ngIf="typeCart === 'michelotes'"   color="dark">
+    <ion-icon (click)="goToMap()" name="location-outline" style="color: white;" slot="start">
+
+    </ion-icon>
+    <ion-icon (click)="goToMap()" name="chevron-forward-outline" style="color: white;" slot="end">
+
+    </ion-icon>
+
+    <ion-label  style="font-size: 14px;white-space:'normal';color: white;" >
+     <div (click)="goToMap()" style="color: white;"> {{this.ubicacion}}</div>
+      <br>
+      <b  (click)="textComponent('Agregar calle y numero')" *ngIf="!showCalleNum" style="color: orange;">Calle y numero: {{this.ind}}
+      <ion-icon name="create-outline" style="color: white;font-size: 16px;color: white;">
+
+      </ion-icon>
+      </b>
+      <br>
+ 
+    <b (click)="textComponent('Agregar calle y numero')" 
+    *ngIf="showCalleNum"
+    style="color: rgb(247, 168, 95);border-style: solid;padding: 7px;font-size: 10px;border-width: 0.5px;border-color: rgb(195, 195, 195);border-radius: 14px;">
+    AGREGAR CALLE Y NUMERO</b>
+  
+    </ion-label>
+  </ion-item>
+   
+  <ion-item *ngIf="typeCart !== 'michelotes'"color="dark">
+    <ion-icon name="location-outline" slot="start" style="color: white;">
+
+    </ion-icon>
+    <ion-icon name="chevron-forward-outline" style="color: white;" slot="end">
+
+    </ion-icon>
+
+    <ion-label style="font-size: 14px; white-space:'normal'; color: white;">
+      {{this.ubicacion}}<br>
+      <b style="color: orange;">Calle y numero: {{this.ind}}</b>
+    </ion-label>
+  </ion-item>
+  
+
+  <ion-item *ngIf="this.metodoPago === 'Transferencia bancaria'"color="dark">
+    <ion-icon name="image-outline" slot="start" style="color: white;">
+    </ion-icon> 
+  
+  
+    <ion-label style="font-size: 13px;color: rgb(155, 155, 155);">
+     <b> Michel Alberto Ochoa Santos</b><br>
+     <b style="color: rgb(95, 139, 233);"> BBVA Bancomer</b><br>
+      <b style="font-size: 16px;color: #fff;"(click)="copy()">{{this.tarjeta}}</b> <ion-icon (click)="copy()" style="color: white;font-size: 15px;margin-left: 6px;" name="copy-outline"></ion-icon>
+   <br>
+   <ion-button disable="outOfWork" (click)="doit()" mode="md" style="font-size: 12px;">
+   <b style="font-size: 8px;color: white;"> Cargar comprobante </b><ion-icon slot="end" name="cloud-upload-outline"></ion-icon>
+     
+  </ion-button><br>
+
+    </ion-label>
+   
+    <img (click)="openImg(this.img)" *ngIf="!showImg" src="{{this.croppedImage}}" style="max-height: 100px;max-width: 60px;margin-left: 10px;" id="imagenProfile2"   />
+    <img (click)="openImg(this.img)" *ngIf="showImg" src="{{this.srcSendImg}}" style="max-height: 120px;max-width: 100px;margin-left: 10px;" id="imagenProfile1"   />
+    <ion-icon (click)="openImg(this.img)" name="chevron-forward-outline" slot="end">
+    </ion-icon>
+  </ion-item>
+
+
+  
+<a href="https://api.whatsapp.com/send?phone=+528333269231" style="display: none;" id="wppId"></a>
+  <ion-item  color="dark" style="--background: #111;display: none;">
+    <ion-icon name="chewevron-forward-outline" slot="start" style="color: white;">
+
+    </ion-icon>
+    <ion-select id="slct-opt" [(ngModel)]="metodoPago"  >
+      <ion-select-option style="color: white;"  *ngFor="let item of typeMethods"  value="{{item.Type}}">
+        {{item.Type}} </ion-select-option>
+
+
+    </ion-select>
+  </ion-item>
+  
+  <ion-item style="display: none;" color="dark">
+    <ion-icon name="man-outline" slot="start" style="color: white;">
+
+    </ion-icon>
+    <ion-icon name="chevron-forward-outline" style="color:white" slot="end">
+
+    </ion-icon>
+    <ion-label style="color: white;">
+      Recojer en sucursal: <b> {{this.recojer}}</b>
+    </ion-label>
+  </ion-item>
+
+  <ion-item (click)="textComponent('Agregar cupon')" color="dark">
+    <ion-icon name="ticket-outline" slot="start" style="color: white;">
+
+    </ion-icon>
+    <ion-icon name="chevron-forward-outline" style="color: white;" slot="end">
+
+    </ion-icon>
+ 
+    <ion-label *ngIf="cuponCharged !== true" style="font-family: 'general-font';color: white;">
+     Agregar un cupon de descuento
+
+    </ion-label>
+    <ion-label *ngIf="cuponCharged === true" style="font-family: 'general-font';color: white;">
+          <b> CUPÓN AGREGADO: </b> <b style="color: rgb(58, 167, 112);"> {{this.cudigo}}</b>
+
+     </ion-label>
+  </ion-item>
+
+
+  <ion-item (click)="textComponent('Agregar una nota')" color="dark">
+    <ion-icon name="create-outline" slot="start" style="color: white;">
+
+    </ion-icon>
+    <ion-icon name="chevron-forward-outline" slot="end" style="color: white;">
+
+    </ion-icon>
+    
+    <ion-label *ngIf="notaVisible" style="color: white;">
+     Agregar una nota
+    </ion-label>
+
+    <ion-label *ngIf="!notaVisible" style="color: wheat;">
+    Nota: <b style="color: orange;"> {{this.notaGeneral}}</b>
+     </ion-label>
+  </ion-item>
+  <ion-grid>
+    <ion-row style="color: white;">
+      <ion-col size="7.5">
+      <div style="text-align: left;padding: 10px;font-size: 15px;color: rgb(199, 199, 199);">
+        Metodo de pago<br>
+     
+        
+      </div>
+      </ion-col>
+      <ion-col size="4.5">
+        <div style="text-align: left;padding: 10px;font-size: 14px;color: rgb(53, 187, 136);">
+         <b> {{this.metodoPago}}</b><br>
+    
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row style="color: white;">
+      <ion-col size="7.5">
+      <div style="text-align: left;padding: 10px;font-size: 16px;color: rgb(199, 199, 199);">
+        Tiempo de entrega estimado
+
+      </div>
+      </ion-col>
+      <ion-col size="4.5">
+        <div style="text-align: left;padding: 10px;font-size: 18px;color: rgb(69, 212, 158);">
+        {{this.start}} min.
+        <ion-button style="display: none;" (click)="toggleFullScreen()">Toggle Full Screen</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row style="color: white;">
+      <ion-col size="7.5">
+      <div style="text-align: left;padding: 10px;font-size: 18px;color: white;">
+        Subtotal
+
+      </div>
+      </ion-col>
+      <ion-col size="4.5">
+        <div style="text-align: left;padding: 10px;font-size: 18px;color: white;">
+          ${{this.precio}}
+
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row style="color: white;">
+      <ion-col size="7.5">
+      <div style="text-align: left;padding: 10px;font-size: 18px;color: white;">
+        Costo de envio
+
+      </div>
+      </ion-col>
+      <ion-col size="4.5">
+        <div style="text-align: left;padding: 10px;font-size: 18px;color: white;">
+          ${{this.costoEnvio}} ({{this.distancia}} km.)  
+
+        </div>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row style="color: white;">
+      <ion-col size="7.5">
+      <div style="text-align: left;padding: 10px;font-size: 18px;color: white;">
+        Descuento
+
+      </div>
+      </ion-col>
+      <ion-col size="4.5">
+        <div *ngIf="precioCache !== 0" style="text-align: left;padding: 10px;font-size: 18px;color: white;">
+          ${{this.precioCache+costoEnvio-this.precio-this.costoEnvio}} (-{{this.descuento}}%)
+
+        </div>
+        <div *ngIf="precioCache === 0" style="text-align: left;padding: 10px;font-size: 18px;color: white;">
+          $0
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row style="color: white;">
+      <ion-col size="7.5">
+      <div style="font-weight: bold;text-align: right;padding: 10px;font-size: 20px;color: rgb(117, 212, 200);">
+        Total
+
+      </div>
+      </ion-col>
+      <ion-col size="4.5">
+        <div style="text-align: left;padding: 10px;font-size: 20px;color: white;">
+          ${{this.precio+this.costoEnvio}} MXN
+
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="metodoPago === 'Efectivo'" style="color: white;">
+      <ion-col size="7.5">
+      <div style="font-weight: bold;text-align: right;padding: 10px;font-size: 16px;color: rgb(209, 235, 231);">
+        Pagas con:
+      </div>
+      </ion-col>
+      <ion-col size="4.5">
+        <div style="text-align: left;padding: 10px;font-size: 20px;color: white;">
+          ${{this.cuantoPaga}} MXN
+
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <input style="display: none;"  type="file" id="upload2" accept="image/x-png,image/jpeg" onchange="process9()" />
+  <button style="display: none;" id="btnUpload3" (click)="uploadImg()"></button>
+  <div style="display: none;" id="resetArrayImg2" (click)="resetArray()"></div>
+  <button style="display: none;" id="btnUpload2" (click)="newBot()"></button>
+ 
+    <ion-grid>
+      <ion-row>
+       
+        <ion-col size="12">
+     <ion-button shape="round" expand="full" *ngIf="enableBtn" [disabled]="ubicacion === 'Sin ubicacion' || disableBtn === 'Sin ubicacion'"
+       style="height: 42px;" color="primary"
+           mode="ios" (click)="buyNow()">
+            <div class="moving-text"  style="font-size: 18px;font-family: 'general-font';letter-spacing: 2px;color: white;">
+              FINALIZAR x ${{this.precio+this.costoEnvio}} MXN
+               
+             </div>
+             <ion-spinner slot="end"  *ngIf="disableBtn === 'Sin ubicacion'" name="crescent"></ion-spinner>
+        
+          </ion-button>
+          <div style="text-align: center;padding: 5px;">
+            <ion-spinner style="width: 40px;height: 40px;" name="crescent" *ngIf="!enableBtn"></ion-spinner>
+  
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <br>
+    <br>
+  
+</ion-content>

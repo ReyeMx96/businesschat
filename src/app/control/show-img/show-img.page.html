@@ -1,0 +1,11 @@
+<ion-content class="fade-in" style="--background: #111;">
+  <ion-header *ngIf="showToolbar" class="toolbar" (click)="hideToolbar()">
+    <ion-toolbar color="dark">
+      <ion-buttons slot="start" style="padding-left: 10px;">
+        <ion-back-button [defaultHref]="'/p/' + numberCache"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
+</ion-content>

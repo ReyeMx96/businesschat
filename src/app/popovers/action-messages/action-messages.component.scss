@@ -1,0 +1,18 @@
+.popover-bg {
+  --background: linear-gradient(135deg, rgba(0,0,0,.78), rgba(255,255,255,.15));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 20px;
+}
+
+ion-item {
+  --background: transparent;
+  color: white;
+  font-weight: 500;
+}
+
+
+    ion-content {
+        --padding-start: 0%;
+        --padding-end: 0%;
+    }
