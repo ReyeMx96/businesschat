@@ -2,7 +2,9 @@ const { app, BrowserWindow, protocol, ipcMain } = require("electron");
 const { truncate } = require("fs/promises");
 const { autoUpdater } = require("electron-updater");
 const path = require("path");
+const log = require("electron-log");
 
+log.info("🔥 MAIN JS ARRANCÓ");
 let mainWindow;
 
 /* 🔥 Registrar protocolo como estándar y seguro */
@@ -45,27 +47,27 @@ autoUpdater.logger = require("electron-log");
 autoUpdater.logger.transports.file.level = "info";
 
 autoUpdater.on("checking-for-update", () => {
-  console.log("🔎 Buscando actualización...");
+  log.info("🔎 Buscando actualización...");
 });
 
 autoUpdater.on("update-available", () => {
-  console.log("🚀 Actualización disponible, descargando...");
+  log.info("🚀 Actualización disponible, descargando...");
 });
 
 autoUpdater.on("update-not-available", () => {
-  console.log("✅ No hay actualización disponible");
+  log.info("✅ No hay actualización disponible");
 });
 
 autoUpdater.on("error", (err) => {
-  console.log("❌ Error en updater:", err);
+  log.error("❌ Error en updater:", err);
 });
 
 autoUpdater.on("download-progress", (progress) => {
-  console.log(`📦 Descargando: ${Math.round(progress.percent)}%`);
+  log.info(`📦 Descargando: ${Math.round(progress.percent)}%`);
 });
 
 autoUpdater.on("update-downloaded", () => {
-  console.log("✅ Actualización descargada, reiniciando app...");
+  log.info("✅ Actualización descargada, reiniciando app...");
   autoUpdater.quitAndInstall();
 });
 
@@ -106,7 +108,7 @@ ipcMain.handle("imprimir-ticket", async (event, htmlContent) => {
 
 
 app.whenReady().then(() => {
-
+  log.info("✅ APP READY SE EJECUTÓ");
   protocol.registerFileProtocol("app", (request, callback) => {
     const url = request.url.replace("app://./", "");
     const filePath = path.normalize(path.join(__dirname, "../www", url));
@@ -120,7 +122,7 @@ app.whenReady().then(() => {
   /* 🔥 AHORA SÍ VERIFICAMOS UPDATE EN EL MOMENTO CORRECTO */
     setTimeout(() => {
     autoUpdater.checkForUpdatesAndNotify();
-    console.log("⏱ Verificando actualizaciones...");
+    log.info("⏱ Verificando actualizaciones...");
   }, 3000);
 });
 
