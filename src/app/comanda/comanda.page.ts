@@ -448,7 +448,7 @@ var dataClient6 = {}
         PhBs: "861393147061358",
       }
       }
-     if(this.phoneRest === "5218332367397"){
+          if(this.phoneRest === "5218332367397"){
         dataClient6 = {
         Text: "Tu pedido ya está en proceso de preparación🧑‍🍳😋",
         Pay:"Efectivo",
@@ -458,6 +458,17 @@ var dataClient6 = {}
         PhBs: "969119026283394",
       }
       }
+           if(this.phoneRest === "5218332367311"){
+        dataClient6 = {
+        Text: "Tu pedido ya está en proceso de preparación🧑‍🍳😋",
+        Pay:"Efectivo",
+        Ph: "5218332367311",
+        Tk:this.tk,
+        Phone:this.pedido.phone,
+        PhBs: "983865444811474",
+      }
+      }
+ 
      this.sendMsgWhatsapp(dataClient6)
 
     }
@@ -777,6 +788,7 @@ async presentTiempoEntregaAlert(pedidoId: string, uid:string, nameRest: string, 
           if (selectedValue === 'default') {
             console.log('🟢 Se mantuvo el tiempo actual.');
             this.aceptarPedido(pedidoId, uid, nameRest, 20, array);
+
             return;
           }
           this.aceptarPedido(pedidoId, uid, nameRest, Number(selectedValue), array);
@@ -943,7 +955,48 @@ console.log(fechaFormateada);
         acceptBy:  this.userId,
       });
       }
-  
+      var dataClient6 = {}
+          if(this.phoneRest === "5218333861194"){
+    dataClient6 = {
+        Text: "Tu pedido ya está en proceso de preparación🧑‍🍳 elaboramos los productos con mucho esmero para que disfrutes tu momento más sabroso 😋 🌽🍓",
+        Pay:"Efectivo",
+        Ph: "5218333861194",
+        Tk:this.tkMichelotes,
+        Phone:this.pedido.phone,
+        PhBs: "331199676738389",
+      }
+      }
+      if(this.phoneRest === "5218334460818"){
+        dataClient6 = {
+        Text: "Tu pedido ya está en proceso de preparación🧑‍🍳😋",
+        Pay:"Efectivo",
+        Ph: "5218334460818",
+        Tk:this.tk,
+        Phone:this.pedido.phone,
+        PhBs: "861393147061358",
+      }
+      }
+          if(this.phoneRest === "5218332367397"){
+        dataClient6 = {
+        Text: "Tu pedido ya está en proceso de preparación🧑‍🍳😋",
+        Pay:"Efectivo",
+        Ph: "5218332367397",
+        Tk:this.tk,
+        Phone:this.pedido.phone,
+        PhBs: "969119026283394",
+      }
+      }
+      if(this.phoneRest === "5218332367311"){
+        dataClient6 = {
+        Text: "Tu pedido fue aceptado por el Tío Alito 🐣❤️ Hora de crear la magia 🪄.",
+        Pay:"Efectivo",
+        Ph: "5218332367311",
+        Tk:this.tk,
+        Phone:this.pedido.phone,
+        PhBs: "983865444811474",
+      }
+      }
+      this.sendMsgWhatsapp(dataClient6)
       this.sendNotification(uid, "Pedido Aceptado", "Tu pedido ha sido aceptado por: " + nameRest  )
  // Simular el proceso de 1 segundo
     if (this.pedido.devMode === "A domicilio"){

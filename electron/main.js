@@ -32,7 +32,6 @@ function createWindow() {
     },
   });
 
-  // 👇 Esto abre DevTools automáticamente
   mainWindow.webContents.openDevTools();
   mainWindow.loadURL("app://./index.html");
 
@@ -41,19 +40,32 @@ function createWindow() {
   });
 }
 
-// Configurar auto-update
-autoUpdater.checkForUpdatesAndNotify();
-
-// Opcional: logs
+/* 🔥 LOGS DEL AUTO-UPDATER */
 autoUpdater.logger = require("electron-log");
 autoUpdater.logger.transports.file.level = "info";
 
+autoUpdater.on("checking-for-update", () => {
+  console.log("🔎 Buscando actualización...");
+});
+
 autoUpdater.on("update-available", () => {
-  console.log("Actualización disponible, descargando...");
+  console.log("🚀 Actualización disponible, descargando...");
+});
+
+autoUpdater.on("update-not-available", () => {
+  console.log("✅ No hay actualización disponible");
+});
+
+autoUpdater.on("error", (err) => {
+  console.log("❌ Error en updater:", err);
+});
+
+autoUpdater.on("download-progress", (progress) => {
+  console.log(`📦 Descargando: ${Math.round(progress.percent)}%`);
 });
 
 autoUpdater.on("update-downloaded", () => {
-  console.log("Actualización descargada, reiniciando app...");
+  console.log("✅ Actualización descargada, reiniciando app...");
   autoUpdater.quitAndInstall();
 });
 
@@ -93,7 +105,6 @@ ipcMain.handle("imprimir-ticket", async (event, htmlContent) => {
 });
 
 
-
 app.whenReady().then(() => {
 
   protocol.registerFileProtocol("app", (request, callback) => {
@@ -103,6 +114,14 @@ app.whenReady().then(() => {
   });
 
   createWindow();
+  autoUpdater.autoDownload = true;
+  autoUpdater.autoInstallOnAppQuit = true;
+
+  /* 🔥 AHORA SÍ VERIFICAMOS UPDATE EN EL MOMENTO CORRECTO */
+    setTimeout(() => {
+    autoUpdater.checkForUpdatesAndNotify();
+    console.log("⏱ Verificando actualizaciones...");
+  }, 3000);
 });
 
 app.on("window-all-closed", () => {

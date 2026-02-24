@@ -1219,6 +1219,16 @@ if(this.typePay=== 'Efectivo'){
         PhBs: "861393147061358",
       }
       }
+            if(this.phoneRest === '5218332367311'){
+         dataClient6 = {
+        Text: orderMessage,
+        Pay:"Efectivo",
+        Ph: "5218332367311",
+        Tk:this.tk,
+        Phone:this.phoneUser,
+        PhBs: "983865444811474",
+      }
+      }
         if(this.phoneRest === '5218333096367'){
          dataClient6 = {
         Text: orderMessage,

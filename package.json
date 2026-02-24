@@ -1,6 +1,6 @@
 {
   "name": "businesschat",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "main": "electron/main.js",

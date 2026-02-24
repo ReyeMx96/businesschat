@@ -262,11 +262,11 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    //RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes)
     // tRADICIONAL 
 
     // useHash: true para que funcione en eLECTRON Pages, eliminarlo si se despliega en un servidor con soporte para Angular  
-    RouterModule.forRoot(routes, { useHash: true })
+    // RouterModule.forRoot(routes, { useHash: true })
   ],
   exports: [RouterModule]
 })
